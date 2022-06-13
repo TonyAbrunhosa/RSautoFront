@@ -22,6 +22,7 @@
     "@angular/platform-server": "~8.2.14",
     "@angular/router": "~8.2.14",
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
+    "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "@nguniversal/module-map-ngfactory-loader": "~8.2.6",
     "bootstrap": "^5.2.0-beta1",
     "core-js": "^3.20.2",
