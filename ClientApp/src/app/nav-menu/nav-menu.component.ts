@@ -22,6 +22,7 @@ export class NavMenuComponent {
   isExpanded = false;
   largeSidebar = true;
   miniSidebar = false;
+  changeLogo = true;
 
   collapse() {
     this.isExpanded = true;
@@ -38,5 +39,8 @@ export class NavMenuComponent {
 
   changeState(): void {
     (this.state == "closed") ? this.state = "open" : this.state = "closed";
+  }
+  ChangeLogo() {
+    (this.changeLogo == true) ? this.changeLogo = false : this.changeLogo = true;
   }
 }

@@ -2,8 +2,14 @@
   <h1 class="visually-hidden">RS Auto</h1>
   <div *ngIf="largeSidebar" class="sidebar d-flex flex-column flex-shrink-0 p-3 bg-white text-dark"
     style="width: 280px;">
-    <img src="../../assets/img/Logo_RS_Finais (1)/Logo_RS_Finais/Logo_RS_500px_Volumes_RGB.png" width="80%"
-      height="10%">
+    <img *ngIf="changeLogo" src="../../assets/img/Archive 2/Logo_RS_ContaGiros_Topo1.png" width="80%" height="10%">
+    <img *ngIf="!changeLogo" src="../../assets/img/Archive 2/Logo_RS_ContaGiros_Topo2.png" width="80%" height="10%">
+    <!-- <input type="checkbox" (change)="ChangeLogo()"/> -->
+    <!-- Default switch -->
+    <div class="form-check form-switch">
+      <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" (change)="ChangeLogo()">
+      <label class="form-check-label" for="flexSwitchCheckDefault">Alterar Logo</label>
+    </div>
     <a href="javascript:void(0)" class="closebtn" (click)="collapse()">
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
         class="bi bi-chevron-double-left" viewBox="0 0 16 16">
