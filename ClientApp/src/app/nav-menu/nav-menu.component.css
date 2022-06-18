@@ -73,13 +73,13 @@ main {
 }
 
 .btn-toggle:hover {
-  color: rgb(255, 0, 0);
-  background-color: #ff8181;
+  color: rgb(0, 0, 0);
+  background-color: #cdb1b1;
 }
 
 .btn-toggle:focus {
   color: rgba(0, 0, 0, .85);
-  background-color: #ff0000;
+  background-color: #C94343;
 }
 
 .btn-toggle:before {
@@ -106,14 +106,14 @@ main {
 }
 
 .btn-toggle-nav a:hover {
-  color: rgb(255, 1, 1);
-  background-color: #ff8181;
+  color: rgb(0, 0, 0);
+  background-color: #cdb1b1;
   font-weight: 600;
 }
 
 .btn-toggle-nav a:focus {
   color: rgba(0, 0, 0, .85);
-  background-color: #ff0000;
+  background-color: #C94343;
   font-weight: 600;
 }
 
@@ -239,15 +239,15 @@ main {
 }
 
 .dropdown-item:hover {
-  color: rgb(255, 0, 0);
-  background-color: #ff8181;
+  color: rgb(0, 0, 0);
+  background-color: #cdb1b1;
   font-weight: 600;
   border-radius: 5%;
 }
 
 .dropdown-item:focus {
   color: rgba(0, 0, 0, .85);
-  background-color: #ff0000;
+  background-color: #C94343;
   font-weight: 600;
   border-radius: 5%;
 }
