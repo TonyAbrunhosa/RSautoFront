@@ -108,11 +108,13 @@ main {
 .btn-toggle-nav a:hover {
   color: rgb(255, 0, 0);
   background-color: #ededed;
+  font-weight: 600;
 }
 
 .btn-toggle-nav a:focus {
   color: rgba(0, 0, 0, .85);
   background-color: #ff0000;
+  font-weight: 600;
 }
 
 .btn-toggle-nav a:before {
