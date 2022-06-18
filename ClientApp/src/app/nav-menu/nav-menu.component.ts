@@ -24,14 +24,12 @@ export class NavMenuComponent {
   miniSidebar = false;
 
   collapse() {
-    debugger;
     this.isExpanded = true;
     this.largeSidebar = false;
     this.miniSidebar = true;
   }
 
   openNav() {
-    debugger;
     this.isExpanded = !this.isExpanded;
     this.largeSidebar = true;
     this.miniSidebar = false;
@@ -40,6 +38,5 @@ export class NavMenuComponent {
 
   changeState(): void {
     (this.state == "closed") ? this.state = "open" : this.state = "closed";
-
   }
 }

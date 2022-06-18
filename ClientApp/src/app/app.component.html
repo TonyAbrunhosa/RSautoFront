@@ -1,13 +1,13 @@
 <body>
-  <div class="container-fluid">
-    <div class="row">
-      <!-- <div class="col px-1 bg-dark text-white position-fixed" id="sticky-sidebar"> -->
-      <app-nav-menu></app-nav-menu>
+  <div class="page-wrapper">
+    <!-- <div class="row">
+      <div class="col px-1 bg-dark text-white position-fixed" id="sticky-sidebar"> -->
+        <app-nav-menu></app-nav-menu>
       <!-- </div> -->
-      <!-- <div class="col-12 offset" id="main"> -->
-      <!-- <div class="container"> -->
-      <router-outlet></router-outlet>
-      <!-- </div> -->
+      <div class="page-content" id="main">
+        <!-- <div class="container"> -->
+          <router-outlet></router-outlet>
+        <!-- </div> -->
       <!-- </div> -->
     </div>
   </div>
