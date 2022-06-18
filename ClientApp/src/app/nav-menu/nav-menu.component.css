@@ -74,7 +74,7 @@ main {
 
 .btn-toggle:hover {
   color: rgb(255, 0, 0);
-  background-color: #ededed;
+  background-color: #ff8181;
 }
 
 .btn-toggle:focus {
@@ -106,8 +106,8 @@ main {
 }
 
 .btn-toggle-nav a:hover {
-  color: rgb(255, 0, 0);
-  background-color: #ededed;
+  color: rgb(255, 1, 1);
+  background-color: #ff8181;
   font-weight: 600;
 }
 
@@ -239,8 +239,8 @@ main {
 }
 
 .dropdown-item:hover {
-  color: rgba(255, 0, 0, 0.85);
-  background-color: #ededed;
+  color: rgb(255, 0, 0);
+  background-color: #ff8181;
   font-weight: 600;
   border-radius: 5%;
 }
