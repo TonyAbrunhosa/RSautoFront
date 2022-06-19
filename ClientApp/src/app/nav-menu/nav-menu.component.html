@@ -1,15 +1,15 @@
 <header class="bg-white text-dark">
   <h1 class="visually-hidden">RS Auto</h1>
-  <div *ngIf="largeSidebar" class="sidebar d-flex flex-column flex-shrink-0 p-3 bg-white text-dark"
-    style="width: 280px;">
-    <img *ngIf="changeLogo" src="../../assets/img/Archive 2/Logo_RS_ContaGiros_Topo1.png" width="80%" height="10%">
+  <div *ngIf="largeSidebar" class="sidebar d-flex flex-column flex-shrink-0 p-1 bg-white text-dark"
+    style="width: 300px;">
+    <img *ngIf="changeLogo" src="../../assets/img/Archive 2/Logo_RS_ContaGiros_Topo1.png" width="80%" height="8%">
     <img *ngIf="!changeLogo" src="../../assets/img/Archive 2/Logo_RS_ContaGiros_Topo2.png" width="80%" height="10%">
     <!-- <input type="checkbox" (change)="ChangeLogo()"/> -->
     <!-- Default switch -->
-    <div class="form-check form-switch">
+    <!-- <div class="form-check form-switch">
       <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" (change)="ChangeLogo()">
       <label class="form-check-label" for="flexSwitchCheckDefault">Alterar Logo</label>
-    </div>
+    </div> -->
     <a href="javascript:void(0)" class="closebtn" (click)="collapse()">
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
         class="bi bi-chevron-double-left" viewBox="0 0 16 16">
@@ -19,8 +19,8 @@
           d="M12.354 1.646a.5.5 0 0 1 0 .708L6.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
       </svg>
     </a>
-    <hr>
-    <ul class="list-unstyled ps-0">
+    <!-- <hr> -->
+    <ul class="list-unstyled ps-0 p-5">
       <li class="mb-1">
         <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
           data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="false">
@@ -62,8 +62,7 @@
         </div>
       </li>
     </ul>
-    <hr>
-    <div class="dropdown">
+    <div class="dropdown fixed-bottom">
       <a href="#" class="d-flex align-items-center text-dark text-decoration-none dropdown-toggle" id="dropdownUser1"
         data-bs-toggle="dropdown" aria-expanded="false">
         <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
@@ -140,7 +139,7 @@
         </a>
       </li>
     </ul>
-    <div class="dropdown border-top">
+    <div class="dropdown border-top t-5">
       <a href="#"
         class="d-flex align-items-center justify-content-center p-3 link-dark text-decoration-none dropdown-toggle"
         id="dropdownUser3" data-bs-toggle="dropdown" aria-expanded="false">
