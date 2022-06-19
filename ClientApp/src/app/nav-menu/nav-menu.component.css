@@ -251,3 +251,7 @@ main {
   font-weight: 600;
   border-radius: 5%;
 }
+
+.listHomeSidebar {
+  margin-left: 5%;
+}

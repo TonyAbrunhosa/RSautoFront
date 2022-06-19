@@ -22,6 +22,9 @@ export class NavMenuComponent {
   isExpanded = false;
   largeSidebar = true;
   miniSidebar = false;
+  listHomeSidebar = false;
+  listCreateSidebar = false;
+  listReportSidebar = false;
   changeLogo = true;
 
   collapse() {
@@ -42,5 +45,23 @@ export class NavMenuComponent {
   }
   ChangeLogo() {
     (this.changeLogo == true) ? this.changeLogo = false : this.changeLogo = true;
+  }
+  MouseOverHome() {
+    this.listHomeSidebar = true;
+  }
+  MouseLeaveHome() {
+    this.listHomeSidebar = false;
+  }
+  MouseOverCreate() {
+    this.listCreateSidebar = true;
+  }
+  MouseLeaveCreate() {
+    this.listCreateSidebar = false;
+  }
+  MouseOverReport() {
+    this.listReportSidebar = true;
+  }
+  MouseLeaveReport() {
+    this.listReportSidebar = false;
   }
 }

@@ -1,5 +1,6 @@
 <header class="bg-white text-dark">
   <h1 class="visually-hidden">RS Auto</h1>
+
   <div *ngIf="largeSidebar" class="sidebar d-flex flex-column flex-shrink-0 p-3 bg-white text-dark"
     style="width: 280px;">
     <img *ngIf="changeLogo" src="../../assets/img/Archive 2/Logo_RS_ContaGiros_Topo1.png" width="80%" height="10%">
@@ -80,7 +81,8 @@
       </ul>
     </div>
   </div>
-  <div *ngIf="miniSidebar" class="sidebar d-flex flex-column flex-shrink-0 bg-white text-dark" style="width: 4.5rem;">
+  <div *ngIf="miniSidebar" class="col-3 sidebar d-flex flex-column flex-shrink-0 bg-white text-dark"
+    style="width: 4.5rem;">
     <a href="javascript:void(0)" class="closebtn" (click)="openNav()">
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
         class="bi bi-chevron-double-right" viewBox="0 0 16 16">
@@ -98,7 +100,7 @@
       <span class="visually-hidden">Icon-only</span>
     </a>
     <ul class="nav nav-pills nav-flush flex-column mb-auto text-left">
-      <li class="nav-item">
+      <li class="nav-item" (mouseover)="MouseOverHome()" (mouseleave)="MouseLeaveHome()">
         <a href="#" class="nav-link bg-danger py-3 border-bottom" aria-current="page" title="Home"
           data-bs-toggle="tooltip" data-bs-placement="center">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="24" height="24" role="img"
@@ -108,39 +110,23 @@
           </svg>
         </a>
       </li>
-      <li>
+      <li class="nav-item" (mouseover)="MouseOverCreate()" (mouseleave)="MouseLeaveCreate()">
         <a href="#" class="nav-link py-3 border-bottom rounded-0" title="Creates" data-bs-toggle="tooltip"
           data-bs-placement="right">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="24" height="24" role="img" aria-label="Creates">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="24" height="24" role="img"
+            aria-label="Creates">
             <path
               d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V198.6C310.1 219.5 256 287.4 256 368C256 427.1 285.1 479.3 329.7 511.3C326.6 511.7 323.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256zM288 368C288 288.5 352.5 224 432 224C511.5 224 576 288.5 576 368C576 447.5 511.5 512 432 512C352.5 512 288 447.5 288 368zM448 303.1C448 295.2 440.8 287.1 432 287.1C423.2 287.1 416 295.2 416 303.1V351.1H368C359.2 351.1 352 359.2 352 367.1C352 376.8 359.2 383.1 368 383.1H416V431.1C416 440.8 423.2 447.1 432 447.1C440.8 447.1 448 440.8 448 431.1V383.1H496C504.8 383.1 512 376.8 512 367.1C512 359.2 504.8 351.1 496 351.1H448V303.1z" />
           </svg>
         </a>
       </li>
-      <li>
+      <li class="nav-item" (mouseover)="MouseOverReport()" (mouseleave)="MouseLeaveReport()">
         <a href="#" class="nav-link py-3 border-bottom rounded-0" title="Reports" data-bs-toggle="tooltip"
           data-bs-placement="right">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" width="24" height="24" role="img"
             aria-label="Reports">
-            <!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
             <path
               d="M256 0v128h128L256 0zM224 128L224 0H48C21.49 0 0 21.49 0 48v416C0 490.5 21.49 512 48 512h288c26.51 0 48-21.49 48-48V160h-127.1C238.3 160 224 145.7 224 128zM64 72C64 67.63 67.63 64 72 64h80C156.4 64 160 67.63 160 72v16C160 92.38 156.4 96 152 96h-80C67.63 96 64 92.38 64 88V72zM64 136C64 131.6 67.63 128 72 128h80C156.4 128 160 131.6 160 136v16C160 156.4 156.4 160 152 160h-80C67.63 160 64 156.4 64 152V136zM304 384c8.875 0 16 7.125 16 16S312.9 416 304 416h-47.25c-16.38 0-31.25-9.125-38.63-23.88c-2.875-5.875-8-6.5-10.12-6.5s-7.25 .625-10 6.125l-7.75 15.38C187.6 412.6 181.1 416 176 416H174.9c-6.5-.5-12-4.75-14-11L144 354.6L133.4 386.5C127.5 404.1 111 416 92.38 416H80C71.13 416 64 408.9 64 400S71.13 384 80 384h12.38c4.875 0 9.125-3.125 10.62-7.625l18.25-54.63C124.5 311.9 133.6 305.3 144 305.3s19.5 6.625 22.75 16.5l13.88 41.63c19.75-16.25 54.13-9.75 66 14.12c2 4 6 6.5 10.12 6.5H304z" />
-          </svg>
-        </a>
-      </li>
-      <li>
-        <a href="#" class="nav-link py-3 border-bottom rounded-0" title="Orders" data-bs-toggle="tooltip"
-          data-bs-placement="right">
-          <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Orders">
-            <use xlink:href="#table" />
-          </svg>
-        </a>
-      </li>
-      <li>
-        <a href="#" class="nav-link py-3 border-bottom rounded-0" title="Customers" data-bs-toggle="tooltip"
-          data-bs-placement="right">
-          <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Customers">
-            <use xlink:href="#people-circle" />
           </svg>
         </a>
       </li>
@@ -161,5 +147,33 @@
         <li><a class="dropdown-item" href="#">Sign out</a></li>
       </ul>
     </div>
+  </div>
+  <div *ngIf="listHomeSidebar"
+    class="col-3 sidebar listHomeSidebar d-flex flex-column align-items-stretch flex-shrink-0 bg-white"
+    style="width: 380px;">
+    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+      <li><a href="#">Overview</a></li>
+      <li><a href="#">Updates</a></li>
+      <li><a href="#">Reports</a></li>
+    </ul>
+  </div>
+  <div *ngIf="listCreateSidebar"
+    class="col-3 sidebar listHomeSidebar d-flex flex-column align-items-stretch flex-shrink-0 bg-white"
+    style="width: 380px;">
+    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+      <li><a href="#">Clientes</a></li>
+      <li><a href="#">Fornecedores</a></li>
+      <li><a href="#">Peças</a></li>
+    </ul>
+  </div>
+  <div *ngIf="listReportSidebar"
+    class="col-3 sidebar listHomeSidebar d-flex flex-column align-items-stretch flex-shrink-0 bg-white"
+    style="width: 380px;">
+    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+      <li><a href="#">Produtos</a></li>
+      <li><a href="#">Vendas</a></li>
+      <li><a href="#">Estoque</a></li>
+      <li><a href="#">Compras</a></li>
+    </ul>
   </div>
 </header>
