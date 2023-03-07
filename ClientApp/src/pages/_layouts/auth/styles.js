@@ -1,68 +1,70 @@
 import styled from 'styled-components';
-import { darken, lighten } from 'polished';
+import { lighten } from 'polished';
 
 export const Wrapper = styled.div`
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #514848;
 `;
 
 export const Content = styled.div`
-  width: 40%;
-  background-color: #45188e;
-  border-radius: 8px;
+  background-color: #ffffff;
+  padding: 0 65px;
+  border-radius: 15px;
   text-align: center;
 
   form {
     display: flex;
     flex-direction: column;
-    margin-top: 60px;
+    margin-top: 10px;
     label {
-      color: #ffff;
+      color: #514848;
+      display: block;
+      text-align: left;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 23px;
+      font-family: 'Roboto';
     }
     input {
-      width: 80%;
-      border: 1px solid ${darken(0.3, '#ffff')};
-      background: transparent;
-      border-radius: 20px;
-      height: 44px;
-      padding: 0 15px;
-      color: #fff;
-      margin: 0 5px 20px;
+      width: 411.33px;
+      border: none;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      background: #d9d9d9;
+      padding: 10px;
+      border-radius: 12px;
+      height: 46px;
+      color: #514848;
+      margin-bottom: 20px;
       &::placeholder {
-        color: rgba(255, 255, 255, 0.7);
+        color: #514848;
       }
     }
     span {
       display: block;
-      color: #fb5f91;
-      margin-bottom: 20px;
+      color: #fc1515;
+      margin-bottom: 10px;
       align-self: flex-start;
+      text-align: left;
       font-size: 12px;
       font-weight: bold;
     }
     button {
-      width: 120px;
+      width: 240.22px;
       margin: 0 auto;
-      height: 44px;
-      background: none;
-      color: #fff;
-      border: 1px solid ${darken(0.3, '#ffff')};
-      border-radius: 20px;
-      font-size: 16px;
+      height: 50px;
+      background: #fc1515;
+      color: #ffffff;
+      border-radius: 50px;
+      border: none;
+      font-size: 20px;
+      line-height: 23.44px;
       transition: background 0.2s;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
       &:hover {
-        background: ${lighten(0.06, '#45188e')};
-      }
-    }
-    a {
-      color: #ffff;
-      margin-top: 8px;
-      font-size: 12px;
-      opacity: 0.8;
-      &:hover {
-        opacity: 1;
+        background: ${lighten(0.06, '#fc1515')};
       }
     }
   }

@@ -1,20 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { getResearchesAsync } from '~/services/api';
-import ResearchList from './components/ResearchList';
+import React from 'react';
 
 const Home = () => {
-  const [researches, setResearches] = useState([]);
-
-  useEffect(() => {
-    async function fetchData() {
-      const response = await getResearchesAsync();
-      setResearches(response);
-    }
-
-    fetchData();
-  }, []);
-
-  return <ResearchList items={researches} />;
+  return <h1>home</h1>;
 };
 
 export default Home;
