@@ -33,7 +33,7 @@ const SignIn = () => {
   return (
     <>
       <Content>
-        <img src={logo} alt="Rs Auto" width="363.07px" height="253px" />
+        <img src={logo} alt="Rs Auto" width="363.07" height="253" />
         <Form schema={schema} onSubmit={() => handleSubmit()}>
           <div>
             <label htmlFor="user">Usuário</label>
