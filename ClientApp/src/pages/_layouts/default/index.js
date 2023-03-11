@@ -1,81 +1,142 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import { Layout, Menu } from 'antd';
+import {
+  PlusOutlined,
+  SaveOutlined,
+  ShoppingCartOutlined,
+  CarOutlined,
+  SettingFilled,
+} from '@ant-design/icons';
 
 import logo from '~/assets/images/logo.svg';
-import { useHistory } from 'react-router-dom';
 
-const { Content, Sider } = Layout;
+const { Content, Sider, Header } = Layout;
 
-const SiderStyles = {
+const siderStyles = {
   overflow: 'auto',
   height: '100vh',
   position: 'fixed',
-  background: '#5C5555',
-  boxShadow: '1px 1px 5px 0px rgba(0,0,0,0.5)',
   left: 0,
   top: 0,
   bottom: 0,
 };
 
-const RsAutoLogoStyles = {
-  height: 78,
+const meneuheaderStyless = {
+  height: 60,
   background: '#FFFFFF',
+  paddingLeft: '12px',
+  display: 'flex',
+  alignItems: 'center',
+  borderRight: '1px solid #7b7c90',
 };
 
-const MenuStyles = {
+const menuStyles = {
   marginTop: '20px',
-  fontSize: '20px',
-  color: '#ffff',
-  fontFamily: 'Roboto',
+  fontSize: '16px',
+  fontFamily: 'Roboto, sans-serif',
 };
 
-const ContentLayoutStyles = {
-  marginLeft: 380,
+const contentLayoutStyles = {
   height: '100vh',
+  background: '#E9E8E8',
 };
 
-const getItem = (label, key, subItems, type = null) => ({
+const headerStyles = {
+  height: 60,
+  backgroundColor: '#ffff',
+  boxShadow: '0px 2px 3px 0px rgba(0,0,0,0.75)',
+  marginBottom: 20,
+};
+
+const headerContentStyles = {
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+};
+
+const pageNameStyles = {
+  fontFamily: 'Roboto, sans-serif',
+  fontSize: 22,
+  color: '#434040',
+  fontWeight: 'normal',
+};
+
+const settingsStyles = { fontSize: 22, color: '#474747', cursor: 'pointer' };
+
+const getItem = (label, key, subItems, icon, type) => ({
   key,
   children: subItems,
   label,
   type,
+  icon,
 });
 
 const items = [
-  getItem('Peças', 'pecas', [
-    getItem('Estoque', 'pecas_estoque'),
-    getItem('Salvas', 'pecas_salvas'),
-    getItem('Cadastrar', 'pecas_cadastrar'),
-  ]),
-  getItem('Veículos', 'veiculos', [
-    getItem('Salvos', 'veiculos_salvos'),
-    getItem('Cadastrar', 'veiculos_cadastrar'),
-  ]),
+  getItem(
+    'Peças',
+    'pecas',
+    [
+      getItem('Estoque', 'pecas_estoque', null, <ShoppingCartOutlined />),
+      getItem('Salvas', 'pecas_salvas', null, <SaveOutlined />),
+      getItem('Cadastrar', 'pecas_cadastrar', null, <PlusOutlined />),
+    ],
+    <SettingFilled />
+  ),
+  getItem(
+    'Veículos',
+    'veiculos',
+    [
+      getItem('Salvos', 'veiculos_salvos', null, <SaveOutlined />),
+      getItem('Cadastrar', 'veiculos_cadastrar', null, <PlusOutlined />),
+    ],
+    <CarOutlined />
+  ),
 ];
 
-const DefaultLayout = ({ children }) => {
+const DefaultLayout = ({ children, page }) => {
+  const [collapsed, setCollapsed] = useState(false);
   const history = useHistory();
 
   return (
     <Layout hasSider>
-      <Sider width="350px" style={SiderStyles}>
-        <div style={RsAutoLogoStyles}>
-          <img src={logo} alt="Rs Auto" height="74" />
+      <Sider
+        collapsible
+        collapsed={collapsed}
+        onCollapse={(value) => setCollapsed(value)}
+        style={siderStyles}
+        width="250"
+      >
+        <div style={meneuheaderStyless}>
+          <Link to="/home">
+            <img src={logo} alt="Rs Auto" height={collapsed ? 45 : 55} />
+          </Link>
         </div>
         <Menu
           onClick={({ key: menuItem }) => {
-            history.push(menuItem.replace('_', '/'));
+            history.push({ pathname: menuItem.replace('_', '/') });
           }}
-          style={MenuStyles}
+          style={menuStyles}
+          theme="dark"
           defaultSelectedKeys={['1']}
           mode="inline"
           items={items}
         />
       </Sider>
-      <Layout style={ContentLayoutStyles}>
-        <Content>{children}</Content>
+      <Layout style={contentLayoutStyles}>
+        <Header style={headerStyles}>
+          <div
+            style={{ ...headerContentStyles, marginLeft: collapsed ? 50 : 220 }}
+          >
+            <h2 style={pageNameStyles}>{page}</h2>
+            <SettingFilled style={settingsStyles} />
+          </div>
+        </Header>
+        <Content style={{ marginLeft: collapsed ? 100 : 270 }}>
+          {children}
+        </Content>
       </Layout>
     </Layout>
   );
@@ -85,4 +146,5 @@ export default DefaultLayout;
 
 DefaultLayout.propTypes = {
   children: PropTypes.element.isRequired,
+  page: PropTypes.string.isRequired,
 };

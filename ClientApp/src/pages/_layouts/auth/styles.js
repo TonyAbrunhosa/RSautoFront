@@ -6,7 +6,7 @@ export const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #514848;
+  background-color: #363636;
 `;
 
 export const Content = styled.div`
@@ -26,7 +26,7 @@ export const Content = styled.div`
       font-weight: 500;
       font-size: 16px;
       line-height: 23px;
-      font-family: 'Roboto';
+      font-family: 'Roboto, sans-serif';
     }
     input {
       width: 411.33px;
@@ -52,7 +52,7 @@ export const Content = styled.div`
       font-weight: bold;
     }
     button {
-      width: 240.22px;
+      width: 200px;
       margin: 0 auto;
       height: 50px;
       background: #fc1515;

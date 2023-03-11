@@ -14,19 +14,40 @@ import Route from './Route';
 const Routes = () => {
   return (
     <Switch>
-      <Route exact path="/" type="auth" component={SignIn} />
-      <Route path="/home" type="private" component={Home} />
-      <Route path="/veiculos/salvos" type="private" component={SavedVehicles} />
+      <Route exact path="/" type="auth" page="Login" component={SignIn} />
+      <Route path="/home" type="private" page="Home" component={Home} />
+      <Route
+        path="/veiculos/salvos"
+        type="private"
+        page="Veículos > Salvos"
+        component={SavedVehicles}
+      />
       <Route
         path="/veiculos/cadastrar"
         type="private"
+        page="Veículos > Cadastrar"
         component={VehiclesStore}
       />
-      <Route path="/pecas/salvas" type="private" component={SavedParts} />
-      <Route path="/pecas/cadastrar" type="private" component={PartsStore} />
-      <Route path="/pecas/estoque" type="private" component={PartsInventory} />
-      <Route path="/home" type="private" component={Home} />
-      <Route path="/login" type="auth" component={SignIn} />
+      <Route
+        path="/pecas/salvas"
+        type="private"
+        page="Peças > Salvas"
+        component={SavedParts}
+      />
+      <Route
+        path="/pecas/cadastrar"
+        type="private"
+        page="Peças > Cadastrar"
+        component={PartsStore}
+      />
+      <Route
+        path="/pecas/estoque"
+        type="private"
+        page="Peças > Estoque"
+        component={PartsInventory}
+      />
+      <Route path="/home" type="private" page="Home" component={Home} />
+      <Route path="/login" type="auth" page="Login" component={SignIn} />
     </Switch>
   );
 };

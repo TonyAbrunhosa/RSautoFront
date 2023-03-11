@@ -11,7 +11,7 @@ const PRIVATE_TYPE = 'private';
 const PUBLIC_TYPE = 'public';
 const AUTH_TYPE = 'auth';
 
-const RouteWrapper = ({ component: Component, type, ...rest }) => {
+const RouteWrapper = ({ component: Component, type, page, ...rest }) => {
   const { signed } = store.getState().auth;
 
   if (!signed && type === PRIVATE_TYPE) {
@@ -27,7 +27,7 @@ const RouteWrapper = ({ component: Component, type, ...rest }) => {
     <Route
       {...rest}
       render={(props) => (
-        <Layout>
+        <Layout page={page}>
           <Component {...props} />
         </Layout>
       )}
@@ -39,6 +39,7 @@ RouteWrapper.propTypes = {
   type: PropTypes.oneOf([PRIVATE_TYPE, PUBLIC_TYPE, AUTH_TYPE]).isRequired,
   component: PropTypes.oneOfType([PropTypes.element, PropTypes.func])
     .isRequired,
+  page: PropTypes.string.isRequired,
 };
 
 export default RouteWrapper;
