@@ -1,12 +1,11 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Form, Input } from '@rocketseat/unform';
-import { useHistory } from 'react-router-dom';
 
 import * as Yup from 'yup';
 
-import { signInSuccess } from '~/store/modules/auth/actions';
+import { signInRequest } from '~/store/modules/auth/actions';
 
 import logo from '~/assets/images/logo.svg';
 
@@ -21,20 +20,15 @@ const schema = Yup.object().shape({
 
 const SignIn = () => {
   const dispatch = useDispatch();
-  const history = useHistory();
-  const loading = useSelector((state) => state.auth.loading);
-
-  function handleSubmit() {
-    // dispatch(signInRequest(user, password));
-    dispatch(signInSuccess('', ''));
-    history.push('/home');
-  }
+  const handleSubmit = ({ user, password }) => {
+    dispatch(signInRequest(user, password));
+  };
 
   return (
     <>
       <Content>
         <img src={logo} alt="Rs Auto" width="363.07" height="253" />
-        <Form schema={schema} onSubmit={() => handleSubmit()}>
+        <Form schema={schema} onSubmit={(data) => handleSubmit(data)}>
           <div>
             <label htmlFor="user">Usuário</label>
             <Input
@@ -53,7 +47,7 @@ const SignIn = () => {
               placeholder="Sua senha"
             />
           </div>
-          <button type="submit">{loading ? 'Carregando...' : 'Login'}</button>
+          <button type="submit">Login</button>
         </Form>
       </Content>
     </>

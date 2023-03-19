@@ -10,7 +10,8 @@ const api = axios.create({
   baseURL: settings.api.baseURL,
 });
 
-const authenticateAsync = async (payload) => await api.post('/Auth', payload);
+const authenticateAsync = async (payload) =>
+  await api.post('/Token/Web', payload);
 
 const createUserAsync = async (payload) => await api.post('/User', payload);
 

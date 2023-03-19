@@ -13,7 +13,7 @@ export const StatisticWrapper = styled.div`
 export const StatisticSection = styled.section`
   width: 1000px;
   padding: 10px;
-  border-radius: 12px;
+  border-radius: 15px;
   margin-top: 20px;
   font-family: Roboto, sans serif;
   background: #ffff;

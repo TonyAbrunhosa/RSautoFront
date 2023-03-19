@@ -1,14 +1,13 @@
 import { takeLatest, call, put, all } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
 
-import { signInSuccess, signFailure } from './actions';
-
 import history from '~/services/history';
 import {
   authenticateAsync,
   createUserAsync,
   setAuthorizationToken,
 } from '~/services/api';
+import { signInSuccess, signFailure } from './actions';
 
 export function* signIn({ payload }) {
   try {
@@ -16,14 +15,22 @@ export function* signIn({ payload }) {
 
     const response = yield call(
       authenticateAsync({
-        email,
+        login: email,
         password,
       })
     );
 
-    const { token, user } = response.data;
+    const { token, nomeUsuario, loginUsuario } = response.data;
 
-    yield call(put(signInSuccess(token, user)));
+    yield call(
+      put(
+        signInSuccess(token, {
+          name: nomeUsuario,
+          email: loginUsuario,
+          password,
+        })
+      )
+    );
 
     history.push('/home');
   } catch (err) {
