@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { Form, Input } from '@rocketseat/unform';
 
 import * as Yup from 'yup';
+import history from '~/services/history';
 
 import { signInSuccess } from '~/store/modules/auth/actions';
 
@@ -23,6 +24,7 @@ const SignIn = () => {
 
   const handleSubmit = ({ user, password }) => {
     dispatch(signInSuccess(user, password));
+    history.push('/home');
   };
 
   return (
