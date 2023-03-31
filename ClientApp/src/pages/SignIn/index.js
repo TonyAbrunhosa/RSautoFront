@@ -5,7 +5,7 @@ import { Form, Input } from '@rocketseat/unform';
 
 import * as Yup from 'yup';
 
-import { signInRequest } from '~/store/modules/auth/actions';
+import { signInSuccess } from '~/store/modules/auth/actions';
 
 import logo from '~/assets/images/logo.svg';
 
@@ -20,8 +20,9 @@ const schema = Yup.object().shape({
 
 const SignIn = () => {
   const dispatch = useDispatch();
+
   const handleSubmit = ({ user, password }) => {
-    dispatch(signInRequest(user, password));
+    dispatch(signInSuccess(user, password));
   };
 
   return (
