@@ -7,7 +7,7 @@ import axios from 'axios';
 import settings from '~/config/appsettings.json';
 
 const api = axios.create({
-  baseURL: settings.api.baseURL,
+  baseURL: settings.api.baseUrl,
 });
 
 const authenticateAsync = async (payload) =>

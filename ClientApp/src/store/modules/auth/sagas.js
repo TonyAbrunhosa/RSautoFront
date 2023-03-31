@@ -16,7 +16,7 @@ export function* signIn({ payload }) {
     const response = yield call(
       authenticateAsync({
         login: email,
-        password,
+        senha: password,
       })
     );
 
