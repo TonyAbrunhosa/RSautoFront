@@ -24,7 +24,7 @@ const siderStyles = {
   bottom: 0,
 };
 
-const meneuheaderStyless = {
+const menuHeaderStyles = {
   height: 60,
   background: '#FFFFFF',
   paddingLeft: '12px',
@@ -40,7 +40,6 @@ const menuStyles = {
 };
 
 const contentLayoutStyles = {
-  height: '100vh',
   background: '#E9E8E8',
 };
 
@@ -59,8 +58,9 @@ const headerContentStyles = {
 
 const pageNameStyles = {
   fontFamily: 'Roboto, sans-serif',
-  fontSize: 22,
-  color: '#434040',
+  fontSize: 16,
+  fontWeight: 'bolder',
+  color: '#2e2e2e',
   fontWeight: 'normal',
 };
 
@@ -79,7 +79,6 @@ const items = [
     'Peças',
     'pecas',
     [
-      getItem('Estoque', 'pecas_estoque', null, <ShoppingCartOutlined />),
       getItem('Salvas', 'pecas_salvas', null, <SaveOutlined />),
       getItem('Cadastrar', 'pecas_cadastrar', null, <PlusOutlined />),
     ],
@@ -109,7 +108,7 @@ const DefaultLayout = ({ children, page }) => {
         style={siderStyles}
         width="250"
       >
-        <div style={meneuheaderStyless}>
+        <div style={menuHeaderStyles}>
           <Link to="/home">
             <img src={logo} alt="Rs Auto" height={collapsed ? 45 : 55} />
           </Link>

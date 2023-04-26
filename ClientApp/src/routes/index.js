@@ -4,7 +4,6 @@ import { Switch } from 'react-router-dom';
 import SignIn from '~/pages/SignIn';
 import Home from '~/pages/Home';
 import PartsStore from '~/pages/PartsStore';
-import PartsInventory from '~/pages/PartsInventory';
 import SavedParts from '~/pages/SavedParts';
 import SavedVehicles from '~/pages/SavedVehicles';
 import VehiclesStore from '~/pages/VehiclesStore';
@@ -39,12 +38,6 @@ const Routes = () => {
         type="private"
         page="Peças > Cadastrar"
         component={PartsStore}
-      />
-      <Route
-        path="/pecas/estoque"
-        type="private"
-        page="Peças > Estoque"
-        component={PartsInventory}
       />
       <Route path="/home" type="private" page="Home" component={Home} />
       <Route path="/login" type="auth" page="Login" component={SignIn} />

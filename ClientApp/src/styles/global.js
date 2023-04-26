@@ -16,6 +16,7 @@ export default createGlobalStyle`
 }
 html, body, #root{
   height: 100%;
+  background: #E9E8E8;
 }
 body{
   -webkit-font-smoothing: antialiased;

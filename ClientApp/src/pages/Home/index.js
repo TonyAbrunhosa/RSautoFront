@@ -14,7 +14,7 @@ const getOptions = (type) => ({
     backgroundColor: '#ffff',
     borderRadius: 12,
     type,
-    width: 1000,
+    width: 950,
     height: 400,
     shadow: true,
   },
@@ -91,31 +91,37 @@ const Home = () => {
 
   return (
     <Wrapper>
-      <HighchartsReact highcharts={Highcharts} options={getOptions('line')} />
-      <StatisticSection>
-        <h2>Estatísticas de Março</h2>
-        <StatisticWrapper>
-          <Statistic title="Notas emitidas" value={300} formatter={formatter} />
-          <Statistic
-            title="Total de peças no estoque"
-            value={112893}
-            precision={2}
-            formatter={formatter}
-          />
-          <Statistic
-            title="Peças salvas"
-            value={112893}
-            precision={2}
-            formatter={formatter}
-          />
-          <Statistic
-            title="Veículos salvos"
-            value={112893}
-            precision={2}
-            formatter={formatter}
-          />
-        </StatisticWrapper>
-      </StatisticSection>
+      <div>
+        <HighchartsReact highcharts={Highcharts} options={getOptions('line')} />
+        <StatisticSection>
+          <h2>Estatísticas de Março</h2>
+          <StatisticWrapper>
+            <Statistic
+              title="Notas emitidas"
+              value={300}
+              formatter={formatter}
+            />
+            <Statistic
+              title="Total de peças no estoque"
+              value={112893}
+              precision={2}
+              formatter={formatter}
+            />
+            <Statistic
+              title="Peças salvas"
+              value={112893}
+              precision={2}
+              formatter={formatter}
+            />
+            <Statistic
+              title="Veículos salvos"
+              value={112893}
+              precision={2}
+              formatter={formatter}
+            />
+          </StatisticWrapper>
+        </StatisticSection>
+      </div>
     </Wrapper>
   );
 };
