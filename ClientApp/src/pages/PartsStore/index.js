@@ -11,11 +11,13 @@ import { Input, InputNumber, Select, Switch, Form, Button } from 'antd';
 
 import { priceFormatterUtil } from '~/utils/formatterUtils';
 import FormHeader from '~/components/FormHeader';
+import history from '~/services/history'; 
+
 import { Wrapper, FormWarapper, FormRow } from './styles';
 
 const PartsStore = () => {
   const [form] = Form.useForm();
-  const [requiredMark, setRequiredMarkType] = useState('opcional');
+  const [requiredMark, setRequiredMarkType] = useState('optional');
   const [brands, setBrands] = useState([]);
   const [models, setModels] = useState([]);
   const [suppliers, setSuppliers] = useState([]);
@@ -54,7 +56,7 @@ const PartsStore = () => {
             name: 'Voltar',
             type: 'dashed',
             size: 'large',
-            onClick: () => {},
+            onClick: () => history.goBack(),
             icon: <LeftOutlined />,
           },
           {
