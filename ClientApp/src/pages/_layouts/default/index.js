@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import { Layout, Menu } from 'antd';
 import {
   PlusOutlined,
   SaveOutlined,
-  ShoppingCartOutlined,
   CarOutlined,
   SettingFilled,
 } from '@ant-design/icons';
@@ -29,7 +28,7 @@ const menuHeaderStyles = {
   background: '#FFFFFF',
   paddingLeft: '12px',
   display: 'flex',
-  alignItems: 'center',
+  alignMenuItems: 'center',
   borderRight: '1px solid #7b7c90',
 };
 
@@ -52,7 +51,7 @@ const headerStyles = {
 
 const headerContentStyles = {
   display: 'flex',
-  alignItems: 'center',
+  alignMenuItems: 'center',
   justifyContent: 'space-between',
 };
 
@@ -66,21 +65,21 @@ const pageNameStyles = {
 
 const settingsStyles = { fontSize: 22, color: '#474747', cursor: 'pointer' };
 
-const getItem = (label, key, subItems, icon, type) => ({
+const getItem = (label, key, subMenuItems, icon, type) => ({
   key,
-  children: subItems,
+  subMenuItems,
   label,
   type,
   icon,
 });
 
-const items = [
+const MenuItems = [
   getItem(
     'Peças',
     'pecas',
     [
-      getItem('Salvas', 'pecas_salvas', null, <SaveOutlined />),
-      getItem('Cadastrar', 'pecas_cadastrar', null, <PlusOutlined />),
+      getItem('Salvas', 'pecas', null, <SaveOutlined />),
+      getItem('Cadastrar', 'cadastrar_peca', null, <PlusOutlined />),
     ],
     <SettingFilled />
   ),
@@ -88,16 +87,23 @@ const items = [
     'Veículos',
     'veiculos',
     [
-      getItem('Salvos', 'veiculos_salvos', null, <SaveOutlined />),
-      getItem('Cadastrar', 'veiculos_cadastrar', null, <PlusOutlined />),
+      getItem('Salvos', 'veiculos', null, <SaveOutlined />),
+      getItem('Cadastrar', 'cadastrar_veiculo', null, <PlusOutlined />),
     ],
     <CarOutlined />
   ),
 ];
 
+const getMenuItemComponent = (key, label, icon) => (
+  <Menu.Item key={key} icon={icon}>
+    <Link to={key.replace("_", "-")}>
+      {label}
+    </Link>
+  </Menu.Item>
+)
+
 const DefaultLayout = ({ children, page }) => {
   const [collapsed, setCollapsed] = useState(false);
-  const history = useHistory();
 
   return (
     <Layout hasSider>
@@ -114,15 +120,23 @@ const DefaultLayout = ({ children, page }) => {
           </Link>
         </div>
         <Menu
-          onClick={({ key: menuItem }) => {
-            history.push({ pathname: menuItem.replace('_', '/') });
-          }}
           style={menuStyles}
           theme="dark"
           defaultSelectedKeys={['1']}
           mode="inline"
-          items={items}
-        />
+        >
+          {MenuItems.map(i => 
+              !i.subMenuItems.length ?
+                 getMenuItemComponent(i.key, i.label, i.icon)
+              :
+              <Menu.SubMenu key={i.key} title={i.label} icon={i.icon}>
+                {i.subMenuItems.map(subI => 
+                  getMenuItemComponent(subI.key, subI.label, subI.icon)
+                )}
+              </Menu.SubMenu>
+            )
+          }
+        </Menu>
       </Sider>
       <Layout style={contentLayoutStyles}>
         <Header style={headerStyles}>
@@ -130,7 +144,6 @@ const DefaultLayout = ({ children, page }) => {
             style={{ ...headerContentStyles, marginLeft: collapsed ? 50 : 220 }}
           >
             <h2 style={pageNameStyles}>{page}</h2>
-            <SettingFilled style={settingsStyles} />
           </div>
         </Header>
         <Content style={{ marginLeft: collapsed ? 100 : 270 }}>

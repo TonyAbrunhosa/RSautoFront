@@ -16,25 +16,25 @@ const Routes = () => {
       <Route exact path="/" type="auth" page="Login" component={SignIn} />
       <Route path="/home" type="private" page="Home" component={Home} />
       <Route
-        path="/veiculos/salvos"
+        path="/veiculos"
         type="private"
         page="Veículos > Salvos"
         component={SavedVehicles}
       />
       <Route
-        path="/veiculos/cadastrar"
+        path="/cadastrar-veiculo"
         type="private"
         page="Veículos > Cadastrar"
         component={VehiclesStore}
       />
       <Route
-        path="/pecas/salvas"
+        path="/pecas"
         type="private"
         page="Peças > Salvas"
         component={SavedParts}
       />
       <Route
-        path="/pecas/cadastrar"
+        path="/cadastrar-peca"
         type="private"
         page="Peças > Cadastrar"
         component={PartsStore}
