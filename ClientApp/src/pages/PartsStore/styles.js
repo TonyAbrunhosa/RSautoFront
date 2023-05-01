@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.section`
   margin: 5px auto;
-  width: 80%;
+  width: 90%;
 `;
 
 export const FormWarapper = styled.div`
