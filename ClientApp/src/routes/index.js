@@ -9,6 +9,7 @@ import SavedVehicles from '~/pages/SavedVehicles';
 import VehiclesStore from '~/pages/VehiclesStore';
 
 import Route from './Route';
+import CustomerStore from '~/pages/CustomerStore';
 
 const Routes = () => {
   return (
@@ -38,6 +39,12 @@ const Routes = () => {
         type="private"
         page="Peças > Cadastrar"
         component={PartsStore}
+      />
+      <Route
+        path="/cadastrar-cliente"
+        type="private"
+        page="Clientes > Cadastrar"
+        component={CustomerStore}
       />
       <Route path="/home" type="private" page="Home" component={Home} />
       <Route path="/login" type="auth" page="Login" component={SignIn} />

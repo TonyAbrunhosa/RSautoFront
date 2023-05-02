@@ -8,6 +8,7 @@ import {
   SaveOutlined,
   CarOutlined,
   SettingFilled,
+  UserOutlined,
 } from '@ant-design/icons';
 
 import logo from '~/assets/images/logo.svg';
@@ -91,6 +92,15 @@ const MenuItems = [
       getItem('Cadastrar', 'cadastrar_veiculo', null, <PlusOutlined />),
     ],
     <CarOutlined />
+  ),
+  getItem(
+    'Clientes',
+    'clientes',
+    [
+      getItem('Salvos', 'clientes', null, <SaveOutlined />),
+      getItem('Cadastrar', 'cadastrar_cliente', null, <PlusOutlined />),
+    ],
+    <UserOutlined />
   ),
 ];
 
