@@ -13,7 +13,7 @@ import { priceFormatterUtil } from '~/utils/formatterUtils';
 import FormHeader from '~/components/FormHeader';
 import history from '~/services/history'; 
 
-import { Wrapper, FormWarapper, FormRow } from './styles';
+import { Wrapper, FormWarapper, FormRow } from '~/styles/form';
 
 const PartsStore = () => {
   const [form] = Form.useForm();

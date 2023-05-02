@@ -7,7 +7,7 @@ import { Input, Select, Switch, Form } from 'antd';
 import FormHeader from '~/components/FormHeader';
 import history from '~/services/history';
 
-import { Wrapper, FormWarapper, FormRow } from './styles';
+import { Wrapper, FormWarapper, FormRow } from '~/styles/form';
 
 const CustomerStore = () => {
   const [form] = Form.useForm();
