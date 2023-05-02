@@ -80,28 +80,28 @@ const PartsStore = () => {
         >
           <FormRow>
             <Form.Item
-              name="name"
-              label="Nome"
+              name="description"
+              label="Descrição"
               validateTrigger={['onChange', 'onBlur']}
               rules={[
                 {
                   required: true,
                   whitespace: true,
-                  message: 'O nome da peça é obrigatório',
+                  message: 'A descrição da peça é obrigatória',
                 },
               ]}
-              tooltip="Nome da peça"
+              tooltip="Descrição da peça"
               style={{ width: '100%' }}
             >
-              <Input placeholder="Digite o nome da peça..." />{' '}
+              <Input placeholder="Digite a descrição da peça..." />{' '}
             </Form.Item>
           </FormRow>
 
           <FormRow>
             <Form.Item
               name="brand"
-              style={{ width: '49%' }}
-              label="Marca"
+              style={{ width: '33%' }}
+              label="Marca da peça"
               validateTrigger={['onChange']}
               rules={[
                 {
@@ -117,8 +117,8 @@ const PartsStore = () => {
 
             <Form.Item
               name="model"
-              style={{ width: '49%' }}
-              label="Modelo"
+              style={{ width: '33%' }}
+              label="Modelo da Peça"
               validateTrigger={['onChange']}
               rules={[
                 {
@@ -128,6 +128,23 @@ const PartsStore = () => {
                 },
               ]}
               tooltip="Nome do modelo da peça"
+            >
+              <Select mode="tags" options={models} />
+            </Form.Item>
+
+            <Form.Item
+              name="vehicleModel"
+              style={{ width: '33%' }}
+              label="Modelo do Veículo"
+              validateTrigger={['onChange']}
+              rules={[
+                {
+                  required: true,
+                  whitespace: true,
+                  message: 'O nome do modelo do veículo é obrigatório',
+                },
+              ]}
+              tooltip="Nome do modelo do veículo"
             >
               <Select mode="tags" options={models} />
             </Form.Item>

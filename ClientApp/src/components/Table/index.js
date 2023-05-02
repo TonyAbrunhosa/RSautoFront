@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Table as AntdTable, Input } from 'antd';
+import { Table as AntdTable, Input, Button } from 'antd';
 
-import { Header, Wrapper } from './styles';
+import { ActionsWrapper, Wrapper } from './styles';
+import { PlusOutlined } from '@ant-design/icons';
 
 const Table = ({
   data,
@@ -13,12 +14,13 @@ const Table = ({
   loading,
   expandable,
   onChange,
+  onCreateClick,
   filterPlaceholder,
   searchLoading,
 }) => (
   <Wrapper>
-    <Header>
-      <h2>{title}</h2>
+    <h2>{title}</h2>
+    <ActionsWrapper>
       <Input.Search
         style={{ width: 400 }}
         placeholder={filterPlaceholder}
@@ -27,7 +29,10 @@ const Table = ({
         size="large"
         onChange={() => onChange()}
       />
-    </Header>
+      <Button type="primary" icon={<PlusOutlined />} size='large' onClick={onCreateClick}>
+        Cadastrar
+      </Button>
+    </ActionsWrapper>
 
     <AntdTable
       style={{ boxShadow: '0px 2px 2px rgba(0, 0, 0, 0.25)' }}
@@ -53,6 +58,7 @@ Table.propTypes = {
   columns: PropTypes.number.isRequired,
   filterPlaceholder: PropTypes.string.isRequired,
   onFilter: PropTypes.func.isRequired,
+  onCreateClick: PropTypes.func.isRequired,
   loading: PropTypes.bool,
   searchLoading: PropTypes.bool,
   expandable: PropTypes.object,

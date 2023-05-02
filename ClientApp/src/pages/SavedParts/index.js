@@ -11,6 +11,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 
 import { nameFormatterUtil } from '~/utils/formatterUtils';
 import Table from '~/components/Table';
+import history from '~/services/history';
 
 const data = [
   {
@@ -459,6 +460,41 @@ const data = [
   },
 ];
 
+const CollumnAction = (
+  <Dropdown
+    menu={{
+      items: [
+        {
+          key: '1',
+          label: (
+            <span>
+              <EditOutlined
+                style={{ color: '#1099d7', marginRight: '5px' }}
+              />
+              Editar
+            </span>
+          ),
+        },
+        {
+          key: '2',
+          label: (
+            <span>
+              <DeleteOutlined
+                style={{ color: '#fd163d', marginRight: '5px' }}
+              />
+              Excluir
+            </span>
+          ),
+        },
+      ],
+    }}
+    placement="bottom"
+    arrow={{ pointAtCenter: true }}
+  >
+    <Button type="text" icon={<MoreOutlined />} />
+  </Dropdown>
+);
+
 const getFilters = (name, records) =>
   [...new Set(records.map((r) => r[name]))].map((r) => ({
     text: nameFormatterUtil(r),
@@ -467,7 +503,7 @@ const getFilters = (name, records) =>
 
 const columns = [
   {
-    title: 'Nome',
+    title: 'Descrição',
     dataIndex: 'nome',
     key: 'nome',
     sortDirections: ['descend', 'ascend'],
@@ -514,40 +550,7 @@ const columns = [
     title: 'Ações',
     dataIndex: '',
     key: 'x',
-    render: () => (
-      <Dropdown
-        menu={{
-          items: [
-            {
-              key: '1',
-              label: (
-                <span>
-                  <EditOutlined
-                    style={{ color: '#1099d7', marginRight: '5px' }}
-                  />
-                  Editar
-                </span>
-              ),
-            },
-            {
-              key: '2',
-              label: (
-                <span>
-                  <DeleteOutlined
-                    style={{ color: '#fd163d', marginRight: '5px' }}
-                  />
-                  Excluir
-                </span>
-              ),
-            },
-          ],
-        }}
-        placement="bottom"
-        arrow={{ pointAtCenter: true }}
-      >
-        <Button type="text" icon={<MoreOutlined />} />
-      </Dropdown>
-    ),
+    render: () => CollumnAction,
   },
 ];
 
@@ -577,6 +580,7 @@ const SavedParts = () => {
       filterPlaceholder="Digite o valor para a busca..."
       title="Peças Cadastradas"
       onChange={() => {}}
+      onCreateClick={() => history.push('cadastrar-peca')}
       searchLoading={searchLoading}
       loading={loading}
       data={records}
