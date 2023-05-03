@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
-import { LeftOutlined, CheckOutlined } from '@ant-design/icons';
-
 import { Input, Select, Form } from 'antd';
 
-import FormHeader from '~/components/FormHeader';
+import FormHeader from '~/components/Form/FormHeader';
 import history from '~/services/history';
 
 import { Wrapper, FormWarapper, FormRow } from '~/styles/form';
@@ -45,23 +43,8 @@ const VehiclesStore = () => {
     <Wrapper>
       <FormHeader
         title="Cadastro de Veículos"
-        buttons={[
-          {
-            name: 'Voltar',
-            type: 'dashed',
-            size: 'large',
-            onClick: () => history.goBack(),
-            icon: <LeftOutlined />,
-          },
-          {
-            name: 'Salvar',
-            type: 'primary',
-            size: 'large',
-            onClick: onSubmit,
-            disabled: false,
-            icon: <CheckOutlined />,
-          },
-        ]}
+        saveOnClick={onSubmit}
+        goBackOnClick={() => history.goBack()}
       />
 
       <FormWarapper>
@@ -74,7 +57,7 @@ const VehiclesStore = () => {
         >
           <FormRow>
             <Form.Item
-              name="brand"
+              name="marca"
               style={{ width: '49%' }}
               label="Marca"
               validateTrigger={['onChange']}
@@ -91,7 +74,7 @@ const VehiclesStore = () => {
             </Form.Item>
 
             <Form.Item
-              name="model"
+              name="modelo"
               style={{ width: '49%' }}
               label="Modelo"
               validateTrigger={['onChange']}
@@ -107,6 +90,7 @@ const VehiclesStore = () => {
               <Select mode="tags" options={models} />
             </Form.Item>
           </FormRow>
+
           <FormRow>
             <Form.Item
               name="tipoCombustivel"
@@ -160,6 +144,7 @@ const VehiclesStore = () => {
             >
               <Input placeholder="Digite o número da placa..." />{' '}
             </Form.Item>
+
             <Form.Item
               name="km"
               label="Quilometragem"
@@ -177,6 +162,7 @@ const VehiclesStore = () => {
               <Input placeholder="Digite a quilometragem do veículo..." />{' '}
             </Form.Item>
           </FormRow>
+
           <FormRow>
             <Form.Item
               name="cliente"

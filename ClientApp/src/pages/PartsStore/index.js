@@ -1,24 +1,18 @@
 import React, { useState, useEffect } from 'react';
 
-import {
-  LeftOutlined,
-  CheckOutlined,
-  MinusCircleOutlined,
-  PlusOutlined,
-} from '@ant-design/icons';
+import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 
 import { Input, InputNumber, Select, Switch, Form, Button } from 'antd';
 
 import { priceFormatterUtil } from '~/utils/formatterUtils';
-import FormHeader from '~/components/FormHeader';
-import history from '~/services/history'; 
+import FormHeader from '~/components/Form/FormHeader';
+import history from '~/services/history';
 
 import { Wrapper, FormWarapper, FormRow } from '~/styles/form';
 
 const PartsStore = () => {
   const [form] = Form.useForm();
   const [requiredMark, setRequiredMarkType] = useState('optional');
-  const [brands, setBrands] = useState([]);
   const [models, setModels] = useState([]);
   const [suppliers, setSuppliers] = useState([]);
   const [initialValues, setInitialValues] = useState({});
@@ -27,8 +21,7 @@ const PartsStore = () => {
     setRequiredMarkType(requiredMarkValue);
 
   const onSubmit = () => {
-    console.log(form.getFieldsError());
-    console.log(form.getFieldsValue());
+    console.log(form.getFieldValue());
   };
 
   useEffect(() => {
@@ -42,7 +35,6 @@ const PartsStore = () => {
       { value: 'Renault', label: 'Renault' },
       { value: 'Citroën', label: 'Citroën' },
     ]);
-    setBrands([]);
     setSuppliers([]);
     setInitialValues({});
   }, []);
@@ -51,23 +43,8 @@ const PartsStore = () => {
     <Wrapper>
       <FormHeader
         title="Cadastro de Peças"
-        buttons={[
-          {
-            name: 'Voltar',
-            type: 'dashed',
-            size: 'large',
-            onClick: () => history.goBack(),
-            icon: <LeftOutlined />,
-          },
-          {
-            name: 'Salvar',
-            type: 'primary',
-            size: 'large',
-            onClick: onSubmit,
-            disabled: false,
-            icon: <CheckOutlined />,
-          },
-        ]}
+        saveOnClick={onSubmit}
+        goBackOnClick={() => history.goBack()}
       />
 
       <FormWarapper>
@@ -80,7 +57,7 @@ const PartsStore = () => {
         >
           <FormRow>
             <Form.Item
-              name="description"
+              name="descricao"
               label="Descrição"
               validateTrigger={['onChange', 'onBlur']}
               rules={[
@@ -99,7 +76,7 @@ const PartsStore = () => {
 
           <FormRow>
             <Form.Item
-              name="brand"
+              name="marcaPeca"
               style={{ width: '24%' }}
               label="Marca da peça"
               validateTrigger={['onChange']}
@@ -116,7 +93,7 @@ const PartsStore = () => {
             </Form.Item>
 
             <Form.Item
-              name="model"
+              name="marcaVeiculo"
               style={{ width: '24%' }}
               label="Marca do Veículo"
               validateTrigger={['onChange']}
@@ -133,7 +110,7 @@ const PartsStore = () => {
             </Form.Item>
 
             <Form.Item
-              name="vehicleModel"
+              name="modeloVeiculo"
               style={{ width: '24%' }}
               label="Modelo do Veículo"
               validateTrigger={['onChange']}
@@ -148,8 +125,9 @@ const PartsStore = () => {
             >
               <Select mode="tags" options={[]} />
             </Form.Item>
+
             <Form.Item
-              name="vehicleYear"
+              name="anoModelo"
               style={{ width: '24%' }}
               label="Ano/Modelo"
               validateTrigger={['onChange']}
@@ -167,11 +145,11 @@ const PartsStore = () => {
           </FormRow>
 
           <Form.List
-            name="suppliersList"
+            name="fornecedores"
             rules={[
               {
-                validator: async (_, suppliersList) => {
-                  if (!suppliersList || suppliersList.length < 1) {
+                validator: async (_, fornecedores) => {
+                  if (!fornecedores || fornecedores.length < 1) {
                     return Promise.reject(
                       new Error('Pelo menos um fornecedor deve ser informado.')
                     );
@@ -192,7 +170,7 @@ const PartsStore = () => {
                       <FormRow>
                         <Form.Item
                           {...field}
-                          name="supplierName"
+                          name="nome"
                           style={{ width: '80%' }}
                           validateTrigger={['onChange']}
                           rules={[
@@ -207,6 +185,7 @@ const PartsStore = () => {
                         >
                           <Select mode="tags" options={suppliers} />
                         </Form.Item>
+
                         {fields.length >= 1 && (
                           <MinusCircleOutlined
                             style={{ fontSize: '16px', color: 'red' }}
@@ -218,7 +197,7 @@ const PartsStore = () => {
 
                       <FormRow>
                         <Form.Item
-                          name="stockBatch"
+                          name="lote"
                           label="Lote"
                           style={{ width: '50%' }}
                           tooltip="O lote do estoque"
@@ -227,7 +206,7 @@ const PartsStore = () => {
                         </Form.Item>
 
                         <Form.Item
-                          name="stock"
+                          name="estoque"
                           label="Estoque"
                           tooltip="Quantidade de peças no estoque para este fornecedor"
                         >
@@ -235,7 +214,7 @@ const PartsStore = () => {
                         </Form.Item>
 
                         <Form.Item
-                          name="unitPrice"
+                          name="precoUnitario"
                           label="Preço Unitário"
                           tooltip="Preço unitário da peça para este fornecedor"
                         >
@@ -248,7 +227,7 @@ const PartsStore = () => {
                         </Form.Item>
 
                         <Form.Item
-                          name="unitCost"
+                          name="custoUnitario"
                           label="Custo Unitário"
                           tooltip="Custo unitário da peça para este fornecedor"
                         >
@@ -283,7 +262,7 @@ const PartsStore = () => {
 
           <FormRow>
             <Form.Item
-              name="enabled"
+              name="status"
               label="Ativa"
               required
               tooltip="Indica o status da peça"

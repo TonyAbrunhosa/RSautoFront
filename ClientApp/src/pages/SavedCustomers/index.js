@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Dropdown, Button } from 'antd';
-import { MoreOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
 
+import history from '~/services/history';
+import { getFilters } from '~/utils/tableUtils';
 import { nameFormatterUtil } from '~/utils/formatterUtils';
 import Table from '~/components/Table';
-import history from '~/services/history';
+import CollumnAction from '~/components/Table/ActionDropdow';
 
 const data = [
   {
@@ -100,45 +100,6 @@ const data = [
   },
 ];
 
-const CollumnAction = (
-  <Dropdown
-    menu={{
-      items: [
-        {
-          key: '1',
-          label: (
-            <span>
-              <EditOutlined style={{ color: '#1099d7', marginRight: '5px' }} />
-              Editar
-            </span>
-          ),
-        },
-        {
-          key: '2',
-          label: (
-            <span>
-              <DeleteOutlined
-                style={{ color: '#fd163d', marginRight: '5px' }}
-              />
-              Excluir
-            </span>
-          ),
-        },
-      ],
-    }}
-    placement="bottom"
-    arrow={{ pointAtCenter: true }}
-  >
-    <Button type="text" icon={<MoreOutlined />} />
-  </Dropdown>
-);
-
-const getFilters = (name, records) =>
-  [...new Set(records.map((r) => r[name]))].map((r) => ({
-    text: nameFormatterUtil(r),
-    value: r,
-  }));
-
 const columns = [
   {
     title: 'Nome',
@@ -201,10 +162,7 @@ const columns = [
     onFilter: (value, record) => record.email.startsWith(value),
     filterSearch: true,
     render: (email) => (
-      <a href={`mailto:${email}`} target="_blank"
-        target="_blank"
-        rel="noreferrer"
-      >
+      <a href={`mailto:${email}`} target="_blank" rel="noreferrer">
         {email}
       </a>
     ),
@@ -218,7 +176,7 @@ const columns = [
     title: 'Ações',
     dataIndex: '',
     key: 'x',
-    render: () => CollumnAction,
+    render: () => <CollumnAction />,
   },
 ];
 

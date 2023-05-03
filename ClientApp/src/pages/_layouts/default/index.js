@@ -77,7 +77,7 @@ const getItem = (label, key, subMenuItems, icon, type) => ({
 const MenuItems = [
   getItem(
     'Peças',
-    'pecas',
+    'pecas_option',
     [
       getItem('Salvas', 'pecas', null, <SaveOutlined />),
       getItem('Cadastrar', 'cadastrar_peca', null, <PlusOutlined />),
@@ -86,7 +86,7 @@ const MenuItems = [
   ),
   getItem(
     'Veículos',
-    'veiculos',
+    'veiculos_option',
     [
       getItem('Salvos', 'veiculos', null, <SaveOutlined />),
       getItem('Cadastrar', 'cadastrar_veiculo', null, <PlusOutlined />),
@@ -95,7 +95,7 @@ const MenuItems = [
   ),
   getItem(
     'Clientes',
-    'clientes',
+    'clientes_option',
     [
       getItem('Salvos', 'clientes', null, <SaveOutlined />),
       getItem('Cadastrar', 'cadastrar_cliente', null, <PlusOutlined />),

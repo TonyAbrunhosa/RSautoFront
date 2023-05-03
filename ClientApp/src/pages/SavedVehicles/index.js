@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Dropdown, Button } from 'antd';
-import { MoreOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
 
-import { nameFormatterUtil } from '~/utils/formatterUtils';
-import Table from '~/components/Table';
 import history from '~/services/history';
+import { getFilters } from '~/utils/tableUtils';
+
+import CollumnAction from '~/components/Table/ActionDropdow';
+import Table from '~/components/Table';
 
 const data = [
   {
@@ -68,45 +68,6 @@ const data = [
     clienteCpfCnpj: '67.117.218/0001-00',
   },
 ];
-
-const CollumnAction = (
-  <Dropdown
-    menu={{
-      items: [
-        {
-          key: '1',
-          label: (
-            <span>
-              <EditOutlined style={{ color: '#1099d7', marginRight: '5px' }} />
-              Editar
-            </span>
-          ),
-        },
-        {
-          key: '2',
-          label: (
-            <span>
-              <DeleteOutlined
-                style={{ color: '#fd163d', marginRight: '5px' }}
-              />
-              Excluir
-            </span>
-          ),
-        },
-      ],
-    }}
-    placement="bottom"
-    arrow={{ pointAtCenter: true }}
-  >
-    <Button type="text" icon={<MoreOutlined />} />
-  </Dropdown>
-);
-
-const getFilters = (name, records) =>
-  [...new Set(records.map((r) => r[name]))].map((r) => ({
-    text: nameFormatterUtil(r),
-    value: r,
-  }));
 
 const columns = [
   {
@@ -188,7 +149,7 @@ const columns = [
     title: 'Ações',
     dataIndex: '',
     key: 'x',
-    render: () => CollumnAction,
+    render: () => <CollumnAction />,
   },
 ];
 

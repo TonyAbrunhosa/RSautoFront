@@ -1,17 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { Tag, Dropdown, Button, Divider, List } from 'antd';
-import {
-  MoreOutlined,
-  EditOutlined,
-  DeleteOutlined,
-  EyeOutlined,
-  EyeInvisibleOutlined,
-} from '@ant-design/icons';
+import { Tag, Divider, List } from 'antd';
+import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
-import { nameFormatterUtil } from '~/utils/formatterUtils';
-import Table from '~/components/Table';
 import history from '~/services/history';
+import { getFilters } from '~/utils/tableUtils';
+
+import Table from '~/components/Table';
+import CollumnAction from '~/components/Table/ActionDropdow';
 
 const data = [
   {
@@ -460,47 +456,6 @@ const data = [
   },
 ];
 
-const CollumnAction = (
-  <Dropdown
-    menu={{
-      items: [
-        {
-          key: '1',
-          label: (
-            <span>
-              <EditOutlined
-                style={{ color: '#1099d7', marginRight: '5px' }}
-              />
-              Editar
-            </span>
-          ),
-        },
-        {
-          key: '2',
-          label: (
-            <span>
-              <DeleteOutlined
-                style={{ color: '#fd163d', marginRight: '5px' }}
-              />
-              Excluir
-            </span>
-          ),
-        },
-      ],
-    }}
-    placement="bottom"
-    arrow={{ pointAtCenter: true }}
-  >
-    <Button type="text" icon={<MoreOutlined />} />
-  </Dropdown>
-);
-
-const getFilters = (name, records) =>
-  [...new Set(records.map((r) => r[name]))].map((r) => ({
-    text: nameFormatterUtil(r),
-    value: r,
-  }));
-
 const columns = [
   {
     title: 'Descrição',
@@ -550,7 +505,7 @@ const columns = [
     title: 'Ações',
     dataIndex: '',
     key: 'x',
-    render: () => CollumnAction,
+    render: () => <CollumnAction />,
   },
 ];
 

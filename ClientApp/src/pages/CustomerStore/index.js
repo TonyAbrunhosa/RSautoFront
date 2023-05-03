@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
-import { LeftOutlined, CheckOutlined } from '@ant-design/icons';
+import { Input, Select, Form } from 'antd';
 
-import { Input, Select, Switch, Form } from 'antd';
-
-import FormHeader from '~/components/FormHeader';
+import FormHeader from '~/components/Form/FormHeader';
 import history from '~/services/history';
 
 import { Wrapper, FormWarapper, FormRow } from '~/styles/form';
@@ -40,23 +38,8 @@ const CustomerStore = () => {
     <Wrapper>
       <FormHeader
         title="Cadastro de Clientes"
-        buttons={[
-          {
-            name: 'Voltar',
-            type: 'dashed',
-            size: 'large',
-            onClick: () => history.goBack(),
-            icon: <LeftOutlined />,
-          },
-          {
-            name: 'Salvar',
-            type: 'primary',
-            size: 'large',
-            onClick: onSubmit,
-            disabled: false,
-            icon: <CheckOutlined />,
-          },
-        ]}
+        saveOnClick={onSubmit}
+        goBackOnClick={() => history.goBack()}
       />
 
       <FormWarapper>
@@ -84,6 +67,7 @@ const CustomerStore = () => {
             >
               <Input placeholder="Digite o nome do cliente..." />
             </Form.Item>
+
             <Form.Item
               name="razaoSocial"
               label="Razão Social"
@@ -92,8 +76,9 @@ const CustomerStore = () => {
             >
               <Input placeholder="Digite a razão social do cliente..." />
             </Form.Item>
+
             <Form.Item
-              name="cpfcnpj"
+              name="cpfCnpj"
               label="Documento"
               validateTrigger={['onChange', 'onBlur']}
               rules={[
@@ -119,6 +104,7 @@ const CustomerStore = () => {
             >
               <Input placeholder="Digite o número do telefone fixo do cliente..." />
             </Form.Item>
+
             <Form.Item
               validateTrigger={['onChange', 'onBlur']}
               rules={[
@@ -135,6 +121,7 @@ const CustomerStore = () => {
             >
               <Input placeholder="Digite o número de telefone móvel do cliente..." />
             </Form.Item>
+
             <Form.Item
               validateTrigger={['onChange', 'onBlur']}
               rules={[
@@ -170,6 +157,7 @@ const CustomerStore = () => {
             >
               <Input placeholder="Digite o cep do cliente..." />
             </Form.Item>
+
             <Form.Item
               name="estado"
               style={{ width: '10%' }}
@@ -186,6 +174,7 @@ const CustomerStore = () => {
             >
               <Select mode="tags" options={states} />
             </Form.Item>
+
             <Form.Item
               validateTrigger={['onChange', 'onBlur']}
               rules={[
@@ -202,6 +191,7 @@ const CustomerStore = () => {
             >
               <Input placeholder="Digite a cidade do cliente..." />
             </Form.Item>
+
             <Form.Item
               validateTrigger={['onChange', 'onBlur']}
               rules={[
@@ -218,6 +208,7 @@ const CustomerStore = () => {
             >
               <Input placeholder="Digite o endereço do cliente..." />
             </Form.Item>
+
             <Form.Item
               name="complemento"
               label="Complemento"
@@ -228,16 +219,6 @@ const CustomerStore = () => {
             </Form.Item>
           </FormRow>
 
-          <FormRow>
-            <Form.Item
-              name="enabled"
-              label="Ativo"
-              required
-              tooltip="Indica o status da cliente"
-            >
-              <Switch />
-            </Form.Item>
-          </FormRow>
         </Form>
       </FormWarapper>
     </Wrapper>
