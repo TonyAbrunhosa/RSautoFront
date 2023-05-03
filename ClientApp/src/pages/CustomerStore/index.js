@@ -213,7 +213,7 @@ const CustomerStore = () => {
               ]}
               name="endereco"
               label="Endereço"
-              tooltip="Endereço do cliente com logradouro e número"
+              tooltip="Endereço do cliente com logradouro, número e bairro"
               style={{ width: '29%' }}
             >
               <Input placeholder="Digite o endereço do cliente..." />

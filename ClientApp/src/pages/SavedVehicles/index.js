@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Tag, Dropdown, Button, Divider, List } from 'antd';
+import { Dropdown, Button } from 'antd';
 import { MoreOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
 
 import { nameFormatterUtil } from '~/utils/formatterUtils';
@@ -11,7 +11,7 @@ const data = [
     descricao: 'Vectra prata flex 2.0 a',
     marca: 'Chevrolet',
     modelo: 'Hatch GT',
-    ano: '2008',
+    ano: '2008/2008',
     placa: 'HJF-6254',
     km: '10010',
     cilindrada: '128',
@@ -21,7 +21,7 @@ const data = [
     descricao: 'Vectra prata flex 2.0 b',
     marca: 'Chevrolet',
     modelo: 'Hatch GT',
-    ano: '2008',
+    ano: '2008/2008',
     placa: 'HJF-6254',
     km: '10010',
     cilindrada: '128',
@@ -31,7 +31,7 @@ const data = [
     descricao: 'Vectra prata flex 2.0 c',
     marca: 'Chevrolet',
     modelo: 'Hatch GT',
-    ano: '2008',
+    ano: '2008/2008',
     placa: 'HJF-6254',
     km: '10010',
     cilindrada: '128',
@@ -41,7 +41,7 @@ const data = [
     descricao: 'Vectra prata flex 2.0 d',
     marca: 'Chevrolet',
     modelo: 'Hatch GT',
-    ano: '2008',
+    ano: '2008/2008',
     placa: 'HJF-6254',
     km: '10010',
     cilindrada: '128',
@@ -51,7 +51,7 @@ const data = [
     descricao: 'Vectra prata flex 2.0 e',
     marca: 'Chevrolet',
     modelo: 'Hatch GT',
-    ano: '2008',
+    ano: '2008/2008',
     placa: 'HJF-6254',
     km: '10010',
     cilindrada: '128',
@@ -61,7 +61,7 @@ const data = [
     descricao: 'Vectra prata flex 2.0 f',
     marca: 'Chevrolet',
     modelo: 'Hatch GT',
-    ano: '2008',
+    ano: '2008/2008',
     placa: 'HJF-6254',
     km: '10010',
     cilindrada: '128',
@@ -140,7 +140,7 @@ const columns = [
     filterSearch: true,
   },
   {
-    title: 'Ano',
+    title: 'Ano/Modelo',
     dataIndex: 'ano',
     key: 'ano',
     sortDirections: ['descend', 'ascend'],

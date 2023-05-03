@@ -131,16 +131,16 @@ const VehiclesStore = () => {
             <Form.Item
               name="anoModelo"
               style={{ width: '33%' }}
-              label="Ano do modelo"
+              label="Ano/Modelo"
               validateTrigger={['onChange']}
               rules={[
                 {
                   required: true,
                   whitespace: true,
-                  message: 'O ano do modelo é obrigatório',
+                  message: 'O ano/modelo do veículo é obrigatório',
                 },
               ]}
-              tooltip="Ano do modelo do veículo"
+              tooltip="Ano/Modelo do veículo"
             >
               <Select mode="tags" options={[]} />
             </Form.Item>

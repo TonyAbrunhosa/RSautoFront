@@ -32,7 +32,7 @@ const PartsStore = () => {
   };
 
   useEffect(() => {
-    setBrands([
+    setModels([
       { value: 'Volkswagen', label: 'Volkswagen' },
       { value: 'Toyota', label: 'Toyota' },
       { value: 'Hyundai', label: 'Hyundai' },
@@ -42,7 +42,7 @@ const PartsStore = () => {
       { value: 'Renault', label: 'Renault' },
       { value: 'Citroën', label: 'Citroën' },
     ]);
-    setModels([]);
+    setBrands([]);
     setSuppliers([]);
     setInitialValues({});
   }, []);
@@ -100,7 +100,7 @@ const PartsStore = () => {
           <FormRow>
             <Form.Item
               name="brand"
-              style={{ width: '33%' }}
+              style={{ width: '24%' }}
               label="Marca da peça"
               validateTrigger={['onChange']}
               rules={[
@@ -112,29 +112,29 @@ const PartsStore = () => {
               ]}
               tooltip="Nome da marca da peça"
             >
-              <Select mode="tags" options={brands} />
+              <Select mode="tags" options={[]} />
             </Form.Item>
 
             <Form.Item
               name="model"
-              style={{ width: '33%' }}
-              label="Modelo da Peça"
+              style={{ width: '24%' }}
+              label="Marca do Veículo"
               validateTrigger={['onChange']}
               rules={[
                 {
                   required: true,
                   whitespace: true,
-                  message: 'O nome do modelo é obrigatório',
+                  message: 'A marca do veículo é obrigatória',
                 },
               ]}
-              tooltip="Nome do modelo da peça"
+              tooltip="A marca do veículo"
             >
               <Select mode="tags" options={models} />
             </Form.Item>
 
             <Form.Item
               name="vehicleModel"
-              style={{ width: '33%' }}
+              style={{ width: '24%' }}
               label="Modelo do Veículo"
               validateTrigger={['onChange']}
               rules={[
@@ -146,7 +146,23 @@ const PartsStore = () => {
               ]}
               tooltip="Nome do modelo do veículo"
             >
-              <Select mode="tags" options={models} />
+              <Select mode="tags" options={[]} />
+            </Form.Item>
+            <Form.Item
+              name="vehicleYear"
+              style={{ width: '24%' }}
+              label="Ano/Modelo"
+              validateTrigger={['onChange']}
+              rules={[
+                {
+                  required: true,
+                  whitespace: true,
+                  message: 'O ano/modelo do veículo é obrigatório',
+                },
+              ]}
+              tooltip="Ano/Modelo do veículo a qual a peça é compatível"
+            >
+              <Select mode="tags" options={[]} />
             </Form.Item>
           </FormRow>
 

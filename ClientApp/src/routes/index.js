@@ -7,9 +7,10 @@ import PartsStore from '~/pages/PartsStore';
 import SavedParts from '~/pages/SavedParts';
 import SavedVehicles from '~/pages/SavedVehicles';
 import VehiclesStore from '~/pages/VehiclesStore';
+import CustomerStore from '~/pages/CustomerStore';
+import SavedCustomers from '~/pages/SavedCustomers';
 
 import Route from './Route';
-import CustomerStore from '~/pages/CustomerStore';
 
 const Routes = () => {
   return (
@@ -39,6 +40,12 @@ const Routes = () => {
         type="private"
         page="Peças > Cadastrar"
         component={PartsStore}
+      />
+      <Route
+        path="/clientes"
+        type="private"
+        page="Clientes > Salvos"
+        component={SavedCustomers}
       />
       <Route
         path="/cadastrar-cliente"
