@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 
 import { Input, Select, Form } from 'antd';
 
+import settings from '~/config/appsettings.json';
+
 import FormHeader from '~/components/Form/FormHeader';
 import history from '~/services/history';
 
@@ -11,7 +13,11 @@ const CustomerStore = () => {
   const [form] = Form.useForm();
   const [requiredMark, setRequiredMarkType] = useState('optional');
   const [initialValues, setInitialValues] = useState({});
-  const [states, setStates] = useState([]);
+
+  const states = settings.data.states
+    .split(';')
+    .sort()
+    .map((s) => ({ value: s, label: s }));
 
   const onRequiredTypeChange = ({ requiredMarkValue }) =>
     setRequiredMarkType(requiredMarkValue);
@@ -22,15 +28,6 @@ const CustomerStore = () => {
   };
 
   useEffect(() => {
-    setStates(
-      [
-        { value: 'AM', label: 'AM' },
-        { value: 'MG', label: 'MG' },
-        { value: 'SP', label: 'SP' },
-        { value: 'RJ', label: 'RJ' },
-        { value: 'RO', label: 'RO' },
-      ].sort()
-    );
     setInitialValues({});
   }, []);
 
@@ -172,7 +169,7 @@ const CustomerStore = () => {
               ]}
               tooltip="Estado do cliente"
             >
-              <Select mode="tags" options={states} />
+              <Select mode="tags" options={states} defaultValue="SP" />
             </Form.Item>
 
             <Form.Item
@@ -218,7 +215,6 @@ const CustomerStore = () => {
               <Input placeholder="Digite o complemento de endereço do cliente..." />
             </Form.Item>
           </FormRow>
-
         </Form>
       </FormWarapper>
     </Wrapper>
