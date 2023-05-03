@@ -1,15 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
-import {
-  LeftOutlined,
-  CheckOutlined,
-  MinusCircleOutlined,
-  PlusOutlined,
-} from '@ant-design/icons';
+import { LeftOutlined, CheckOutlined } from '@ant-design/icons';
 
-import { Input, InputNumber, Select, Switch, Form, Button } from 'antd';
+import { Input, Select, Form } from 'antd';
 
-import { priceFormatterUtil } from '~/utils/formatterUtils';
 import FormHeader from '~/components/FormHeader';
 import history from '~/services/history';
 
@@ -20,7 +14,8 @@ const VehiclesStore = () => {
   const [requiredMark, setRequiredMarkType] = useState('optional');
   const [brands, setBrands] = useState([]);
   const [models, setModels] = useState([]);
-  const [suppliers, setSuppliers] = useState([]);
+  const [customers, setCustomers] = useState([]);
+  const [fetching, setFetching] = useState(false);
   const [initialValues, setInitialValues] = useState({});
 
   const onRequiredTypeChange = ({ requiredMarkValue }) =>
@@ -43,8 +38,9 @@ const VehiclesStore = () => {
       { value: 'Citroën', label: 'Citroën' },
     ]);
     setModels([]);
-    setSuppliers([]);
+    setCustomers(['João Victor - 67.117.218/0001-00']);
     setInitialValues({});
+    setFetching(false);
   }, []);
 
   return (
@@ -101,7 +97,7 @@ const VehiclesStore = () => {
             <Form.Item
               name="brand"
               style={{ width: '33%' }}
-              label="Marca do veículo"
+              label="Marca"
               validateTrigger={['onChange']}
               rules={[
                 {
@@ -118,7 +114,7 @@ const VehiclesStore = () => {
             <Form.Item
               name="model"
               style={{ width: '33%' }}
-              label="Modelo da Peça"
+              label="Modelo"
               validateTrigger={['onChange']}
               rules={[
                 {
@@ -198,6 +194,33 @@ const VehiclesStore = () => {
               style={{ width: '33%' }}
             >
               <Input placeholder="Digite a cilindrada do veículo..." />{' '}
+            </Form.Item>
+          </FormRow>
+          <FormRow>
+            <Form.Item
+              name="Cliente"
+              label="cliente"
+              validateTrigger={['onChange', 'onBlur']}
+              rules={[
+                {
+                  required: true,
+                  whitespace: true,
+                  message: 'O cliente é obrigatório',
+                },
+              ]}
+              tooltip="Dono do veículo"
+              style={{ width: '50%' }}
+            >
+              <Select
+                mode="multiple"
+                placeholder="Selecione o cliente"
+                value={[]}
+                onChange={() => {}}
+                options={customers.map((item) => ({
+                  value: item,
+                  label: item,
+                }))}
+              />
             </Form.Item>
           </FormRow>
         </Form>
