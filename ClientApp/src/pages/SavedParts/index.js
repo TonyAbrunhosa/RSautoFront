@@ -4,7 +4,8 @@ import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 import history from '~/services/history';
-import { getFilters } from '~/utils/tableUtils';
+
+import { getFilters, onFilter } from '~/utils/componentUtils';
 
 import Table from '~/components/Table';
 import CollumnAction from '~/components/Table/ActionDropdow';
@@ -15,7 +16,9 @@ const data = [
     nome: 'Pneu Aro 13 a',
     marca: 'Goodyear a',
     status: 'ativa',
-    modelo: 'Direction 2',
+    anoModelo: '2008/2008',
+    marcaVeiculo: 'Goodyear a',
+    modeloveiculo: 'Direction 2',
     fornecedores: [
       {
         nome: 'Fornecedor 1',
@@ -52,7 +55,9 @@ const data = [
     nome: 'Pneu Aro 13 b',
     marca: 'Goodyear b',
     status: 'ativa',
-    modelo: 'Direction 2',
+    marcaVeiculo: 'Goodyear a',
+    anoModelo: '2008/2008',
+    modeloveiculo: 'Direction 2',
     fornecedores: [
       {
         nome: 'Fornecedor 1',
@@ -89,7 +94,9 @@ const data = [
     nome: 'Pneu Aro 13 c',
     marca: 'Goodyear c',
     status: 'ativa',
-    modelo: 'Direction 2',
+    anoModelo: '2008/2008',
+    modeloveiculo: 'Direction 2',
+    marcaVeiculo: 'Goodyear a',
     fornecedores: [
       {
         nome: 'Fornecedor 1',
@@ -126,7 +133,9 @@ const data = [
     nome: 'Pneu Aro 13 d',
     marca: 'Goodyear d',
     status: 'ativa',
-    modelo: 'Direction 2',
+    anoModelo: '2008/2008',
+    modeloveiculo: 'Direction 2',
+    marcaVeiculo: 'Goodyear a',
     fornecedores: [
       {
         nome: 'Fornecedor 1',
@@ -163,7 +172,9 @@ const data = [
     nome: 'Pneu Aro 13 e',
     marca: 'Goodyear e',
     status: 'ativa',
-    modelo: 'Direction 2',
+    modeloveiculo: 'Direction 2',
+    anoModelo: '2008/2008',
+    marcaVeiculo: 'Goodyear a',
     fornecedores: [
       {
         nome: 'Fornecedor 1',
@@ -200,7 +211,9 @@ const data = [
     nome: 'Pneu Aro 13 f',
     marca: 'Goodyear f',
     status: 'ativa',
-    modelo: 'Direction 2',
+    anoModelo: '2008/2008',
+    modeloveiculo: 'Direction 2',
+    marcaVeiculo: 'Goodyear a',
     fornecedores: [
       {
         nome: 'Fornecedor 1',
@@ -237,7 +250,9 @@ const data = [
     nome: 'Pneu Aro 13 g',
     marca: 'Goodyear g',
     status: 'ativa',
-    modelo: 'Direction 2',
+    anoModelo: '2008/2008',
+    modeloveiculo: 'Direction 2',
+    marcaVeiculo: 'Goodyear a',
     fornecedores: [
       {
         nome: 'Fornecedor 1',
@@ -273,8 +288,10 @@ const data = [
     key: 8,
     nome: 'Pneu Aro 13 h',
     marca: 'Goodyear h',
+    marcaVeiculo: 'Goodyear a',
+    anoModelo: '2008/2008',
     status: 'ativa',
-    modelo: 'Direction 2',
+    modeloveiculo: 'Direction 2',
     fornecedores: [
       {
         nome: 'Fornecedor 1',
@@ -310,8 +327,10 @@ const data = [
     key: 9,
     nome: 'Pneu Aro 13 i',
     marca: 'Goodyear i',
+    marcaVeiculo: 'Goodyear a',
     status: 'ativa',
-    modelo: 'Direction 2',
+    anoModelo: '2008/2008',
+    modeloveiculo: 'Direction 2',
     fornecedores: [
       {
         nome: 'Fornecedor 1',
@@ -347,8 +366,10 @@ const data = [
     key: 10,
     nome: 'Pneu Aro 13 j',
     marca: 'Goodyear j',
+    marcaVeiculo: 'Goodyear a',
     status: 'ativa',
-    modelo: 'Direction 2',
+    anoModelo: '2008/2008',
+    modeloveiculo: 'Direction 2',
     fornecedores: [
       {
         nome: 'Fornecedor 1',
@@ -384,8 +405,10 @@ const data = [
     key: 11,
     nome: 'Pneu Aro 13 k',
     marca: 'Goodyear k',
+    anoModelo: '2008/2008',
+    marcaVeiculo: 'Goodyear a',
     status: 'ativa',
-    modelo: 'Direction 2',
+    modeloveiculo: 'Direction 2',
     fornecedores: [
       {
         nome: 'Fornecedor 1',
@@ -421,8 +444,10 @@ const data = [
     key: 12,
     nome: 'Pneu Aro 13 l',
     marca: 'Goodyear l',
+    anoModelo: '2008/2008',
+    marcaVeiculo: 'Goodyear a',
     status: 'inativa',
-    modelo: 'Direction 2',
+    modeloveiculo: 'Direction 2',
     fornecedores: [
       {
         nome: 'Fornecedor 1',
@@ -464,27 +489,45 @@ const columns = [
     sortDirections: ['descend', 'ascend'],
     sorter: (a, b) => a.nome.localeCompare(b.nome),
     filters: getFilters('nome', data),
-    onFilter: (value, record) => record.nome.startsWith(value),
+    onFilter: (value, record) => onFilter(value, record, 'nome'),
     filterSearch: true,
   },
   {
-    title: 'Marca',
+    title: 'Marca Peça',
     dataIndex: 'marca',
     key: 'marca',
     sortDirections: ['descend', 'ascend'],
     sorter: (a, b) => a.marca.localeCompare(b.marca),
     filters: getFilters('marca', data),
-    onFilter: (value, record) => record.marca.startsWith(value),
+    onFilter: (value, record) => onFilter(value, record, 'marca'),
     filterSearch: true,
   },
   {
-    title: 'Modelo',
-    dataIndex: 'modelo',
-    key: 'modelo',
+    title: 'Marca Veículo',
+    dataIndex: 'marcaVeiculo',
+    key: 'marcaVeiculo',
     sortDirections: ['descend', 'ascend'],
-    sorter: (a, b) => a.modelo.localeCompare(b.modelo),
-    filters: getFilters('modelo', data),
-    onFilter: (value, record) => record.modelo.startsWith(value),
+    sorter: (a, b) => a.marcaVeiculo.localeCompare(b.marcaVeiculo),
+    filters: getFilters('marcaVeiculo', data),
+    onFilter: (value, record) => onFilter(value, record, 'marcaVeiculo'),
+    filterSearch: true,
+  },
+  {
+    title: 'Modelo Veículo',
+    dataIndex: 'modeloveiculo',
+    key: 'modeloveiculo',
+    sortDirections: ['descend', 'ascend'],
+    sorter: (a, b) => a.modeloveiculo.localeCompare(b.modeloveiculo),
+    filters: getFilters('modeloveiculo', data),
+    onFilter: (value, record) => onFilter(value, record, 'modeloveiculo'),
+    filterSearch: true,
+  },
+  {
+    title: 'Ano/Modelo',
+    dataIndex: 'anoModelo',
+    key: 'anoModelo',
+    filters: getFilters('anoModelo', data),
+    onFilter: (value, record) => onFilter(value, record, 'anoModelo'),
     filterSearch: true,
   },
   {
@@ -494,7 +537,7 @@ const columns = [
     sortDirections: ['descend', 'ascend'],
     sorter: (a, b) => a.status.localeCompare(b.status),
     filters: getFilters('status', data),
-    onFilter: (value, record) => record.status.startsWith(value),
+    onFilter: (value, record) => onFilter(value, record, 'status'),
     render: (tag) => (
       <Tag color={tag === 'ativa' ? 'green' : 'red'} key={tag}>
         {tag.toUpperCase()}

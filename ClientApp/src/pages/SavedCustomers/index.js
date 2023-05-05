@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 
 import history from '~/services/history';
-import { getFilters } from '~/utils/tableUtils';
+import { getFilters, onFilter } from '~/utils/componentUtils';
 import { nameFormatterUtil } from '~/utils/formatterUtils';
+
 import Table from '~/components/Table';
 import CollumnAction from '~/components/Table/ActionDropdow';
 
@@ -108,7 +109,7 @@ const columns = [
     sortDirections: ['descend', 'ascend'],
     sorter: (a, b) => a.descricao.localeCompare(b.nome),
     filters: getFilters('nome', data),
-    onFilter: (value, record) => record.nome.startsWith(value),
+    onFilter: (value, record) => onFilter(value, record, 'nome'),
     filterSearch: true,
   },
   {
@@ -118,7 +119,7 @@ const columns = [
     sortDirections: ['descend', 'ascend'],
     sorter: (a, b) => a.marca.localeCompare(b.razaoSocial),
     filters: getFilters('razaoSocial', data),
-    onFilter: (value, record) => record.razaoSocial.startsWith(value),
+    onFilter: (value, record) => onFilter(value, record, 'razaoSocial'),
     filterSearch: true,
   },
   {
@@ -126,7 +127,7 @@ const columns = [
     dataIndex: 'documento',
     key: 'documento',
     filters: getFilters('documento', data),
-    onFilter: (value, record) => record.modelo.startsWith(value),
+    onFilter: (value, record) => onFilter(value, record, 'documento'),
     filterSearch: true,
   },
   {
@@ -134,7 +135,7 @@ const columns = [
     dataIndex: 'telefone',
     key: 'telefone',
     filters: getFilters('telefone', data),
-    onFilter: (value, record) => record.telefone.startsWith(value),
+    onFilter: (value, record) => onFilter(value, record, 'telefone'),
     filterSearch: true,
   },
   {
@@ -142,7 +143,7 @@ const columns = [
     dataIndex: 'celular',
     key: 'celular',
     filters: getFilters('celular', data),
-    onFilter: (value, record) => record.celular.startsWith(value),
+    onFilter: (value, record) => onFilter(value, record, 'celular'),
     filterSearch: true,
     render: (telefone) => (
       <a
@@ -159,7 +160,7 @@ const columns = [
     dataIndex: 'email',
     key: 'email',
     filters: getFilters('email', data),
-    onFilter: (value, record) => record.email.startsWith(value),
+    onFilter: (value, record) => onFilter(value, record, 'email'),
     filterSearch: true,
     render: (email) => (
       <a href={`mailto:${email}`} target="_blank" rel="noreferrer">

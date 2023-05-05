@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
 import history from '~/services/history';
-import { getFilters } from '~/utils/tableUtils';
+
+import { getFilters, onFilter } from '~/utils/componentUtils';
 
 import CollumnAction from '~/components/Table/ActionDropdow';
 import Table from '~/components/Table';
@@ -77,7 +78,7 @@ const columns = [
     sortDirections: ['descend', 'ascend'],
     sorter: (a, b) => a.descricao.localeCompare(b.descricao),
     filters: getFilters('descricao', data),
-    onFilter: (value, record) => record.descricao.startsWith(value),
+    onFilter: (value, record) => onFilter(value, record, 'descricao'),
     filterSearch: true,
   },
   {
@@ -87,7 +88,7 @@ const columns = [
     sortDirections: ['descend', 'ascend'],
     sorter: (a, b) => a.marca.localeCompare(b.marca),
     filters: getFilters('marca', data),
-    onFilter: (value, record) => record.marca.startsWith(value),
+    onFilter: (value, record) => onFilter(value, record, 'marca'),
     filterSearch: true,
   },
   {
@@ -97,7 +98,7 @@ const columns = [
     sortDirections: ['descend', 'ascend'],
     sorter: (a, b) => a.modelo.localeCompare(b.modelo),
     filters: getFilters('modelo', data),
-    onFilter: (value, record) => record.modelo.startsWith(value),
+    onFilter: (value, record) => onFilter(value, record, 'modelo'),
     filterSearch: true,
   },
   {
@@ -107,7 +108,7 @@ const columns = [
     sortDirections: ['descend', 'ascend'],
     sorter: (a, b) => a.status.localeCompare(b.status),
     filters: getFilters('ano', data),
-    onFilter: (value, record) => record.ano.startsWith(value),
+    onFilter: (value, record) => onFilter(value, record, 'ano'),
   },
   {
     title: 'Placa',
@@ -116,7 +117,7 @@ const columns = [
     sortDirections: ['descend', 'ascend'],
     sorter: (a, b) => a.status.localeCompare(b.status),
     filters: getFilters('placa', data),
-    onFilter: (value, record) => record.placa.startsWith(value),
+    onFilter: (value, record) => onFilter(value, record, 'placa'),
   },
   {
     title: 'KM',
@@ -125,7 +126,7 @@ const columns = [
     sortDirections: ['descend', 'ascend'],
     sorter: (a, b) => a.status.localeCompare(b.status),
     filters: getFilters('km', data),
-    onFilter: (value, record) => record.km.startsWith(value),
+    onFilter: (value, record) => onFilter(value, record, 'km'),
   },
   {
     title: 'Cilindrada',
@@ -134,7 +135,7 @@ const columns = [
     sortDirections: ['descend', 'ascend'],
     sorter: (a, b) => a.status.localeCompare(b.status),
     filters: getFilters('cilindrada', data),
-    onFilter: (value, record) => record.cilindrada.startsWith(value),
+    onFilter: (value, record) => onFilter(value, record, 'cilindrada'),
   },
   {
     title: 'Cliente',
@@ -143,7 +144,7 @@ const columns = [
     sortDirections: ['descend', 'ascend'],
     sorter: (a, b) => a.status.localeCompare(b.status),
     filters: getFilters('clienteCpfCnpj', data),
-    onFilter: (value, record) => record.clienteCpfCnpj.startsWith(value),
+    onFilter: (value, record) => onFilter(value, record, 'clienteCpfCnpj'),
   },
   {
     title: 'Ações',

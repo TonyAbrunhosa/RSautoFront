@@ -4,8 +4,12 @@ import { Input, Select, Form } from 'antd';
 
 import settings from '~/config/appsettings.json';
 
-import FormHeader from '~/components/Form/FormHeader';
 import history from '~/services/history';
+
+import { strToList } from '~/utils/converterUtils';
+import { mapToSelectOption } from '~/utils/componentUtils';
+
+import FormHeader from '~/components/Form/FormHeader';
 
 import { Wrapper, FormWarapper, FormRow } from '~/styles/form';
 
@@ -14,10 +18,7 @@ const CustomerStore = () => {
   const [requiredMark, setRequiredMarkType] = useState('optional');
   const [initialValues, setInitialValues] = useState({});
 
-  const states = settings.data.states
-    .split(';')
-    .sort()
-    .map((s) => ({ value: s, label: s }));
+  const states = strToList(settings.data.states, ';', mapToSelectOption);
 
   const onRequiredTypeChange = ({ requiredMarkValue }) =>
     setRequiredMarkType(requiredMarkValue);

@@ -1,21 +1,31 @@
 import React, { useState, useEffect } from 'react';
 
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
-
 import { Input, InputNumber, Select, Switch, Form, Button } from 'antd';
 
-import { priceFormatterUtil } from '~/utils/formatterUtils';
-import FormHeader from '~/components/Form/FormHeader';
+import settings from '~/config/appsettings.json';
+
 import history from '~/services/history';
+
+import { strToList } from '~/utils/converterUtils';
+import { mapToSelectOption } from '~/utils/componentUtils';
+import { priceFormatterUtil } from '~/utils/formatterUtils';
+
+import FormHeader from '~/components/Form/FormHeader';
 
 import { Wrapper, FormWarapper, FormRow } from '~/styles/form';
 
 const PartsStore = () => {
   const [form] = Form.useForm();
   const [requiredMark, setRequiredMarkType] = useState('optional');
-  const [models, setModels] = useState([]);
   const [suppliers, setSuppliers] = useState([]);
   const [initialValues, setInitialValues] = useState({});
+
+  const brands = strToList(
+    settings.data.vehiclesBrands,
+    ';',
+    mapToSelectOption
+  );
 
   const onRequiredTypeChange = ({ requiredMarkValue }) =>
     setRequiredMarkType(requiredMarkValue);
@@ -25,16 +35,6 @@ const PartsStore = () => {
   };
 
   useEffect(() => {
-    setModels([
-      { value: 'Volkswagen', label: 'Volkswagen' },
-      { value: 'Toyota', label: 'Toyota' },
-      { value: 'Hyundai', label: 'Hyundai' },
-      { value: 'Nissan', label: 'Nissan' },
-      { value: 'Ford', label: 'Ford' },
-      { value: 'Kia', label: 'Kia' },
-      { value: 'Renault', label: 'Renault' },
-      { value: 'Citroën', label: 'Citroën' },
-    ]);
     setSuppliers([]);
     setInitialValues({});
   }, []);
@@ -70,7 +70,7 @@ const PartsStore = () => {
               tooltip="Descrição da peça"
               style={{ width: '100%' }}
             >
-              <Input placeholder="Digite a descrição da peça..." />{' '}
+              <Select mode="tags" options={[]} />
             </Form.Item>
           </FormRow>
 
@@ -106,7 +106,7 @@ const PartsStore = () => {
               ]}
               tooltip="A marca do veículo"
             >
-              <Select mode="tags" options={models} />
+              <Select mode="tags" options={brands} />
             </Form.Item>
 
             <Form.Item

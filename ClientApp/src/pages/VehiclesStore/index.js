@@ -2,18 +2,30 @@ import React, { useState, useEffect } from 'react';
 
 import { Input, Select, Form } from 'antd';
 
-import FormHeader from '~/components/Form/FormHeader';
+import settings from '~/config/appsettings.json';
+
 import history from '~/services/history';
+
+import { strToList } from '~/utils/converterUtils';
+import { mapToSelectOption } from '~/utils/componentUtils';
+
+import FormHeader from '~/components/Form/FormHeader';
 
 import { Wrapper, FormWarapper, FormRow } from '~/styles/form';
 
 const VehiclesStore = () => {
   const [form] = Form.useForm();
   const [requiredMark, setRequiredMarkType] = useState('optional');
-  const [brands, setBrands] = useState([]);
   const [models, setModels] = useState([]);
   const [customers, setCustomers] = useState([]);
   const [initialValues, setInitialValues] = useState({});
+
+  const fullTypes = strToList(settings.data.fuelTypes, ';', mapToSelectOption);
+  const brands = strToList(
+    settings.data.vehiclesBrands,
+    ';',
+    mapToSelectOption
+  );
 
   const onRequiredTypeChange = ({ requiredMarkValue }) =>
     setRequiredMarkType(requiredMarkValue);
@@ -24,16 +36,6 @@ const VehiclesStore = () => {
   };
 
   useEffect(() => {
-    setBrands([
-      { value: 'Volkswagen', label: 'Volkswagen' },
-      { value: 'Toyota', label: 'Toyota' },
-      { value: 'Hyundai', label: 'Hyundai' },
-      { value: 'Nissan', label: 'Nissan' },
-      { value: 'Ford', label: 'Ford' },
-      { value: 'Kia', label: 'Kia' },
-      { value: 'Renault', label: 'Renault' },
-      { value: 'Citroën', label: 'Citroën' },
-    ]);
     setModels([]);
     setCustomers(['João Victor - 67.117.218/0001-00']);
     setInitialValues({});
@@ -106,7 +108,7 @@ const VehiclesStore = () => {
               ]}
               tooltip="Tipo do combustível do veículo"
             >
-              <Select mode="tags" options={[]} />
+              <Select mode="tags" options={fullTypes} defaultValue="Flex" />
             </Form.Item>
 
             <Form.Item
