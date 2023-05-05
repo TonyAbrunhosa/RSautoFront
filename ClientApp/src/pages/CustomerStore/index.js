@@ -170,7 +170,7 @@ const CustomerStore = () => {
               ]}
               tooltip="Estado do cliente"
             >
-              <Select mode="tags" options={states} defaultValue="SP" />
+              <Select showSearch options={states} defaultValue="SP" />
             </Form.Item>
 
             <Form.Item

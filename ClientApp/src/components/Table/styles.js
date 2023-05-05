@@ -16,4 +16,5 @@ export const ActionsWrapper = styled.section`
 export const Wrapper = styled.div`
    width: 90%;
    margin: 0 auto;
+   padding-bottom: 10px;
 `;

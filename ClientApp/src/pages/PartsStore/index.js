@@ -70,7 +70,11 @@ const PartsStore = () => {
               tooltip="Descrição da peça"
               style={{ width: '75%' }}
             >
-              <Select mode="tags" options={[]} />
+              <Select
+                placeholder="Selecione ou adicione a descrição da peça"
+                mode="tags"
+                options={[]}
+              />
             </Form.Item>
 
             <Form.Item
@@ -98,7 +102,11 @@ const PartsStore = () => {
               ]}
               tooltip="Nome da marca da peça"
             >
-              <Select mode="tags" options={[]} />
+              <Select
+                placeholder="Selecione ou adicione a marca da peça"
+                mode="tags"
+                options={[]}
+              />
             </Form.Item>
 
             <Form.Item
@@ -115,7 +123,11 @@ const PartsStore = () => {
               ]}
               tooltip="A marca do veículo"
             >
-              <Select mode="tags" options={brands} />
+              <Select
+                mode="tags"
+                placeholder="Selecione ou adicione a marca do veículo"
+                options={brands}
+              />
             </Form.Item>
 
             <Form.Item
@@ -132,7 +144,11 @@ const PartsStore = () => {
               ]}
               tooltip="Nome do modelo do veículo"
             >
-              <Select mode="tags" options={[]} />
+              <Select
+                placeholder="Selecione ou adicione o modelo do veículo"
+                mode="tags"
+                options={[]}
+              />
             </Form.Item>
 
             <Form.Item
@@ -149,7 +165,11 @@ const PartsStore = () => {
               ]}
               tooltip="Ano/Modelo do veículo a qual a peça é compatível"
             >
-              <Select mode="tags" options={[]} />
+              <Select
+                placeholder="Selecione ou adicione o ano/modelo do veículo"
+                mode="tags"
+                options={[]}
+              />
             </Form.Item>
           </FormRow>
 
@@ -192,7 +212,11 @@ const PartsStore = () => {
                           label="Fornecedor"
                           tooltip="Nome do fornecedor da peça"
                         >
-                          <Select mode="tags" options={suppliers} />
+                          <Select
+                            placeholder="Selecione ou adicione o fornecedor"
+                            mode="tags"
+                            options={suppliers}
+                          />
                         </Form.Item>
 
                         {fields.length >= 1 && (

@@ -375,7 +375,7 @@ const SavedParts = () => {
       loading={loading}
       data={records}
       columns={columns}
-      width={400}
+      width={300}
       pageSize={10}
       expandable={{
         showExpandColumn: true,

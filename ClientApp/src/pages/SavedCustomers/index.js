@@ -28,16 +28,6 @@ const data = [
 
 const columns = [
   {
-    title: 'Nome',
-    dataIndex: 'nome',
-    key: 'nome',
-    sortDirections: ['descend', 'ascend'],
-    sorter: (a, b) => a.descricao.localeCompare(b.nome),
-    filters: getFilters('nome', data),
-    onFilter: (value, record) => onFilter(value, record, 'nome'),
-    filterSearch: true,
-  },
-  {
     title: 'Razão Social',
     dataIndex: 'razaoSocial',
     key: 'razaoSocial',
@@ -145,7 +135,7 @@ const SavedCustomers = () => {
       loading={loading}
       data={records}
       columns={columns}
-      width={400}
+      width={350}
       pageSize={10}
     />
   );

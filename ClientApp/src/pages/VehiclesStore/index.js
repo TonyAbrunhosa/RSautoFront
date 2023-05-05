@@ -72,7 +72,11 @@ const VehiclesStore = () => {
               ]}
               tooltip="Nome da marca do veículo"
             >
-              <Select mode="tags" options={brands} />
+              <Select
+                placeholder="Selecione ou adicione a marca do veículo"
+                mode="tags"
+                options={brands}
+              />
             </Form.Item>
 
             <Form.Item
@@ -89,7 +93,11 @@ const VehiclesStore = () => {
               ]}
               tooltip="Nome do modelo do veículo"
             >
-              <Select mode="tags" options={models} />
+              <Select
+                placeholder="Selecione ou adicione o modelo do veículo"
+                mode="tags"
+                options={models}
+              />
             </Form.Item>
 
             <Form.Item
@@ -106,9 +114,12 @@ const VehiclesStore = () => {
               ]}
               tooltip="Ano/Modelo do veículo a qual a peça é compatível"
             >
-              <Select mode="tags" options={[]} />
+              <Select
+                mode="tags"
+                placeholder="Selecione ou adicione o ano/modelo"
+                options={[]}
+              />
             </Form.Item>
-
           </FormRow>
 
           <FormRow>
@@ -126,7 +137,11 @@ const VehiclesStore = () => {
               ]}
               tooltip="Tipo do combustível do veículo"
             >
-              <Select mode="tags" options={fullTypes} defaultValue="Flex" />
+              <Select
+                placeholder="Selecione ou adicione o tipo do combustível"
+                mode="tags"
+                options={fullTypes}
+              />
             </Form.Item>
 
             <Form.Item
@@ -199,10 +214,8 @@ const VehiclesStore = () => {
               style={{ width: '50%' }}
             >
               <Select
-                mode="multiple"
+                showSearch
                 placeholder="Selecione o cliente"
-                value={[]}
-                onChange={() => {}}
                 options={customers.map((item) => ({
                   value: item,
                   label: item,

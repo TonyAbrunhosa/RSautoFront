@@ -220,7 +220,7 @@ const SavedVehicles = () => {
       loading={loading}
       data={records}
       columns={columns}
-      width={400}
+      width={350}
       pageSize={10}
     />
   );
