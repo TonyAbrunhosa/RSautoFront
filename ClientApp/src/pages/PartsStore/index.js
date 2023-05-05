@@ -68,9 +68,18 @@ const PartsStore = () => {
                 },
               ]}
               tooltip="Descrição da peça"
-              style={{ width: '100%' }}
+              style={{ width: '75%' }}
             >
               <Select mode="tags" options={[]} />
+            </Form.Item>
+
+            <Form.Item
+              name="codigo"
+              label="Código da Peça"
+              style={{ width: '24%' }}
+              tooltip="O código da peça"
+            >
+              <Input placeholder="Digite o código..." />
             </Form.Item>
           </FormRow>
 

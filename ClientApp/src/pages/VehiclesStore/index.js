@@ -60,7 +60,7 @@ const VehiclesStore = () => {
           <FormRow>
             <Form.Item
               name="marca"
-              style={{ width: '49%' }}
+              style={{ width: '33%' }}
               label="Marca"
               validateTrigger={['onChange']}
               rules={[
@@ -77,7 +77,7 @@ const VehiclesStore = () => {
 
             <Form.Item
               name="modelo"
-              style={{ width: '49%' }}
+              style={{ width: '33%' }}
               label="Modelo"
               validateTrigger={['onChange']}
               rules={[
@@ -91,6 +91,24 @@ const VehiclesStore = () => {
             >
               <Select mode="tags" options={models} />
             </Form.Item>
+
+            <Form.Item
+              name="anoModelo"
+              style={{ width: '33%' }}
+              label="Ano/Modelo"
+              validateTrigger={['onChange']}
+              rules={[
+                {
+                  required: true,
+                  whitespace: true,
+                  message: 'O ano/modelo do veículo é obrigatório',
+                },
+              ]}
+              tooltip="Ano/Modelo do veículo a qual a peça é compatível"
+            >
+              <Select mode="tags" options={[]} />
+            </Form.Item>
+
           </FormRow>
 
           <FormRow>

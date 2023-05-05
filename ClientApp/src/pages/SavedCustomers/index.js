@@ -9,96 +9,21 @@ import CollumnAction from '~/components/Table/ActionDropdow';
 
 const data = [
   {
+    id: 1,
     nome: 'João Victor',
     razaoSocial: 'Joao Corporações',
     documento: '67.117.218/0001-00',
     telefone: 'N/A',
     celular: '34984217839',
     email: 'jvsfernandes924@gmail.com',
-    cep: '38175000',
-    estado: 'MG',
-    cidade: 'Santa Juliana',
-    endereco: 'Rua Suiça, 350',
-    complemento: 'Próximo a Agro Pub',
-  },
-  {
-    nome: 'João Victor',
-    razaoSocial: 'Joao Corporações',
-    documento: '67.117.218/0001-00',
-    telefone: 'N/A',
-    celular: '34984217839',
-    email: 'jvsfernandes924@gmail.com',
-    cep: '38175000',
-    estado: 'MG',
-    cidade: 'Santa Juliana',
-    endereco: 'Rua Suiça, 350',
-    complemento: 'Próximo a Agro Pub',
-  },
-  {
-    nome: 'João Victor',
-    razaoSocial: 'Joao Corporações',
-    documento: '67.117.218/0001-00',
-    telefone: 'N/A',
-    celular: '34984217839',
-    email: 'jvsfernandes924@gmail.com',
-    cep: '38175000',
-    estado: 'MG',
-    cidade: 'Santa Juliana',
-    endereco: 'Rua Suiça, 350',
-    complemento: 'Próximo a Agro Pub',
-  },
-  {
-    nome: 'João Victor',
-    razaoSocial: 'Joao Corporações',
-    documento: '67.117.218/0001-00',
-    telefone: 'N/A',
-    celular: '34984217839',
-    email: 'jvsfernandes924@gmail.com',
-    cep: '38175000',
-    estado: 'MG',
-    cidade: 'Santa Juliana',
-    endereco: 'Rua Suiça, 350',
-    complemento: 'Próximo a Agro Pub',
-  },
-  {
-    nome: 'João Victor',
-    razaoSocial: 'Joao Corporações',
-    documento: '67.117.218/0001-00',
-    telefone: 'N/A',
-    celular: '34984217839',
-    email: 'jvsfernandes924@gmail.com',
-    cep: '38175000',
-    estado: 'MG',
-    cidade: 'Santa Juliana',
-    endereco: 'Rua Suiça, 350',
-    complemento: 'Próximo a Agro Pub',
-  },
-  {
-    nome: 'João Victor',
-    razaoSocial: 'Joao Corporações',
-    documento: '67.117.218/0001-00',
-    telefone: 'N/A',
-    celular: '34984217839',
-    email: 'jvsfernandes924@gmail.com',
-    cep: '38175000',
-    estado: 'MG',
-    cidade: 'Santa Juliana',
-    endereco: 'Rua Suiça 350, José Rodrigues',
-    complemento: 'Próximo a Agro Pub',
-  },
-  {
-    nome: 'João Victor',
-    razaoSocial: 'Joao Corporações',
-    documento: '67.117.218/0001-00',
-    telefone: 'N/A',
-    celular: '34984217839',
-    email: 'jvsfernandes924@gmail.com',
-    cep: '38175000',
-    estado: 'MG',
-    cidade: 'Santa Juliana',
-    endereco: 'Rua Suiça, 350',
-    complemento: 'Próximo a Agro Pub',
-  },
+    endereco: {
+      cep: '38175000',
+      estado: 'MG',
+      cidade: 'Santa Juliana',
+      logradouro: 'Rua Suiça, 350',
+      complemento: 'Próximo a Agro Pub',
+    }
+  }
 ];
 
 const columns = [
@@ -181,19 +106,19 @@ const columns = [
   },
 ];
 
-const formatCustomer = (d) => {
-  const nameParts = nameFormatterUtil(d.nome).split(' ');
-  d.endereco = `${d.endereco}, ${d.cidade} - ${d.estado} ${d.cep}`;
-  d.nome = `${nameParts[0]} ${nameParts[nameParts.length - 1]}`;
-
-  return d;
-};
 
 const SavedCustomers = () => {
   const [loading, setLoading] = useState(true);
+  const [records, setRecords] = useState([]);
   const [searchLoading, setSearchLoading] = useState(false);
 
-  const [records, setRecords] = useState([]);
+  const formatCustomer = (d) => {
+    const nameParts = nameFormatterUtil(d.nome).split(' ');
+    d.endereco = `${d.endereco.logradouro}, ${d.endereco.cidade} - ${d.endereco.estado} ${d.endereco.cep}`;
+    d.nome = `${nameParts[0]} ${nameParts[nameParts.length - 1]}`;
+  
+    return d;
+  };
 
   useEffect(() => {
     const loadData = () =>
