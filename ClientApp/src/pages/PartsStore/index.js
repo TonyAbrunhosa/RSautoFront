@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
+import { toast } from 'react-toastify';
+
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { Input, InputNumber, Select, Switch, Form, Button } from 'antd';
 
@@ -30,8 +32,28 @@ const PartsStore = () => {
   const onRequiredTypeChange = ({ requiredMarkValue }) =>
     setRequiredMarkType(requiredMarkValue);
 
-  const onSubmit = () => {
-    console.log(form.getFieldValue());
+  const convertData = () => {
+    const data = form.getFieldsValue();
+
+    const [descricao] = data.descricao;
+    data.descricao = descricao;
+
+    const [marca] = data.marca;
+    data.marca = marca;
+
+    const [marcaVeiculo] = data.veiculo.marca;
+    data.veiculo.marca = marcaVeiculo;
+
+    return data;
+  };
+
+  const saveData = () => {
+    const data = convertData();
+
+    toast.success('Peça salva com sucesso!');
+    form.resetFields();
+
+    console.log(data);
   };
 
   useEffect(() => {
@@ -43,12 +65,16 @@ const PartsStore = () => {
     <Wrapper>
       <FormHeader
         title="Cadastro de Peças"
-        saveOnClick={onSubmit}
+        saveOnClick={() => form.submit()}
         goBackOnClick={() => history.goBack()}
       />
 
       <FormWarapper>
         <Form
+          onFinish={() => saveData()}
+          onFinishFailed={() =>
+            toast.error('Verique os dados e tente novamente!')
+          }
           form={form}
           layout="vertical"
           initialValues={initialValues}
@@ -92,7 +118,7 @@ const PartsStore = () => {
 
           <FormRow>
             <Form.Item
-              name="marcaPeca"
+              name="marca"
               style={{ width: '24%' }}
               label="Marca da peça"
               validateTrigger={['onBlur', 'onChange']}
@@ -140,7 +166,7 @@ const PartsStore = () => {
             </Form.Item>
 
             <Form.Item
-              name={['veiculo', 'modelo']}
+              name={['veiculo', 'modelos']}
               style={{ width: '24%' }}
               label="Modelo do Veículo"
               validateTrigger={['onBlur', 'onChange']}
@@ -163,7 +189,7 @@ const PartsStore = () => {
             </Form.Item>
 
             <Form.Item
-              name={['veiculo', 'ano']}
+              name={['veiculo', 'anos']}
               style={{ width: '24%' }}
               label="Ano/Modelo"
               validateTrigger={['onBlur', 'onChange']}
@@ -205,14 +231,14 @@ const PartsStore = () => {
                 {fields.map((field, index) => (
                   <Form.Item
                     label={index === 0 ? 'Fornecedores' : ''}
+                    name="fornecedores"
                     required={false}
                     key={field.key}
                   >
                     <>
                       <FormRow>
                         <Form.Item
-                          {...field}
-                          name="nome"
+                          name={['fornecedor', 'nome']}
                           style={{ width: '80%' }}
                           validateTrigger={['onBlur', 'onChange']}
                           rules={[
@@ -246,7 +272,7 @@ const PartsStore = () => {
 
                       <FormRow>
                         <Form.Item
-                          name="lote"
+                          name={['fornecedor', 'lote']}
                           label="Lote"
                           style={{ width: '50%' }}
                           tooltip="O lote do estoque"
@@ -255,7 +281,7 @@ const PartsStore = () => {
                         </Form.Item>
 
                         <Form.Item
-                          name="estoque"
+                          name={['fornecedor', 'estoque']}
                           label="Estoque"
                           tooltip="Quantidade de peças no estoque para este fornecedor"
                         >
@@ -263,7 +289,7 @@ const PartsStore = () => {
                         </Form.Item>
 
                         <Form.Item
-                          name="precoUnitario"
+                          name={['fornecedor', 'precoUnitario']}
                           label="Preço Unitário"
                           tooltip="Preço unitário da peça para este fornecedor"
                         >
@@ -276,7 +302,7 @@ const PartsStore = () => {
                         </Form.Item>
 
                         <Form.Item
-                          name="custoUnitario"
+                          name={['fornecedor', 'custoUnitario']}
                           label="Custo Unitário"
                           tooltip="Custo unitário da peça para este fornecedor"
                         >

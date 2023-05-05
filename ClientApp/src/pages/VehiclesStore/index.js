@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
+import { toast } from 'react-toastify';
+
 import { Input, Select, Form } from 'antd';
 
 import settings from '~/config/appsettings.json';
@@ -30,9 +32,31 @@ const VehiclesStore = () => {
   const onRequiredTypeChange = ({ requiredMarkValue }) =>
     setRequiredMarkType(requiredMarkValue);
 
-  const onSubmit = () => {
-    console.log(form.getFieldsError());
-    console.log(form.getFieldsValue());
+  const convertData = () => {
+    const data = form.getFieldsValue();
+
+    const [modelo] = data.modelo;
+    data.modelo = modelo;
+
+    const [marca] = data.marca;
+    data.marca = marca;
+
+    const [anoModelo] = data.anoModelo;
+    data.anoModelo = anoModelo;
+
+    const [tipoCombustivel] = data.tipoCombustivel;
+    data.tipoCombustivel = tipoCombustivel;
+
+    return data;
+  };
+
+  const saveData = () => {
+    const data = convertData();
+
+    toast.success('Veículo salvo com sucesso!');
+    form.resetFields();
+
+    console.log(data);
   };
 
   useEffect(() => {
@@ -45,13 +69,17 @@ const VehiclesStore = () => {
     <Wrapper>
       <FormHeader
         title="Cadastro de Veículos"
-        saveOnClick={onSubmit}
+        saveOnClick={() => form.submit()}
         goBackOnClick={() => history.goBack()}
       />
 
       <FormWarapper>
         <Form
           form={form}
+          onFinish={() => saveData()}
+          onFinishFailed={() =>
+            toast.error('Verique os dados e tente novamente!')
+          }
           layout="vertical"
           initialValues={initialValues}
           onValuesChange={onRequiredTypeChange}
@@ -121,7 +149,7 @@ const VehiclesStore = () => {
                   message: 'Informe um ano/modelo',
                 },
               ]}
-              tooltip="Ano/Modelo do veículo a qual a peça é compatível"
+              tooltip="Ano/Modelo do veículo"
             >
               <Select
                 mode="tags"

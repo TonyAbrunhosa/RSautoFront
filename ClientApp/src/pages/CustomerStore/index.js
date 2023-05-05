@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
+import { toast } from 'react-toastify';
+
 import { Input, Select, Form } from 'antd';
 
 import settings from '~/config/appsettings.json';
@@ -12,7 +14,6 @@ import { mapToSelectOption } from '~/utils/componentUtils';
 import FormHeader from '~/components/Form/FormHeader';
 
 import { Wrapper, FormWarapper, FormRow } from '~/styles/form';
-import { string } from 'prop-types';
 
 const CustomerStore = () => {
   const [form] = Form.useForm();
@@ -24,9 +25,13 @@ const CustomerStore = () => {
   const onRequiredTypeChange = ({ requiredMarkValue }) =>
     setRequiredMarkType(requiredMarkValue);
 
-  const onSubmit = () => {
-    console.log(form.getFieldsError());
-    console.log(form.getFieldsValue());
+  const saveData = () => {
+    const data = form.getFieldValue();
+
+    toast.success('Cliente salvo com sucesso!');
+    form.resetFields();
+
+    console.log(data);
   };
 
   useEffect(() => {
@@ -37,12 +42,16 @@ const CustomerStore = () => {
     <Wrapper>
       <FormHeader
         title="Cadastro de Clientes"
-        saveOnClick={onSubmit}
+        saveOnClick={() => form.submit()}
         goBackOnClick={() => history.goBack()}
       />
 
       <FormWarapper>
         <Form
+          onFinish={() => saveData()}
+          onFinishFailed={() =>
+            toast.error('Verique os dados e tente novamente!')
+          }
           form={form}
           layout="vertical"
           initialValues={initialValues}
@@ -173,7 +182,7 @@ const CustomerStore = () => {
               name={['endereco', 'estado']}
               style={{ width: '33%' }}
               label="Estado"
-              validateTrigger={['onChange']}
+              validateTrigger={['onBlur', 'onChange']}
               rules={[
                 {
                   required: true,

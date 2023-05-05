@@ -21,6 +21,7 @@ const FormHeader = ({ title, goBackOnClick, saveOnClick }) => {
         <Button
           type="primary"
           onClick={saveOnClick}
+          htmlType="submit"
           icon={<CheckOutlined />}
           size="large"
         >
