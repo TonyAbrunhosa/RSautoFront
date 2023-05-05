@@ -1,8 +1,10 @@
 import React from 'react';
-import { Dropdown, Button } from 'antd';
+import PropTypes from 'prop-types';
+
+import { Dropdown, Button, Popconfirm } from 'antd';
 import { MoreOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
 
-const CollumnAction = () => (
+const CollumnAction = ({ onDelete = () => {} }) => (
   <Dropdown
     menu={{
       items: [
@@ -18,12 +20,20 @@ const CollumnAction = () => (
         {
           key: '2',
           label: (
-            <span>
-              <DeleteOutlined
-                style={{ color: '#fd163d', marginRight: '5px' }}
-              />
-              Excluir
-            </span>
+            <Popconfirm
+              onConfirm={onDelete}
+              title="Excluir registro"
+              description="Você tem certeza que deseja excluir este registro?"
+              okText="Sim"
+              cancelText="Não"
+            >
+              <span>
+                <DeleteOutlined
+                  style={{ color: '#fd163d', marginRight: '5px' }}
+                />
+                Excluir
+              </span>
+            </Popconfirm>
           ),
         },
       ],
@@ -34,5 +44,9 @@ const CollumnAction = () => (
     <Button type="text" icon={<MoreOutlined />} />
   </Dropdown>
 );
+
+CollumnAction.propTypes = {
+  onDelete: PropTypes.func,
+};
 
 export default CollumnAction;
