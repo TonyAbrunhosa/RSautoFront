@@ -110,7 +110,7 @@ const PartsStore = () => {
             </Form.Item>
 
             <Form.Item
-              name="marcaVeiculo"
+              name={['veiculo', 'marca']}
               style={{ width: '24%' }}
               label="Marca do Veículo"
               validateTrigger={['onChange']}
@@ -131,7 +131,7 @@ const PartsStore = () => {
             </Form.Item>
 
             <Form.Item
-              name="modeloVeiculo"
+              name={['veiculo', 'modelo']}
               style={{ width: '24%' }}
               label="Modelo do Veículo"
               validateTrigger={['onChange']}
@@ -152,7 +152,7 @@ const PartsStore = () => {
             </Form.Item>
 
             <Form.Item
-              name="anoModelo"
+              name={['veiculo', 'ano']}
               style={{ width: '24%' }}
               label="Ano/Modelo"
               validateTrigger={['onChange']}

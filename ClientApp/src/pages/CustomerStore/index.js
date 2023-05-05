@@ -12,6 +12,7 @@ import { mapToSelectOption } from '~/utils/componentUtils';
 import FormHeader from '~/components/Form/FormHeader';
 
 import { Wrapper, FormWarapper, FormRow } from '~/styles/form';
+import { string } from 'prop-types';
 
 const CustomerStore = () => {
   const [form] = Form.useForm();
@@ -55,6 +56,7 @@ const CustomerStore = () => {
               validateTrigger={['onChange', 'onBlur']}
               rules={[
                 {
+                  type: 'string',
                   required: true,
                   whitespace: true,
                   message: 'O nome do cliente é obrigatório',
@@ -76,14 +78,18 @@ const CustomerStore = () => {
             </Form.Item>
 
             <Form.Item
-              name="cpfCnpj"
+              name="documento"
               label="Documento"
               validateTrigger={['onChange', 'onBlur']}
               rules={[
                 {
                   required: true,
                   whitespace: true,
-                  message: 'O documento do cliente é obrigatório',
+                  pattern: new RegExp(
+                    '^([0-9]{3}.?[0-9]{3}.?[0-9]{3}-?[0-9]{2}|[0-9]{2}.?[0-9]{3}.?[0-9]{3}/?[0-9]{4}-?[0-9]{2})$',
+                    'i'
+                  ),
+                  message: 'O documento do cliente é inválido',
                 },
               ]}
               tooltip="CPF ou CNPJ do cliente"
@@ -109,12 +115,17 @@ const CustomerStore = () => {
                 {
                   required: true,
                   whitespace: true,
-                  message: 'O número do celular do cliente é obrigatório',
+                  type: 'string',
+                  pattern: new RegExp(
+                    '^([0-9]{2})s?([0-9]{4,5})([0-9]{4})$',
+                    'i'
+                  ),
+                  message: 'O número do celular é inválido',
                 },
               ]}
               name="celular"
               label="Celular"
-              tooltip="Número de telefone móvel do cliente"
+              tooltip="Número de telefone móvel do cliente. Ex: 34999999999"
               style={{ width: '33%' }}
             >
               <Input placeholder="Digite o número de telefone móvel do cliente..." />
@@ -124,9 +135,9 @@ const CustomerStore = () => {
               validateTrigger={['onChange', 'onBlur']}
               rules={[
                 {
+                  type: 'email',
                   required: true,
-                  whitespace: true,
-                  message: 'O e-mail do cliente é obrigatório',
+                  message: 'O e-mail é inválido',
                 },
               ]}
               name="email"
@@ -144,27 +155,30 @@ const CustomerStore = () => {
               rules={[
                 {
                   required: true,
+                  type: 'string',
+                  pattern: new RegExp('^([0-9]{5}(-?)[0-9]{3})$', 'i'),
                   whitespace: true,
-                  message: 'O CEP do cliente é obrigatório',
+                  message: 'O CEP é inválido',
                 },
               ]}
-              name="cep"
+              name={['endereco', 'cep']}
               label="CEP"
-              tooltip="CEP do cliente"
-              style={{ width: '10%' }}
+              tooltip="CEP do cliente. Ex: 38175-000"
+              style={{ width: '33%' }}
             >
               <Input placeholder="Digite o cep do cliente..." />
             </Form.Item>
 
             <Form.Item
-              name="estado"
-              style={{ width: '10%' }}
+              name={['endereco', 'estado']}
+              style={{ width: '33%' }}
               label="Estado"
               validateTrigger={['onChange']}
               rules={[
                 {
                   required: true,
                   whitespace: true,
+                  type: 'string',
                   message: 'O estado do cliente é obrigatório',
                 },
               ]}
@@ -179,15 +193,36 @@ const CustomerStore = () => {
                 {
                   required: true,
                   whitespace: true,
+                  type: 'string',
                   message: 'A cidade do cliente é obrigatória',
                 },
               ]}
-              name="cidade"
+              name={['endereco', 'cidade']}
               label="Cidade"
               tooltip="Cidade do cliente"
-              style={{ width: '20%' }}
+              style={{ width: '33%' }}
             >
               <Input placeholder="Digite a cidade do cliente..." />
+            </Form.Item>
+          </FormRow>
+
+          <FormRow>
+            <Form.Item
+              validateTrigger={['onChange', 'onBlur']}
+              rules={[
+                {
+                  required: true,
+                  type: 'string',
+                  whitespace: true,
+                  message: 'O bairro do usuário é obrigatório',
+                },
+              ]}
+              name={['endereco', 'bairro']}
+              label="Bairro"
+              tooltip="Bairro do cliente"
+              style={{ width: '33%' }}
+            >
+              <Input placeholder="Digite o bairro do cliente..." />
             </Form.Item>
 
             <Form.Item
@@ -196,22 +231,41 @@ const CustomerStore = () => {
                 {
                   required: true,
                   whitespace: true,
-                  message: 'O endereço do cliente é obrigatório',
+                  type: 'string',
+                  message: 'O logradouro do cliente é obrigatório',
                 },
               ]}
-              name="endereco"
-              label="Endereço"
-              tooltip="Endereço do cliente com logradouro, número e bairro"
-              style={{ width: '29%' }}
+              name={['endereco', 'logradouro']}
+              label="logradouro"
+              tooltip="Logradouro do cliente"
+              style={{ width: '23%' }}
             >
-              <Input placeholder="Digite o endereço do cliente..." />
+              <Input placeholder="Digite o logradouro do cliente..." />
             </Form.Item>
 
             <Form.Item
-              name="complemento"
+              name={['endereco', 'numero']}
+              style={{ width: '10%' }}
+              label="Número"
+              validateTrigger={['onChange']}
+              rules={[
+                {
+                  required: true,
+                  whitespace: true,
+                  type: 'string',
+                  message: 'O número da residência/comércio é obrigatório',
+                },
+              ]}
+              tooltip="Número residencial/comercial do cliente"
+            >
+              <Input placeholder="Digite o número da residência/comércio..." />
+            </Form.Item>
+
+            <Form.Item
+              name={['endereco', 'complemento']}
               label="Complemento"
               tooltip="O complemento de endereço do cliente"
-              style={{ width: '29%' }}
+              style={{ width: '33%' }}
             >
               <Input placeholder="Digite o complemento de endereço do cliente..." />
             </Form.Item>
