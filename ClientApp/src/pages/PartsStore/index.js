@@ -64,7 +64,10 @@ const PartsStore = () => {
                 {
                   required: true,
                   whitespace: true,
-                  message: 'A descrição da peça é obrigatória',
+                  type: 'array',
+                  min: 1,
+                  max: 1,
+                  message: 'Informe uma descrição de peça',
                 },
               ]}
               tooltip="Descrição da peça"
@@ -92,12 +95,15 @@ const PartsStore = () => {
               name="marcaPeca"
               style={{ width: '24%' }}
               label="Marca da peça"
-              validateTrigger={['onChange']}
+              validateTrigger={['onBlur', 'onChange']}
               rules={[
                 {
                   required: true,
                   whitespace: true,
-                  message: 'O nome da marca é obrigatório',
+                  type: 'array',
+                  min: 1,
+                  max: 1,
+                  message: 'Informe uma marca de peça',
                 },
               ]}
               tooltip="Nome da marca da peça"
@@ -113,12 +119,15 @@ const PartsStore = () => {
               name={['veiculo', 'marca']}
               style={{ width: '24%' }}
               label="Marca do Veículo"
-              validateTrigger={['onChange']}
+              validateTrigger={['onBlur', 'onChange']}
               rules={[
                 {
                   required: true,
                   whitespace: true,
-                  message: 'A marca do veículo é obrigatória',
+                  type: 'array',
+                  min: 1,
+                  max: 1,
+                  message: 'Informe uma marca de veículo',
                 },
               ]}
               tooltip="A marca do veículo"
@@ -134,12 +143,14 @@ const PartsStore = () => {
               name={['veiculo', 'modelo']}
               style={{ width: '24%' }}
               label="Modelo do Veículo"
-              validateTrigger={['onChange']}
+              validateTrigger={['onBlur', 'onChange']}
               rules={[
                 {
                   required: true,
                   whitespace: true,
-                  message: 'O nome do modelo do veículo é obrigatório',
+                  type: 'array',
+                  min: 1,
+                  message: 'Informe pelo menos um modelo de veículo',
                 },
               ]}
               tooltip="Nome do modelo do veículo"
@@ -155,12 +166,14 @@ const PartsStore = () => {
               name={['veiculo', 'ano']}
               style={{ width: '24%' }}
               label="Ano/Modelo"
-              validateTrigger={['onChange']}
+              validateTrigger={['onBlur', 'onChange']}
               rules={[
                 {
                   required: true,
                   whitespace: true,
-                  message: 'O ano/modelo do veículo é obrigatório',
+                  type: 'array',
+                  min: 1,
+                  message: 'Informe pelo menos um ano/modelo',
                 },
               ]}
               tooltip="Ano/Modelo do veículo a qual a peça é compatível"
@@ -201,12 +214,15 @@ const PartsStore = () => {
                           {...field}
                           name="nome"
                           style={{ width: '80%' }}
-                          validateTrigger={['onChange']}
+                          validateTrigger={['onBlur', 'onChange']}
                           rules={[
                             {
                               required: true,
                               whitespace: true,
-                              message: 'O nome do fornecedor é obrigatório',
+                              type: 'array',
+                              min: 1,
+                              max: 1,
+                              message: 'Informe um fornecedor',
                             },
                           ]}
                           label="Fornecedor"
@@ -300,7 +316,7 @@ const PartsStore = () => {
               required
               tooltip="Indica o status da peça"
             >
-              <Switch />
+              <Switch defaultChecked />
             </Form.Item>
           </FormRow>
         </Form>

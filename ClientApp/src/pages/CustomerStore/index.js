@@ -117,7 +117,7 @@ const CustomerStore = () => {
                   whitespace: true,
                   type: 'string',
                   pattern: new RegExp(
-                    '^([0-9]{2})s?([0-9]{4,5})([0-9]{4})$',
+                    '^([0-9]{2}) ?([0-9]{4,5})([0-9]{4})$',
                     'i'
                   ),
                   message: 'O número do celular é inválido',
@@ -125,7 +125,7 @@ const CustomerStore = () => {
               ]}
               name="celular"
               label="Celular"
-              tooltip="Número de telefone móvel do cliente. Ex: 34999999999"
+              tooltip="Número de telefone móvel do cliente. Ex: 34 999999999"
               style={{ width: '33%' }}
             >
               <Input placeholder="Digite o número de telefone móvel do cliente..." />

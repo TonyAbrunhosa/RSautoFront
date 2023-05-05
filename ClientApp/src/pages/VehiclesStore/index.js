@@ -62,12 +62,15 @@ const VehiclesStore = () => {
               name="marca"
               style={{ width: '33%' }}
               label="Marca"
-              validateTrigger={['onChange']}
+              validateTrigger={['onBlur', 'onChange']}
               rules={[
                 {
                   required: true,
                   whitespace: true,
-                  message: 'O nome da marca é obrigatório',
+                  type: 'array',
+                  min: 1,
+                  max: 1,
+                  message: 'Informe uma marca',
                 },
               ]}
               tooltip="Nome da marca do veículo"
@@ -83,12 +86,15 @@ const VehiclesStore = () => {
               name="modelo"
               style={{ width: '33%' }}
               label="Modelo"
-              validateTrigger={['onChange']}
+              validateTrigger={['onBlur', 'onChange']}
               rules={[
                 {
                   required: true,
                   whitespace: true,
-                  message: 'O nome do modelo é obrigatório',
+                  type: 'array',
+                  min: 1,
+                  max: 1,
+                  message: 'Informe um modelo',
                 },
               ]}
               tooltip="Nome do modelo do veículo"
@@ -104,12 +110,15 @@ const VehiclesStore = () => {
               name="anoModelo"
               style={{ width: '33%' }}
               label="Ano/Modelo"
-              validateTrigger={['onChange']}
+              validateTrigger={['onBlur', 'onChange']}
               rules={[
                 {
                   required: true,
                   whitespace: true,
-                  message: 'O ano/modelo do veículo é obrigatório',
+                  type: 'array',
+                  min: 1,
+                  max: 1,
+                  message: 'Informe um ano/modelo',
                 },
               ]}
               tooltip="Ano/Modelo do veículo a qual a peça é compatível"
@@ -127,12 +136,15 @@ const VehiclesStore = () => {
               name="tipoCombustivel"
               style={{ width: '49%' }}
               label="Tipo do combustível"
-              validateTrigger={['onChange']}
+              validateTrigger={['onBlur', 'onChange']}
               rules={[
                 {
                   required: true,
                   whitespace: true,
-                  message: 'Tipo do combustível',
+                  type: 'array',
+                  min: 1,
+                  max: 1,
+                  message: 'Informe um tipo de combustível',
                 },
               ]}
               tooltip="Tipo do combustível do veículo"
@@ -150,6 +162,7 @@ const VehiclesStore = () => {
               validateTrigger={['onChange', 'onBlur']}
               rules={[
                 {
+                  type: 'string',
                   required: true,
                   whitespace: true,
                   message: 'A cilindrada do veículo é obrigatória',
@@ -158,7 +171,7 @@ const VehiclesStore = () => {
               tooltip="Cilindrada do veículo"
               style={{ width: '49%' }}
             >
-              <Input placeholder="Digite a cilindrada do veículo..." />{' '}
+              <Input placeholder="Digite a cilindrada do veículo..." />
             </Form.Item>
           </FormRow>
 
@@ -171,30 +184,33 @@ const VehiclesStore = () => {
                 {
                   required: true,
                   whitespace: true,
-                  message: 'O número da placa do veículo é obrigatório',
+                  type: 'string',
+                  pattern: new RegExp('^(([a-z]{3})(-)?([0-9]{4}))$', 'i'),
+                  message: 'A placa é inválida',
                 },
               ]}
-              tooltip="O número da placa do veículo"
+              tooltip="A placa do veículo. Ex: JYQ-6145"
               style={{ width: '49%' }}
             >
-              <Input placeholder="Digite o número da placa..." />{' '}
+              <Input placeholder="Digite o número da placa..." />
             </Form.Item>
 
             <Form.Item
-              name="km"
+              name="quilometragem"
               label="Quilometragem"
               validateTrigger={['onChange', 'onBlur']}
               rules={[
                 {
                   required: true,
                   whitespace: true,
+                  type: 'string',
                   message: 'A quilometragem do veículo é obrigatória',
                 },
               ]}
               tooltip="Quilometragem do veículo"
               style={{ width: '49%' }}
             >
-              <Input placeholder="Digite a quilometragem do veículo..." />{' '}
+              <Input placeholder="Digite a quilometragem do veículo..." />
             </Form.Item>
           </FormRow>
 
@@ -202,12 +218,13 @@ const VehiclesStore = () => {
             <Form.Item
               name="cliente"
               label="Cliente"
-              validateTrigger={['onChange', 'onBlur']}
+              validateTrigger={['onBlur', 'onChange']}
               rules={[
                 {
                   required: true,
                   whitespace: true,
-                  message: 'O cliente é obrigatório',
+                  type: 'string',
+                  message: 'Informe um cliente',
                 },
               ]}
               tooltip="Dono do veículo"
