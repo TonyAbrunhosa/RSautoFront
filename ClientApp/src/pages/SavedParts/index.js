@@ -354,7 +354,7 @@ const SavedParts = () => {
       title: 'Ações',
       dataIndex: '',
       key: 'x',
-      render: (text, record, index) => {
+      render: (text, record) => {
         setSelectRecord(record);
 
         return (
