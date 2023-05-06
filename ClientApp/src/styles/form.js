@@ -10,7 +10,8 @@ export const FormWarapper = styled.div`
   margin-top: 25px;
   padding: 25px;
   border-radius: 5px;
-  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+  box-shadow: ${({ boxShadow }) =>
+    boxShadow ? '0px 2px 2px rgba(0, 0, 0, 0.25)' : '0'};
   border: 1px solid #e8e9e9;
 `;
 

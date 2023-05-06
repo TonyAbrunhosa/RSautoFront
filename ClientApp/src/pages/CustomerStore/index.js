@@ -9,6 +9,8 @@ const CustomerStore = () => {
 
   return (
     <CustomerForm
+      boxShadow
+      size={90}
       formRef={formRef}
       initialValues={undefined}
       onSaveAsync={(data) =>

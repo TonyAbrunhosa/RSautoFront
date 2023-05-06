@@ -120,6 +120,7 @@ const SavedCustomers = () => {
             modalTitle="Atualização dos dados do cliente"
             modalContent={
               <CustomerForm
+                boxShadow={false}
                 size={100}
                 formRef={formRef}
                 initialValues={selectRecord}

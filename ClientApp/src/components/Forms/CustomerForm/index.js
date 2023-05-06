@@ -25,6 +25,7 @@ const CustomerForm = ({
   formRef,
   onSaveAsync,
   size = 90,
+  boxShadow = true,
   initialValues = undefined,
 }) => {
   const [requiredMark, setRequiredMarkType] = useState('optional');
@@ -86,7 +87,7 @@ const CustomerForm = ({
         />
       )}
 
-      <FormWarapper>
+      <FormWarapper boxShadow={boxShadow}>
         <Form
           onFinish={() => saveData()}
           onFinishFailed={() =>
@@ -332,5 +333,6 @@ CustomerForm.propTypes = {
   onSaveAsync: PropTypes.func.isRequired,
   initialValues: PropTypes.object.isRequired,
   formRef: PropTypes.any.isRequired,
-  size: PropTypes.number,
+  boxShadow: PropTypes.bool.isRequired,
+  size: PropTypes.number.isRequired,
 };

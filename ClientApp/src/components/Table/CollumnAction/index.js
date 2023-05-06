@@ -34,13 +34,14 @@ const CollumnAction = ({
                 <Modal
                   title={modalTitle}
                   open={openModal}
+                  centered
                   onOk={() => onEdit()}
                   onCancel={() => setOpenModal(false)}
                   width="75%"
                   okText="Atualizar"
                   cancelText="Cancelar"
                   okButtonProps={{
-                    size: 'large'
+                    size: 'large',
                   }}
                   cancelButtonProps={{
                     type: 'ghost',
@@ -48,7 +49,7 @@ const CollumnAction = ({
                     style: { backgroundColor: '#fd163d', color: '#ffff' },
                   }}
                 >
-                  {modalContent}
+                  <div style={{ marginBottom: '20px' }}>{modalContent}</div>
                 </Modal>
               </>
             ),
