@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Tag, Divider, List } from 'antd';
+
+import { Tag, Divider, List, Form } from 'antd';
 import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
@@ -9,6 +10,7 @@ import { getFilters, onFilter } from '~/utils/componentUtils';
 
 import Table from '~/components/Table';
 import CollumnAction from '~/components/Table/CollumnAction';
+import PartForm from '~/components/Forms/PartForm';
 
 const data = [
   {
@@ -265,7 +267,7 @@ const data = [
   }
 ];
 
-const columns = [
+const constantsCollumns = [
   {
     title: 'Descrição',
     dataIndex: 'descricao',
@@ -335,20 +337,52 @@ const columns = [
         {tag.toUpperCase()}
       </Tag>
     ),
-  },
-  {
-    title: 'Ações',
-    dataIndex: '',
-    key: 'x',
-    render: () => <CollumnAction />,
-  },
+  }
 ];
 
 const SavedParts = () => {
   const [loading, setLoading] = useState(true);
-  const [searchLoading, setSearchLoading] = useState(false);
-
   const [records, setRecords] = useState([]);
+  const [searchLoading, setSearchLoading] = useState(false);
+  const [selectRecord, setSelectRecord] = useState({});
+
+  const [formRef] = Form.useForm();
+
+  const columns = [
+    ...constantsCollumns,
+    {
+      title: 'Ações',
+      dataIndex: '',
+      key: 'x',
+      render: (text, record, index) => {
+        setSelectRecord(record);
+
+        return (
+          <CollumnAction
+            onDelete={() => {}}
+            onEdit={() => formRef.submit()}
+            modalTitle="Atualização dos dados da peça"
+            modalContent={
+              <PartForm
+                suppliers={[]}
+                boxShadow={false}
+                size={100}
+                formRef={formRef}
+                initialValues={selectRecord}
+                onSaveAsync={() =>
+                  new Promise((resolve) => {
+                    setTimeout(() => {
+                      resolve(console.log('aushua'));
+                    }, 1);
+                  })
+                }
+              />
+            }
+          />
+        );
+      },
+    },
+  ];
 
   useEffect(() => {
     const loadData = () =>

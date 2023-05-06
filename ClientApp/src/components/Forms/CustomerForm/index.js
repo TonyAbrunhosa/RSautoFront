@@ -327,8 +327,6 @@ const CustomerForm = ({
   );
 };
 
-export default CustomerForm;
-
 CustomerForm.propTypes = {
   onSaveAsync: PropTypes.func.isRequired,
   initialValues: PropTypes.object.isRequired,
@@ -336,3 +334,5 @@ CustomerForm.propTypes = {
   boxShadow: PropTypes.bool.isRequired,
   size: PropTypes.number.isRequired,
 };
+
+export default CustomerForm;

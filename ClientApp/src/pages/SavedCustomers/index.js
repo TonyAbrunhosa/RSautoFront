@@ -32,7 +32,7 @@ const data = [
   },
 ];
 
-const constantsConlumns = [
+const constantsCollumns = [
   {
     title: 'Razão Social',
     dataIndex: 'razaoSocial',
@@ -105,7 +105,7 @@ const SavedCustomers = () => {
   const [formRef] = Form.useForm();
 
   const columns = [
-    ...constantsConlumns,
+    ...constantsCollumns,
     {
       title: 'Ações',
       dataIndex: '',

@@ -32,6 +32,7 @@ const CollumnAction = ({
                   Editar
                 </span>
                 <Modal
+                  destroyOnClose
                   title={modalTitle}
                   open={openModal}
                   centered

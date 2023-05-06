@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
 
+import { Form } from 'antd';
+
 import history from '~/services/history';
 
 import { getFilters, onFilter } from '~/utils/componentUtils';
 
 import CollumnAction from '~/components/Table/CollumnAction';
 import Table from '~/components/Table';
+import VehicleForm from '~/components/Forms/VehicleForm';
 
 const data = [
   {
@@ -115,7 +118,7 @@ const data = [
   },
 ];
 
-const columns = [
+const constantsCollumns = [
   {
     title: 'Marca',
     dataIndex: 'marca',
@@ -181,19 +184,51 @@ const columns = [
     filters: getFilters('cliente.documento', data),
     onFilter: (value, record) => onFilter(value, record, 'cliente.documento'),
   },
-  {
-    title: 'Ações',
-    dataIndex: '',
-    key: 'x',
-    render: () => <CollumnAction />,
-  },
 ];
 
 const SavedVehicles = () => {
   const [loading, setLoading] = useState(true);
   const [searchLoading, setSearchLoading] = useState(false);
-
   const [records, setRecords] = useState([]);
+  const [selectRecord, setSelectRecord] = useState({});
+
+  const [formRef] = Form.useForm();
+
+  const columns = [
+    ...constantsCollumns,
+    {
+      title: 'Ações',
+      dataIndex: '',
+      key: 'x',
+      render: (text, record) => {
+        setSelectRecord(record);
+
+        return (
+          <CollumnAction
+            onDelete={() => {}}
+            onEdit={() => formRef.submit()}
+            modalTitle="Atualização dos dados da peça"
+            modalContent={
+              <VehicleForm
+                customers={['João Victor - 67.117.218/0001-00']}
+                boxShadow={false}
+                size={100}
+                formRef={formRef}
+                initialValues={selectRecord}
+                onSaveAsync={() =>
+                  new Promise((resolve) => {
+                    setTimeout(() => {
+                      resolve(console.log('aushua'));
+                    }, 1);
+                  })
+                }
+              />
+            }
+          />
+        );
+      },
+    },
+  ];
 
   useEffect(() => {
     const loadData = () =>
