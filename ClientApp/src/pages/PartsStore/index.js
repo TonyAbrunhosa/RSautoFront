@@ -13,7 +13,7 @@ import { strToList } from '~/utils/converterUtils';
 import { mapToSelectOption } from '~/utils/componentUtils';
 import { priceFormatterUtil } from '~/utils/formatterUtils';
 
-import FormHeader from '~/components/Form/FormHeader';
+import FormHeader from '~/components/Forms/FormHeader';
 
 import { Wrapper, FormWarapper, FormRow } from '~/styles/form';
 

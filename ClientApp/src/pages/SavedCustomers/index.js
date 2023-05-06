@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react';
 
 import history from '~/services/history';
+
 import { getFilters, onFilter } from '~/utils/componentUtils';
 import { nameFormatterUtil } from '~/utils/formatterUtils';
 
+import { Form } from 'antd';
+
 import Table from '~/components/Table';
-import CollumnAction from '~/components/Table/ActionDropdow';
+import CollumnAction from '~/components/Table/CollumnAction';
+import CustomerForm from '~/components/Forms/CustomerForm';
 
 const data = [
   {
@@ -17,16 +21,18 @@ const data = [
     celular: '34984217839',
     email: 'jvsfernandes924@gmail.com',
     endereco: {
-      cep: '38175000',
+      cep: '38408-128',
       estado: 'MG',
-      cidade: 'Santa Juliana',
-      logradouro: 'Rua Suiça, 350',
-      complemento: 'Próximo a Agro Pub',
-    }
-  }
+      cidade: 'Uberlândia',
+      logradouro: 'Rua Mário Pinto Sobrinho',
+      bairro: 'Santa Mônica',
+      numero: 200,
+      complemento: 'Próximo a UFU',
+    },
+  },
 ];
 
-const columns = [
+const constantsConlumns = [
   {
     title: 'Razão Social',
     dataIndex: 'razaoSocial',
@@ -85,28 +91,58 @@ const columns = [
   },
   {
     title: 'Endereço',
-    dataIndex: 'endereco',
-    key: 'endereco',
-  },
-  {
-    title: 'Ações',
-    dataIndex: '',
-    key: 'x',
-    render: () => <CollumnAction />,
+    dataIndex: 'enderecoToShow',
+    key: 'enderecoToShow',
   },
 ];
-
 
 const SavedCustomers = () => {
   const [loading, setLoading] = useState(true);
   const [records, setRecords] = useState([]);
   const [searchLoading, setSearchLoading] = useState(false);
+  const [selectRecord, setSelectRecord] = useState({});
+
+  const [formRef] = Form.useForm();
+
+  const columns = [
+    ...constantsConlumns,
+    {
+      title: 'Ações',
+      dataIndex: '',
+      key: 'x',
+      render: (text, record, index) => {
+        setSelectRecord(record);
+
+        return (
+          <CollumnAction
+            onDelete={() => {}}
+            onEdit={() => formRef.submit()}
+            modalTitle="Atualização dos dados do cliente"
+            modalContent={
+              <CustomerForm
+                size={100}
+                formRef={formRef}
+                initialValues={selectRecord}
+                onSaveAsync={() =>
+                  new Promise((resolve) => {
+                    setTimeout(() => {
+                      resolve(console.log('aushua'));
+                    }, 1);
+                  })
+                }
+              />
+            }
+          />
+        );
+      },
+    },
+  ];
 
   const formatCustomer = (d) => {
     const nameParts = nameFormatterUtil(d.nome).split(' ');
-    d.endereco = `${d.endereco.logradouro}, ${d.endereco.cidade} - ${d.endereco.estado} ${d.endereco.cep}`;
+    d.enderecoToShow = `${d.endereco.logradouro}, ${d.endereco.cidade} - ${d.endereco.estado} ${d.endereco.cep}`;
     d.nome = `${nameParts[0]} ${nameParts[nameParts.length - 1]}`;
-  
+
     return d;
   };
 

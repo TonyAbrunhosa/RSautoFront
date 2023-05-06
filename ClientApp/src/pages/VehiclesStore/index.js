@@ -11,7 +11,7 @@ import history from '~/services/history';
 import { strToList } from '~/utils/converterUtils';
 import { mapToSelectOption } from '~/utils/componentUtils';
 
-import FormHeader from '~/components/Form/FormHeader';
+import FormHeader from '~/components/Forms/FormHeader';
 
 import { Wrapper, FormWarapper, FormRow } from '~/styles/form';
 import RegexUtils from '~/utils/regexUtils';

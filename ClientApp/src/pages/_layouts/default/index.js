@@ -106,61 +106,64 @@ const MenuItems = [
 
 const getMenuItemComponent = (key, label, icon) => (
   <Menu.Item key={key} icon={icon}>
-    <Link to={key.replace("_", "-")}>
-      {label}
-    </Link>
+    <Link to={key.replace('_', '-')}>{label}</Link>
   </Menu.Item>
-)
+);
 
 const DefaultLayout = ({ children, page }) => {
   const [collapsed, setCollapsed] = useState(false);
 
   return (
-    <Layout hasSider>
-      <Sider
-        collapsible
-        collapsed={collapsed}
-        onCollapse={(value) => setCollapsed(value)}
-        style={siderStyles}
-        width="250"
-      >
-        <div style={menuHeaderStyles}>
-          <Link to="/home">
-            <img src={logo} alt="Rs Auto" height={collapsed ? 45 : 55} />
-          </Link>
-        </div>
-        <Menu
-          style={menuStyles}
-          theme="dark"
-          defaultSelectedKeys={['1']}
-          mode="inline"
+    <div>
+      <Layout hasSider>
+        <Sider
+          collapsible
+          collapsed={collapsed}
+          onCollapse={(value) => setCollapsed(value)}
+          style={siderStyles}
+          width="250"
         >
-          {MenuItems.map(i => 
-              !i.subMenuItems.length ?
-                 getMenuItemComponent(i.key, i.label, i.icon)
-              :
-              <Menu.SubMenu key={i.key} title={i.label} icon={i.icon}>
-                {i.subMenuItems.map(subI => 
-                  getMenuItemComponent(subI.key, subI.label, subI.icon)
-                )}
-              </Menu.SubMenu>
-            )
-          }
-        </Menu>
-      </Sider>
-      <Layout style={contentLayoutStyles}>
-        <Header style={headerStyles}>
-          <div
-            style={{ ...headerContentStyles, marginLeft: collapsed ? 50 : 220 }}
-          >
-            <h2 style={pageNameStyles}>{page}</h2>
+          <div style={menuHeaderStyles}>
+            <Link to="/home">
+              <img src={logo} alt="Rs Auto" height={collapsed ? 45 : 55} />
+            </Link>
           </div>
-        </Header>
-        <Content style={{ marginLeft: collapsed ? 100 : 270 }}>
-          {children}
-        </Content>
+          <Menu
+            style={menuStyles}
+            theme="dark"
+            defaultSelectedKeys={['1']}
+            mode="inline"
+          >
+            {MenuItems.map((i) =>
+              !i.subMenuItems.length ? (
+                getMenuItemComponent(i.key, i.label, i.icon)
+              ) : (
+                <Menu.SubMenu key={i.key} title={i.label} icon={i.icon}>
+                  {i.subMenuItems.map((subI) =>
+                    getMenuItemComponent(subI.key, subI.label, subI.icon)
+                  )}
+                </Menu.SubMenu>
+              )
+            )}
+          </Menu>
+        </Sider>
+        <Layout style={contentLayoutStyles}>
+          <Header style={headerStyles}>
+            <div
+              style={{
+                ...headerContentStyles,
+                marginLeft: collapsed ? 50 : 220,
+              }}
+            >
+              <h2 style={pageNameStyles}>{page}</h2>
+            </div>
+          </Header>
+          <Content style={{ marginLeft: collapsed ? 100 : 270 }}>
+            {children}
+          </Content>
+        </Layout>
       </Layout>
-    </Layout>
+    </div>
   );
 };
 

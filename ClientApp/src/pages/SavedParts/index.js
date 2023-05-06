@@ -8,7 +8,7 @@ import history from '~/services/history';
 import { getFilters, onFilter } from '~/utils/componentUtils';
 
 import Table from '~/components/Table';
-import CollumnAction from '~/components/Table/ActionDropdow';
+import CollumnAction from '~/components/Table/CollumnAction';
 
 const data = [
   {
