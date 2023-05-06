@@ -3,3 +3,6 @@ export const priceFormatterUtil = (value) =>
 
 export const nameFormatterUtil = (value) =>
   value.replace(/(^\w{1})|(\s+\w{1})/g, (letra) => letra.toUpperCase());
+
+export const strFormatterUtil = (value) =>
+  value.normalize('NFD').replace(/[^\w\s]/gi, '');

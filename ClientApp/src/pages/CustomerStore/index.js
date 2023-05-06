@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
 import { toast } from 'react-toastify';
-
 import { Input, Select, Form } from 'antd';
 
 import settings from '~/config/appsettings.json';
 
 import history from '~/services/history';
+import { getAddressByZipCodeAsync } from '~/services/viaCep';
 
 import { strToList } from '~/utils/converterUtils';
 import { mapToSelectOption } from '~/utils/componentUtils';
@@ -14,16 +14,35 @@ import { mapToSelectOption } from '~/utils/componentUtils';
 import FormHeader from '~/components/Form/FormHeader';
 
 import { Wrapper, FormWarapper, FormRow } from '~/styles/form';
+import RegexUtils from '~/utils/regexUtils';
 
 const CustomerStore = () => {
   const [form] = Form.useForm();
   const [requiredMark, setRequiredMarkType] = useState('optional');
   const [initialValues, setInitialValues] = useState({});
-
+  
   const states = strToList(settings.data.states, ';', mapToSelectOption);
 
   const onRequiredTypeChange = ({ requiredMarkValue }) =>
     setRequiredMarkType(requiredMarkValue);
+
+  const setAddressFieldsValues = (zipCode) => {
+    if (RegexUtils.zipCode.test(zipCode)) {
+      getAddressByZipCodeAsync(zipCode).then((data) => {
+        const { cep, uf, bairro, logradouro, complemento, localidade } = data;
+        form.setFieldsValue({
+          endereco: {
+            cep,
+            bairro,
+            logradouro,
+            complemento,
+            estado: uf,
+            cidade: localidade
+          },
+        });
+      });
+    }
+  };
 
   const saveData = () => {
     const data = form.getFieldValue();
@@ -94,10 +113,7 @@ const CustomerStore = () => {
                 {
                   required: true,
                   whitespace: true,
-                  pattern: new RegExp(
-                    '^([0-9]{3}.?[0-9]{3}.?[0-9]{3}-?[0-9]{2}|[0-9]{2}.?[0-9]{3}.?[0-9]{3}/?[0-9]{4}-?[0-9]{2})$',
-                    'i'
-                  ),
+                  pattern: RegexUtils.cpfCnpj,
                   message: 'O documento do cliente é inválido',
                 },
               ]}
@@ -125,10 +141,7 @@ const CustomerStore = () => {
                   required: true,
                   whitespace: true,
                   type: 'string',
-                  pattern: new RegExp(
-                    '^([0-9]{2}) ?([0-9]{4,5})([0-9]{4})$',
-                    'i'
-                  ),
+                  pattern: RegexUtils.whatsAppNumber,
                   message: 'O número do celular é inválido',
                 },
               ]}
@@ -165,7 +178,7 @@ const CustomerStore = () => {
                 {
                   required: true,
                   type: 'string',
-                  pattern: new RegExp('^([0-9]{5}(-?)[0-9]{3})$', 'i'),
+                  pattern: RegexUtils.zipCode,
                   whitespace: true,
                   message: 'O CEP é inválido',
                 },
@@ -175,7 +188,10 @@ const CustomerStore = () => {
               tooltip="CEP do cliente. Ex: 38175-000"
               style={{ width: '33%' }}
             >
-              <Input placeholder="Digite o cep do cliente..." />
+              <Input
+                onChange={({ target }) => setAddressFieldsValues(target.value)}
+                placeholder="Digite o cep do cliente..."
+              />
             </Form.Item>
 
             <Form.Item

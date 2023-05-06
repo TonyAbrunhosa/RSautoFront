@@ -14,6 +14,7 @@ import { mapToSelectOption } from '~/utils/componentUtils';
 import FormHeader from '~/components/Form/FormHeader';
 
 import { Wrapper, FormWarapper, FormRow } from '~/styles/form';
+import RegexUtils from '~/utils/regexUtils';
 
 const VehiclesStore = () => {
   const [form] = Form.useForm();
@@ -213,7 +214,7 @@ const VehiclesStore = () => {
                   required: true,
                   whitespace: true,
                   type: 'string',
-                  pattern: new RegExp('^(([a-z]{3})(-)?([0-9]{4}))$', 'i'),
+                  pattern: RegexUtils.plate,
                   message: 'A placa é inválida',
                 },
               ]}
