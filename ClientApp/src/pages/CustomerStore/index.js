@@ -20,7 +20,7 @@ const CustomerStore = () => {
   const [form] = Form.useForm();
   const [requiredMark, setRequiredMarkType] = useState('optional');
   const [initialValues, setInitialValues] = useState({});
-  
+
   const states = strToList(settings.data.states, ';', mapToSelectOption);
 
   const onRequiredTypeChange = ({ requiredMarkValue }) =>
@@ -37,7 +37,7 @@ const CustomerStore = () => {
             logradouro,
             complemento,
             estado: uf,
-            cidade: localidade
+            cidade: localidade,
           },
         });
       });
@@ -209,7 +209,11 @@ const CustomerStore = () => {
               ]}
               tooltip="Estado do cliente"
             >
-              <Select showSearch options={states} defaultValue="SP" />
+              <Select
+                showSearch
+                placeholder="Selecione o estado"
+                options={states}
+              />
             </Form.Item>
 
             <Form.Item

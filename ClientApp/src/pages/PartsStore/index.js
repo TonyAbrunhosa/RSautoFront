@@ -156,7 +156,7 @@ const PartsStore = () => {
                   message: 'Informe uma marca de veículo',
                 },
               ]}
-              tooltip="A marca do veículo"
+              tooltip="A marca do veículo a qual a peça é compatível"
             >
               <Select
                 mode="tags"
@@ -179,7 +179,7 @@ const PartsStore = () => {
                   message: 'Informe pelo menos um modelo de veículo',
                 },
               ]}
-              tooltip="Nome do modelo do veículo"
+              tooltip="Modelos do veículo a qual a peça é compatível"
             >
               <Select
                 placeholder="Selecione ou adicione o modelo do veículo"

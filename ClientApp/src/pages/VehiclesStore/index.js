@@ -191,16 +191,21 @@ const VehiclesStore = () => {
               validateTrigger={['onChange', 'onBlur']}
               rules={[
                 {
-                  type: 'string',
                   required: true,
                   whitespace: true,
-                  message: 'A cilindrada do veículo é obrigatória',
+                  type: 'array',
+                  min: 1,
+                  max: 1,
+                  message: 'Informe uma cilindrada do veículoa',
                 },
               ]}
               tooltip="Cilindrada do veículo"
               style={{ width: '49%' }}
             >
-              <Input placeholder="Digite a cilindrada do veículo..." />
+              <Select
+                mode="tags"
+                placeholder="Selecione ou adicione a cilindrada..."
+              />
             </Form.Item>
           </FormRow>
 
