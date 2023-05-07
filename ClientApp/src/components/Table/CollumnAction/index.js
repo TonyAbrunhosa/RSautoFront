@@ -50,7 +50,18 @@ const CollumnAction = ({
                     style: { backgroundColor: '#fd163d', color: '#ffff' },
                   }}
                 >
-                  <div style={{ marginBottom: '20px' }}>{modalContent}</div>
+                  <div
+                    id="scrollableDiv"
+                    style={{
+                      border: '1px solid #e8e9e9',
+                      borderRadius: '5px',
+                      height: 400,
+                      overflow: 'auto',
+                      marginBottom: '20px',
+                    }}
+                  >
+                    {modalContent}
+                  </div>
                 </Modal>
               </>
             ),
