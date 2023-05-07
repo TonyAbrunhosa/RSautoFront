@@ -4,8 +4,6 @@ import { Tag, Divider, List, Form } from 'antd';
 import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
-import history from '~/services/history';
-
 import { getFilters, onFilter } from '~/utils/componentUtils';
 
 import Table from '~/components/Table';
@@ -22,7 +20,7 @@ const data = [
     veiculo: {
       modelo: 'Vectra GT 2.0 Flex manual',
       marca: 'Chevrolet',
-      ano: '2008/2008'
+      ano: '2008/2008',
     },
     fornecedores: [
       {
@@ -64,7 +62,7 @@ const data = [
     veiculo: {
       modelo: 'Vectra GT 2.0 Flex manual',
       marca: 'Chevrolet',
-      ano: '2008/2008'
+      ano: '2008/2008',
     },
     fornecedores: [
       {
@@ -106,7 +104,7 @@ const data = [
     veiculo: {
       modelo: 'Vectra GT 2.0 Flex manual',
       marca: 'Chevrolet',
-      ano: '2008/2008'
+      ano: '2008/2008',
     },
     fornecedores: [
       {
@@ -148,7 +146,7 @@ const data = [
     veiculo: {
       modelo: 'Vectra GT 2.0 Flex manual',
       marca: 'Chevrolet',
-      ano: '2008/2008'
+      ano: '2008/2008',
     },
     fornecedores: [
       {
@@ -190,7 +188,7 @@ const data = [
     veiculo: {
       modelo: 'Vectra GT 2.0 Flex manual',
       marca: 'Chevrolet',
-      ano: '2008/2008'
+      ano: '2008/2008',
     },
     fornecedores: [
       {
@@ -222,7 +220,7 @@ const data = [
         custoUnitario: 'R$ 200',
       },
     ],
-  }, 
+  },
   {
     id: 1,
     descricao: 'Pneu Aro 13 a',
@@ -232,7 +230,7 @@ const data = [
     veiculo: {
       modelo: 'Vectra GT 2.0 Flex manual',
       marca: 'Chevrolet',
-      ano: '2008/2008'
+      ano: '2008/2008',
     },
     fornecedores: [
       {
@@ -264,7 +262,7 @@ const data = [
         custoUnitario: 'R$ 200',
       },
     ],
-  }
+  },
 ];
 
 const constantsCollumns = [
@@ -337,7 +335,7 @@ const constantsCollumns = [
         {tag.toUpperCase()}
       </Tag>
     ),
-  }
+  },
 ];
 
 const SavedParts = () => {
@@ -346,43 +344,8 @@ const SavedParts = () => {
   const [searchLoading, setSearchLoading] = useState(false);
   const [selectRecord, setSelectRecord] = useState({});
 
-  const [formRef] = Form.useForm();
-
-  const columns = [
-    ...constantsCollumns,
-    {
-      title: 'Ações',
-      dataIndex: '',
-      key: 'x',
-      render: (text, record) => {
-        setSelectRecord(record);
-
-        return (
-          <CollumnAction
-            onDelete={() => {}}
-            onEdit={() => formRef.submit()}
-            modalTitle="Atualização dos dados da peça"
-            modalContent={
-              <PartForm
-                suppliers={[]}
-                boxShadow={false}
-                size={100}
-                formRef={formRef}
-                initialValues={selectRecord}
-                onSaveAsync={() =>
-                  new Promise((resolve) => {
-                    setTimeout(() => {
-                      resolve(console.log('aushua'));
-                    }, 1);
-                  })
-                }
-              />
-            }
-          />
-        );
-      },
-    },
-  ];
+  const [editFormRef] = Form.useForm();
+  const [storeFormRef] = Form.useForm();
 
   useEffect(() => {
     const loadData = () =>
@@ -399,18 +362,58 @@ const SavedParts = () => {
     setSearchLoading(false);
   }, []);
 
+  const formContent = (initialValues, formRef) => (
+    <PartForm
+      suppliers={[]}
+      boxShadow={false}
+      size={100}
+      formRef={formRef}
+      initialValues={initialValues}
+      onSaveAsync={() =>
+        new Promise((resolve) => {
+          setTimeout(() => {
+            resolve(console.log('aushua'));
+          }, 1);
+        })
+      }
+    />
+  );
+
+  const columns = [
+    ...constantsCollumns,
+    {
+      title: 'Ações',
+      dataIndex: '',
+      key: 'x',
+      render: (text, record) => {
+        setSelectRecord(record);
+
+        return (
+          <CollumnAction
+            onDelete={() => {}}
+            onEdit={() => editFormRef.submit()}
+            modalTitle="Atualização dos dados da peça"
+            modalContent={formContent(selectRecord, editFormRef)}
+          />
+        );
+      },
+    },
+  ];
+
   return (
     <Table
       filterPlaceholder="Digite o valor para a busca..."
       title="Peças Cadastradas"
       onChange={() => {}}
-      onCreateClick={() => history.push('cadastrar-peca')}
+      onCreateClick={() => storeFormRef.submit()}
       searchLoading={searchLoading}
       loading={loading}
       data={records}
       columns={columns}
       width={300}
       pageSize={10}
+      modalTitle="Cadastro de Peças"
+      modalContent={formContent({}, storeFormRef)}
       expandable={{
         showExpandColumn: true,
         expandIcon: ({ expanded, onExpand, record }) =>

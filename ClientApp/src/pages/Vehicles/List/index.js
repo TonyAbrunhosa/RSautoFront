@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 
 import { Form } from 'antd';
 
-import history from '~/services/history';
-
 import { getFilters, onFilter } from '~/utils/componentUtils';
 
 import CollumnAction from '~/components/Table/CollumnAction';
@@ -192,43 +190,8 @@ const SavedVehicles = () => {
   const [records, setRecords] = useState([]);
   const [selectRecord, setSelectRecord] = useState({});
 
-  const [formRef] = Form.useForm();
-
-  const columns = [
-    ...constantsCollumns,
-    {
-      title: 'Ações',
-      dataIndex: '',
-      key: 'x',
-      render: (text, record) => {
-        setSelectRecord(record);
-
-        return (
-          <CollumnAction
-            onDelete={() => {}}
-            onEdit={() => formRef.submit()}
-            modalTitle="Atualização dos dados da peça"
-            modalContent={
-              <VehicleForm
-                customers={['João Victor - 67.117.218/0001-00']}
-                boxShadow={false}
-                size={100}
-                formRef={formRef}
-                initialValues={selectRecord}
-                onSaveAsync={() =>
-                  new Promise((resolve) => {
-                    setTimeout(() => {
-                      resolve(console.log('aushua'));
-                    }, 1);
-                  })
-                }
-              />
-            }
-          />
-        );
-      },
-    },
-  ];
+  const [editFormRef] = Form.useForm();
+  const [storeFormRef] = Form.useForm();
 
   useEffect(() => {
     const loadData = () =>
@@ -245,18 +208,58 @@ const SavedVehicles = () => {
     setSearchLoading(false);
   }, []);
 
+  const formContent = (initialValues, formRef) => (
+    <VehicleForm
+      customers={['João Victor - 67.117.218/0001-00']}
+      boxShadow={false}
+      size={100}
+      formRef={formRef}
+      initialValues={initialValues}
+      onSaveAsync={() =>
+        new Promise((resolve) => {
+          setTimeout(() => {
+            resolve(console.log('aushua'));
+          }, 1);
+        })
+      }
+    />
+  );
+
+  const columns = [
+    ...constantsCollumns,
+    {
+      title: 'Ações',
+      dataIndex: '',
+      key: 'x',
+      render: (text, record) => {
+        setSelectRecord(record);
+
+        return (
+          <CollumnAction
+            onDelete={() => {}}
+            onEdit={() => editFormRef.submit()}
+            modalTitle="Atualização dos dados da peça"
+            modalContent={formContent(selectRecord, editFormRef)}
+          />
+        );
+      },
+    },
+  ];
+
   return (
     <Table
       filterPlaceholder="Digite o valor para a busca..."
       title="Veículos Cadastrados"
       onChange={() => {}}
-      onCreateClick={() => history.push('cadastrar-veiculo')}
+      onCreateClick={() => storeFormRef.submit()}
       searchLoading={searchLoading}
       loading={loading}
       data={records}
       columns={columns}
       width={350}
       pageSize={10}
+      modalTitle="Cadastro de Veículos"
+      modalContent={formContent({}, storeFormRef)}
     />
   );
 };

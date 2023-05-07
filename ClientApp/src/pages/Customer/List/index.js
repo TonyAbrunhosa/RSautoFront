@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 
-import history from '~/services/history';
-
 import { getFilters, onFilter } from '~/utils/componentUtils';
 import { nameFormatterUtil } from '~/utils/formatterUtils';
 
@@ -102,50 +100,8 @@ const SavedCustomers = () => {
   const [searchLoading, setSearchLoading] = useState(false);
   const [selectRecord, setSelectRecord] = useState({});
 
-  const [formRef] = Form.useForm();
-
-  const columns = [
-    ...constantsCollumns,
-    {
-      title: 'Ações',
-      dataIndex: '',
-      key: 'x',
-      render: (text, record) => {
-        setSelectRecord(record);
-
-        return (
-          <CollumnAction
-            onDelete={() => {}}
-            onEdit={() => formRef.submit()}
-            modalTitle="Atualização dos dados do cliente"
-            modalContent={
-              <CustomerForm
-                boxShadow={false}
-                size={100}
-                formRef={formRef}
-                initialValues={selectRecord}
-                onSaveAsync={() =>
-                  new Promise((resolve) => {
-                    setTimeout(() => {
-                      resolve(console.log('aushua'));
-                    }, 1);
-                  })
-                }
-              />
-            }
-          />
-        );
-      },
-    },
-  ];
-
-  const formatCustomer = (d) => {
-    const nameParts = nameFormatterUtil(d.nome).split(' ');
-    d.enderecoToShow = `${d.endereco.logradouro}, ${d.endereco.cidade} - ${d.endereco.estado} ${d.endereco.cep}`;
-    d.nome = `${nameParts[0]} ${nameParts[nameParts.length - 1]}`;
-
-    return d;
-  };
+  const [editFormRef] = Form.useForm();
+  const [storeFormRef] = Form.useForm();
 
   useEffect(() => {
     const loadData = () =>
@@ -162,18 +118,65 @@ const SavedCustomers = () => {
     setSearchLoading(false);
   }, []);
 
+  const formContent = (initialValues, formRef) => (
+    <CustomerForm
+      boxShadow={false}
+      size={100}
+      formRef={formRef}
+      initialValues={initialValues}
+      onSaveAsync={() =>
+        new Promise((resolve) => {
+          setTimeout(() => {
+            resolve(console.log('aushua'));
+          }, 1);
+        })
+      }
+    />
+  );
+
+  const columns = [
+    ...constantsCollumns,
+    {
+      title: 'Ações',
+      dataIndex: '',
+      key: 'x',
+      render: (text, record) => {
+        setSelectRecord(record);
+
+        return (
+          <CollumnAction
+            onDelete={() => {}}
+            onEdit={() => editFormRef.submit()}
+            modalTitle="Atualização dos dados do cliente"
+            modalContent={formContent(selectRecord, editFormRef)}
+          />
+        );
+      },
+    },
+  ];
+
+  const formatCustomer = (d) => {
+    const nameParts = nameFormatterUtil(d.nome).split(' ');
+    d.enderecoToShow = `${d.endereco.logradouro}, ${d.endereco.cidade} - ${d.endereco.estado} ${d.endereco.cep}`;
+    d.nome = `${nameParts[0]} ${nameParts[nameParts.length - 1]}`;
+
+    return d;
+  };
+
   return (
     <Table
       filterPlaceholder="Digite o valor para a busca..."
       title="Clientes Cadastrados"
       onChange={() => {}}
-      onCreateClick={() => history.push('cadastrar-cliente')}
+      onCreateClick={() => storeFormRef.submit()}
       searchLoading={searchLoading}
       loading={loading}
       data={records}
       columns={columns}
       width={350}
       pageSize={10}
+      modalTitle="Cadastro de Clientes"
+      modalContent={formContent({}, storeFormRef)}
     />
   );
 };

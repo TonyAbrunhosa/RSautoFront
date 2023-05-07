@@ -4,11 +4,12 @@ import PropTypes from 'prop-types';
 
 import { Layout, Menu } from 'antd';
 import {
-  PlusOutlined,
-  SaveOutlined,
   CarOutlined,
   SettingFilled,
   UserOutlined,
+  FormOutlined,
+  HomeOutlined,
+  LineChartOutlined,
 } from '@ant-design/icons';
 
 import logo from '~/assets/images/logo.svg';
@@ -61,10 +62,7 @@ const pageNameStyles = {
   fontSize: 16,
   fontWeight: 'bolder',
   color: '#2e2e2e',
-  fontWeight: 'normal',
 };
-
-const settingsStyles = { fontSize: 22, color: '#474747', cursor: 'pointer' };
 
 const getItem = (label, key, subMenuItems, icon, type) => ({
   key,
@@ -75,38 +73,17 @@ const getItem = (label, key, subMenuItems, icon, type) => ({
 });
 
 const MenuItems = [
-  getItem(
-    'Peças',
-    'pecas_option',
-    [
-      getItem('Salvas', 'pecas', null, <SaveOutlined />),
-      getItem('Cadastrar', 'cadastrar_peca', null, <PlusOutlined />),
-    ],
-    <SettingFilled />
-  ),
-  getItem(
-    'Veículos',
-    'veiculos_option',
-    [
-      getItem('Salvos', 'veiculos', null, <SaveOutlined />),
-      getItem('Cadastrar', 'cadastrar_veiculo', null, <PlusOutlined />),
-    ],
-    <CarOutlined />
-  ),
-  getItem(
-    'Clientes',
-    'clientes_option',
-    [
-      getItem('Salvos', 'clientes', null, <SaveOutlined />),
-      getItem('Cadastrar', 'cadastrar_cliente', null, <PlusOutlined />),
-    ],
-    <UserOutlined />
-  ),
+  getItem('Home', 'home', [], <HomeOutlined />),
+  getItem('Métricas', 'metricas', [], <LineChartOutlined />),
+  getItem('Ordens De Serviço', 'ordens', [], <FormOutlined />),
+  getItem('Clientes', 'clientes', [], <UserOutlined />),
+  getItem('Peças', 'pecas', [], <SettingFilled />),
+  getItem('Veículos', 'veiculos', [], <CarOutlined />),
 ];
 
 const getMenuItemComponent = (key, label, icon) => (
   <Menu.Item key={key} icon={icon}>
-    <Link to={key.replace('_', '-')}>{label}</Link>
+    <Link to={key.replaceAll('_', '-')}>{label}</Link>
   </Menu.Item>
 );
 

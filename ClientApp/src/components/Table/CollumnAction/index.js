@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import { Dropdown, Button, Popconfirm, Modal } from 'antd';
+import { Dropdown, Button, Popconfirm } from 'antd';
 import { MoreOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import FormModal from '~/components/Forms/FormModal';
 
 const CollumnAction = ({
   onDelete = () => {},
@@ -31,38 +32,14 @@ const CollumnAction = ({
                   />
                   Editar
                 </span>
-                <Modal
-                  destroyOnClose
+                <FormModal
                   title={modalTitle}
+                  content={modalContent}
                   open={openModal}
-                  centered
-                  onOk={() => onEdit()}
                   onCancel={() => setOpenModal(false)}
-                  width="75%"
+                  onSave={() => onEdit()}
                   okText="Atualizar"
-                  cancelText="Cancelar"
-                  okButtonProps={{
-                    size: 'large',
-                  }}
-                  cancelButtonProps={{
-                    type: 'ghost',
-                    size: 'large',
-                    style: { backgroundColor: '#fd163d', color: '#ffff' },
-                  }}
-                >
-                  <div
-                    id="scrollableDiv"
-                    style={{
-                      border: '1px solid #e8e9e9',
-                      borderRadius: '5px',
-                      height: 400,
-                      overflow: 'auto',
-                      marginBottom: '20px',
-                    }}
-                  >
-                    {modalContent}
-                  </div>
-                </Modal>
+                />
               </>
             ),
           },

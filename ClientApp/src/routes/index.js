@@ -3,13 +3,15 @@ import { Switch } from 'react-router-dom';
 
 import SignIn from '~/pages/SignIn';
 import Home from '~/pages/Home';
-import PartsStore from '~/pages/PartsStore';
-import SavedParts from '~/pages/SavedParts';
-import SavedVehicles from '~/pages/SavedVehicles';
-import VehiclesStore from '~/pages/VehiclesStore';
-import CustomerStore from '~/pages/CustomerStore';
-import SavedCustomers from '~/pages/SavedCustomers';
+import PartsStore from '~/pages/Parts/Store';
+import SavedParts from '~/pages/Parts/List';
+import SavedVehicles from '~/pages/Vehicles/List';
+import VehiclesStore from '~/pages/Vehicles/Store';
+import CustomerStore from '~/pages/Customer/Store';
+import SavedCustomers from '~/pages/Customer/List';
+import ServiceOrder from '~/pages/ServiceOrder/Store';
 
+import Metrics from '~/pages/Metrics';
 import Route from './Route';
 
 const Routes = () => {
@@ -52,6 +54,18 @@ const Routes = () => {
         type="private"
         page="Clientes > Cadastrar"
         component={CustomerStore}
+      />
+      <Route
+        path="/ordens"
+        type="private"
+        page="Ordens de Serviço > Emitir"
+        component={ServiceOrder}
+      />
+      <Route
+        path="/metricas"
+        type="private"
+        page="Métricas"
+        component={Metrics}
       />
       <Route path="/home" type="private" page="Home" component={Home} />
       <Route path="/login" type="auth" page="Login" component={SignIn} />
