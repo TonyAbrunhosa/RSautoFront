@@ -9,8 +9,8 @@ import SavedVehicles from '~/pages/Vehicles/List';
 import VehiclesStore from '~/pages/Vehicles/Store';
 import CustomerStore from '~/pages/Customer/Store';
 import SavedCustomers from '~/pages/Customer/List';
-import ServiceOrder from '~/pages/ServiceOrder/Store';
-
+import SavedServiceOrders from '~/pages/ServiceOrder/List';
+import Suppliers from '~/pages/Suppliers';
 import Metrics from '~/pages/Metrics';
 import Route from './Route';
 
@@ -58,14 +58,20 @@ const Routes = () => {
       <Route
         path="/ordens"
         type="private"
-        page="Ordens de Serviço > Emitir"
-        component={ServiceOrder}
+        page="Ordens de Serviço > Cadastradas"
+        component={SavedServiceOrders}
       />
       <Route
         path="/metricas"
         type="private"
         page="Métricas"
         component={Metrics}
+      />
+      <Route
+        path="/fornecedores"
+        type="private"
+        page="Fornecedores"
+        component={Suppliers}
       />
       <Route path="/home" type="private" page="Home" component={Home} />
       <Route path="/login" type="auth" page="Login" component={SignIn} />

@@ -3,8 +3,9 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Table as AntdTable, Input, Button } from 'antd';
-import { PlusOutlined } from '@ant-design/icons';
+import { LeftOutlined, PlusOutlined } from '@ant-design/icons';
 
+import history from '~/services/history';
 import FormModal from '../Forms/FormModal';
 
 import { ActionsWrapper, Wrapper } from './styles';
@@ -21,8 +22,8 @@ const Table = ({
   onCreateClick,
   filterPlaceholder,
   searchLoading,
-  modalTitle,
-  modalContent,
+  modalTitle = '',
+  modalContent = undefined,
 }) => {
   const [openModal, setOpenModal] = useState(false);
 
@@ -39,14 +40,27 @@ const Table = ({
             size="large"
             onChange={() => onChange()}
           />
-          <Button
-            type="primary"
-            icon={<PlusOutlined />}
-            size="large"
-            onClick={() => setOpenModal(true)}
-          >
-            Cadastrar
-          </Button>
+          <div>
+            <Button
+              type="dashed"
+              style={{ marginRight: 5 }}
+              icon={<LeftOutlined />}
+              size="large"
+              onClick={() => history.goBack()}
+            >
+              Voltar
+            </Button>
+            <Button
+              type="primary"
+              icon={<PlusOutlined />}
+              size="large"
+              onClick={() =>
+                modalContent ? setOpenModal(true) : onCreateClick()
+              }
+            >
+              Cadastrar
+            </Button>
+          </div>
         </ActionsWrapper>
 
         <AntdTable
@@ -76,8 +90,6 @@ const Table = ({
 };
 
 Table.propTypes = {
-  modalTitle: PropTypes.string.isRequired,
-  modalContent: PropTypes.node.isRequired,
   data: PropTypes.array.isRequired,
   title: PropTypes.string.isRequired,
   width: PropTypes.number.isRequired,
@@ -86,10 +98,12 @@ Table.propTypes = {
   filterPlaceholder: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   onCreateClick: PropTypes.func.isRequired,
-  onFilter: PropTypes.func,
+  onFilter: PropTypes.func.isRequired,
   loading: PropTypes.bool,
   searchLoading: PropTypes.bool,
   expandable: PropTypes.object,
+  modalTitle: PropTypes.string,
+  modalContent: PropTypes.node,
 };
 
 export default Table;

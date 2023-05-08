@@ -10,6 +10,7 @@ import {
   FormOutlined,
   HomeOutlined,
   LineChartOutlined,
+  ImportOutlined,
 } from '@ant-design/icons';
 
 import logo from '~/assets/images/logo.svg';
@@ -79,6 +80,7 @@ const MenuItems = [
   getItem('Clientes', 'clientes', [], <UserOutlined />),
   getItem('Peças', 'pecas', [], <SettingFilled />),
   getItem('Veículos', 'veiculos', [], <CarOutlined />),
+  getItem('Fornecedores', 'fornecedores', [], <ImportOutlined />),
 ];
 
 const getMenuItemComponent = (key, label, icon) => (

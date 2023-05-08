@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 
+import { Form, Typography } from 'antd';
+import { CopyOutlined } from '@ant-design/icons';
+
 import { getFilters, onFilter } from '~/utils/componentUtils';
 import { nameFormatterUtil } from '~/utils/formatterUtils';
-
-import { Form } from 'antd';
 
 import Table from '~/components/Table';
 import CollumnAction from '~/components/Table/CollumnAction';
@@ -12,10 +13,10 @@ import CustomerForm from '~/components/Forms/CustomerForm';
 const data = [
   {
     id: 1,
-    nome: 'João Victor',
+    nome: 'Joao Corporaçõe',
     razaoSocial: 'Joao Corporações',
     documento: '67.117.218/0001-00',
-    telefone: 'N/A',
+    telefone: '',
     celular: '34984217839',
     email: 'jvsfernandes924@gmail.com',
     endereco: {
@@ -30,15 +31,15 @@ const data = [
   },
 ];
 
-const constantsCollumns = [
+const constantscolumns = [
   {
-    title: 'Razão Social',
-    dataIndex: 'razaoSocial',
-    key: 'razaoSocial',
+    title: 'Nome/Razão Social',
+    dataIndex: 'nome',
+    key: 'nome',
     sortDirections: ['descend', 'ascend'],
-    sorter: (a, b) => a.marca.localeCompare(b.razaoSocial),
-    filters: getFilters('razaoSocial', data),
-    onFilter: (value, record) => onFilter(value, record, 'razaoSocial'),
+    sorter: (a, b) => a.nome.localeCompare(b.nome),
+    filters: getFilters('nome', data),
+    onFilter: (value, record) => onFilter(value, record, 'nome'),
     filterSearch: true,
   },
   {
@@ -48,6 +49,13 @@ const constantsCollumns = [
     filters: getFilters('documento', data),
     onFilter: (value, record) => onFilter(value, record, 'documento'),
     filterSearch: true,
+    render: (documento) => (
+      <Typography.Text
+        copyable={{ icon: <CopyOutlined style={{ color: '#2e2e2e' }} /> }}
+      >
+        {documento}
+      </Typography.Text>
+    ),
   },
   {
     title: 'Telefone',
@@ -56,6 +64,16 @@ const constantsCollumns = [
     filters: getFilters('telefone', data),
     onFilter: (value, record) => onFilter(value, record, 'telefone'),
     filterSearch: true,
+    render: (telefone) => 
+      telefone ? (
+        <Typography.Text
+          copyable={{ icon: <CopyOutlined style={{ color: '#2e2e2e' }} /> }}
+        >
+          {telefone}
+        </Typography.Text>
+      ) : (
+        'N/A'
+      )
   },
   {
     title: 'Celular',
@@ -64,14 +82,18 @@ const constantsCollumns = [
     filters: getFilters('celular', data),
     onFilter: (value, record) => onFilter(value, record, 'celular'),
     filterSearch: true,
-    render: (telefone) => (
-      <a
-        href={`https://api.whatsapp.com/send?phone=${telefone}`}
-        target="_blank"
-        rel="noreferrer"
+    render: (celular) => (
+      <Typography.Text
+        copyable={{ icon: <CopyOutlined style={{ color: '#2e2e2e' }} /> }}
       >
-        {telefone}
-      </a>
+        <a
+          href={`https://api.whatsapp.com/send?phone=${celular}`}
+          target="_blank"
+          rel="noreferrer"
+        >
+          {celular}
+        </a>
+      </Typography.Text>
     ),
   },
   {
@@ -82,9 +104,13 @@ const constantsCollumns = [
     onFilter: (value, record) => onFilter(value, record, 'email'),
     filterSearch: true,
     render: (email) => (
-      <a href={`mailto:${email}`} target="_blank" rel="noreferrer">
-        {email}
-      </a>
+      <Typography.Text
+        copyable={{ icon: <CopyOutlined style={{ color: '#2e2e2e' }} /> }}
+      >
+        <a href={`mailto:${email}`} target="_blank" rel="noreferrer">
+          {email}
+        </a>
+      </Typography.Text>
     ),
   },
   {
@@ -135,10 +161,11 @@ const SavedCustomers = () => {
   );
 
   const columns = [
-    ...constantsCollumns,
+    ...constantscolumns,
     {
       title: 'Ações',
       dataIndex: '',
+      width: 90,
       key: 'x',
       render: (text, record) => {
         setSelectRecord(record);

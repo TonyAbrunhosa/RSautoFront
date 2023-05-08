@@ -116,7 +116,7 @@ const data = [
   },
 ];
 
-const constantsCollumns = [
+const constantscolumns = [
   {
     title: 'Marca',
     dataIndex: 'marca',
@@ -226,11 +226,12 @@ const SavedVehicles = () => {
   );
 
   const columns = [
-    ...constantsCollumns,
+    ...constantscolumns,
     {
       title: 'Ações',
       dataIndex: '',
       key: 'x',
+      width: 90,
       render: (text, record) => {
         setSelectRecord(record);
 

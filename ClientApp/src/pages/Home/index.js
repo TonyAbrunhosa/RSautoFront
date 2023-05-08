@@ -19,9 +19,9 @@ const cardRows = [
     cards: [
       {
         image: orderImg,
-        title: 'Emitir ordem de serviço',
+        title: 'Cadastrar ordem de serviço',
         link: '/ordens',
-        description: 'Faça a emissão de uma nova ordem de serviço.',
+        description: 'Faça o cadastro de uma nova ordem de serviço.',
       },
       {
         image: carImg,
@@ -43,7 +43,7 @@ const cardRows = [
         image: ordersImg,
         title: 'Visualizar ordens de serviço',
         link: '/ordens-servico',
-        description: ' Visualize todas as ordens de serviço emitidas.',
+        description: ' Visualize todas as ordens de serviço salvas.',
       },
       {
         image: carsImg,

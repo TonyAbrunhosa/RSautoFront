@@ -20,7 +20,7 @@ const Statistics = ({
 
       <StatisticWrapper width={width}>
         <Statistic
-          title="Novos clientes"
+          title="Novos Clientes"
           value={50}
           precision={2}
           formatter={formatter}

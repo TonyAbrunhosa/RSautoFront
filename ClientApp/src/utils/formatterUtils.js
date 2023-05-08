@@ -6,3 +6,6 @@ export const nameFormatterUtil = (value) =>
 
 export const strFormatterUtil = (value) =>
   value.normalize('NFD').replace(/[^\w\s]/gi, '');
+
+export const dateToBrazilDateUtil = (value) =>
+  value.toLocaleDateString('pt-BR');
