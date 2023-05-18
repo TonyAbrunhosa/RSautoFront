@@ -37,7 +37,7 @@ const Table = ({
             placeholder={filterPlaceholder}
             enterButton
             loading={searchLoading}
-            size="large"
+            size='large'
             onChange={() => onChange()}
           />
           <div>
@@ -45,7 +45,7 @@ const Table = ({
               type="dashed"
               style={{ marginRight: 5 }}
               icon={<LeftOutlined />}
-              size="large"
+              size='large'
               onClick={() => history.goBack()}
             >
               Voltar
@@ -53,7 +53,7 @@ const Table = ({
             <Button
               type="primary"
               icon={<PlusOutlined />}
-              size="large"
+              size='large'
               onClick={() =>
                 modalContent ? setOpenModal(true) : onCreateClick()
               }

@@ -11,7 +11,7 @@ export const Wrapper = styled.div`
 
 export const Content = styled.div`
   background-color: #ffffff;
-  padding: 0 65px;
+  padding: 0 40px;
   border-radius: 15px;
   text-align: center;
 
@@ -24,9 +24,9 @@ export const Content = styled.div`
       display: block;
       text-align: left;
       font-weight: 500;
-      font-size: 16px;
+      font-size: 14px;
       line-height: 23px;
-      font-family: 'Roboto, sans-serif';
+      font-family: Roboto, sans-serif;
     }
     input {
       width: 411.33px;
@@ -35,7 +35,7 @@ export const Content = styled.div`
       background: #d9d9d9;
       padding: 10px;
       border-radius: 12px;
-      height: 46px;
+      height: 40px;
       color: #514848;
       margin-bottom: 20px;
       &::placeholder {
@@ -52,14 +52,14 @@ export const Content = styled.div`
       font-weight: bold;
     }
     button {
-      width: 200px;
+      width: 140px;
       margin: 0 auto;
-      height: 50px;
+      height: 40px;
       background: #fc1515;
       color: #ffffff;
       border-radius: 50px;
       border: none;
-      font-size: 20px;
+      font-size: 18px;
       line-height: 23.44px;
       transition: background 0.2s;
       box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);

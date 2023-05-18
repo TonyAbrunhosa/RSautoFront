@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 
-import { Tag, Typography } from 'antd';
+import { Tag, Typography, Form } from 'antd';
 import { getFilters, onFilter } from '~/utils/componentUtils';
 
 import Table from '~/components/Table';
 import CollumnAction from '~/components/Table/CollumnAction';
+import ServiceOrderForm from '~/components/Forms/ServiceOrderForm';
+
 import {
   dateToBrazilDateUtil,
   priceFormatterUtil,
@@ -152,7 +154,7 @@ const data = [
   },
 ];
 
-const columns = [
+const constantscolumns = [
   {
     title: 'Número',
     dataIndex: 'numero',
@@ -171,7 +173,7 @@ const columns = [
     sorter: (a, b) => a.cliente.nome.localeCompare(b.cliente.nome),
     filters: getFilters('cliente.nome', data),
     onFilter: (value, record) => onFilter(value, record, 'cliente.nome'),
-    filterSearch: true
+    filterSearch: true,
   },
   {
     title: 'Veículo',
@@ -228,21 +230,36 @@ const columns = [
       </Tag>
     ),
   },
-  {
-    title: 'Ações',
-    dataIndex: '',
-    key: 'x',
-    width: 90,
-    render: (text, record) => (
-      <CollumnAction edit={false} onDelete={() => {}} />
-    ),
-  },
 ];
 
 const SavedServiceOrders = () => {
   const [loading, setLoading] = useState(true);
   const [records, setRecords] = useState([]);
   const [searchLoading, setSearchLoading] = useState(false);
+
+  const [storeFormRef] = Form.useForm();
+
+  const columns = [
+    ...constantscolumns,
+    {
+      title: 'Ações',
+      dataIndex: '',
+      key: 'x',
+      width: 90,
+      render: () => {
+        return (
+          <CollumnAction
+            onDelete={() => {}}
+            edit={false}
+            modalTitle=""
+            modalContent={
+              <ServiceOrderForm formRef={storeFormRef} initialValues={{}} />
+            }
+          />
+        );
+      },
+    },
+  ];
 
   useEffect(() => {
     const loadData = () =>
@@ -264,13 +281,23 @@ const SavedServiceOrders = () => {
       filterPlaceholder="Digite o valor para a busca..."
       title="Ordens de Serviço Salvas"
       onChange={() => {}}
-      onCreateClick={() => {}}
+      onCreateClick={() => storeFormRef.submit()}
       searchLoading={searchLoading}
       loading={loading}
       data={records}
       columns={columns}
       width={300}
       pageSize={10}
+      modalTitle="Cadastro de Ordens de Serviço"
+      modalContent={
+        <ServiceOrderForm
+          customers={['João Victor - 67.117.218/0001-00']}
+          boxShadow={false}
+          size={100}
+          formRef={storeFormRef}
+          initialValues={{}}
+        />
+      }
     />
   );
 };

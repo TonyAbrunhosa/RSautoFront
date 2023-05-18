@@ -42,11 +42,11 @@ const CollumnAction = ({
               okText="Atualizar"
               cancelText="Cancelar"
               okButtonProps={{
-                size: 'large',
+                size: 'middle',
               }}
               cancelButtonProps={{
                 type: 'ghost',
-                size: 'large',
+                size: 'middle',
                 style: { backgroundColor: '#fd163d', color: '#ffff' },
               }}
             >

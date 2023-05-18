@@ -27,7 +27,7 @@ const cardRows = [
         image: carImg,
         title: 'Cadastrar veículo',
         link: '/cadastrar-veiculo',
-        description: 'Cadastre um veículo para um determinado cliente.',
+        description: 'Cadastre um veículo para um cliente.',
       },
       {
         image: partImg,
@@ -35,28 +35,28 @@ const cardRows = [
         link: '/cadastrar-peca',
         description: 'Realize o cadastro de uma nova peça.',
       },
+      {
+        image: ordersImg,
+        title: 'Visualizar ordens de serviço',
+        link: '/ordens-servico',
+        description: ' Visualize todas as ordens de serviço.',
+      },
     ],
   },
   {
     cards: [
       {
-        image: ordersImg,
-        title: 'Visualizar ordens de serviço',
-        link: '/ordens-servico',
-        description: ' Visualize todas as ordens de serviço salvas.',
+        image: partsImg,
+        title: 'Visualizar peças cadastradas',
+        link: '/pecas',
+        description:
+          'Visualize todas as peças cadastradas.',
       },
       {
         image: carsImg,
         title: 'Visualizar veículos cadastrados',
         link: '/veiculos',
-        description: 'Visualize todas as entradas de veículos por cliente.',
-      },
-      {
-        image: partsImg,
-        title: 'Visualizar peças cadastradas',
-        link: '/pecas',
-        description:
-          'Visualize suas peças cadastradas, com o respectivo fornecedor e estoque.',
+        description: 'Visualize todas as entradas de veículos.',
       },
     ],
   },
@@ -73,14 +73,14 @@ const Home = () => {
         <h2>Ações Rápidas</h2>
         <div>
           {cardRows.map(({ cards }) => (
-            <Row gutter={16} style={{ marginTop: 10 }}>
+            <Row gutter={12} style={{ marginTop: 10 }}>
               {cards.map(({ title, link, description, image }) => (
-                <Col span={8}>
+                <Col span={6}>
                   <Link to={link}>
                     <Card
                       style={{
                         boxShadow: '2px 3px 4px -1px #807878',
-                        height: 185
+                        height: 165
                       }}
                       cover={
                         image ? (
@@ -89,7 +89,7 @@ const Home = () => {
                               display: 'flex',
                               justifyContent: 'center',
                               alignContent: 'center',
-                              padding: 10,
+                              padding: 8,
                             }}
                           >
                             <div
@@ -97,8 +97,8 @@ const Home = () => {
                                 backgroundImage: `url(${image})`,
                                 backgroundRepeat: 'no-repeat',
                                 backgroundSize: 'cover',
-                                height: 80,
-                                width: 80,
+                                height: 50,
+                                width: 50,
                                 backgroundPosition: 'center',
                               }}
                             />
