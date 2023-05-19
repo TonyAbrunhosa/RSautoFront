@@ -12,7 +12,6 @@ import { Wrapper, FormWarapper, FormRow } from '~/styles/form';
 
 import history from '~/services/history';
 
-import { priceFormatterUtil } from '~/utils/formatterUtils';
 import FormHeader from '../FormHeader';
 
 const { TextArea } = Input;
@@ -33,8 +32,37 @@ const ServiceOrderForm = ({
   const [hasCustomer, setHasCustomer] = useState(false);
   const [hasVehicle, setHasVehicle] = useState(false);
   const [total, setTotal] = useState(0);
+  const [grossTotal, setGrossTotal] = useState(0);
 
   const replaceVariables = (str, value) => str.replace('{1}', value);
+
+  const updateTotal = () => {
+    let priceTotal = 0;
+
+    const { pecas, custoServico, desconto, acrescimo } =
+      formRef.getFieldValue();
+
+    if (pecas) {
+      priceTotal = pecas
+        .filter((p) => !!p)
+        .reduce((accumulator, { preco, quantidade }) => {
+          quantidade = Number(quantidade) ? quantidade : 1;
+          if (Number(preco))
+            accumulator +=
+              Math.abs(Number(quantidade)) * Math.abs(Number(preco));
+        }, 0);
+    }
+
+    if (Number(custoServico)) priceTotal += Math.abs(Number(custoServico));
+
+    if (priceTotal > 0) setGrossTotal(priceTotal);
+
+    if (Number(desconto)) priceTotal -= Math.abs(Number(desconto));
+
+    if (Number(acrescimo)) priceTotal += Math.abs(Number(acrescimo));
+
+    setTotal(priceTotal);
+  };
 
   const onRequiredTypeChange = ({ requiredMarkValue }) =>
     setRequiredMarkType(requiredMarkValue);
@@ -66,7 +94,7 @@ const ServiceOrderForm = ({
     <Wrapper size={size}>
       {!initialValues && (
         <FormHeader
-          title="Cadastro de Clientes"
+          title="Cadastro de Ordem de Serviços"
           saveOnClick={() => formRef.submit()}
           goBackOnClick={() => history.goBack()}
         />
@@ -98,7 +126,7 @@ const ServiceOrderForm = ({
                 },
               ]}
               tooltip="Dono do veículo"
-              style={{ width: '49%' }}
+              style={{ width: '33%' }}
             >
               <Select
                 showSearch
@@ -126,7 +154,7 @@ const ServiceOrderForm = ({
                 },
               ]}
               tooltip="Veículo do cliente"
-              style={{ width: '49%' }}
+              style={{ width: '33%' }}
             >
               <Select
                 disabled={!hasCustomer}
@@ -134,6 +162,24 @@ const ServiceOrderForm = ({
                 placeholder="Selecione o veículo"
                 options={[]}
               />
+            </Form.Item>
+            <Form.Item
+              name="km"
+              validateTrigger={['onBlur', 'onChange']}
+              rules={[
+                {
+                  required: true,
+                  whitespace: true,
+                  type: 'number',
+                  min: 1,
+                  max: 1,
+                  message: 'Informe a quilometragem do veículo',
+                },
+              ]}
+              label="Quilometragem do Veículo"
+              tooltip="Quilometragem do Veículo"
+            >
+              <InputNumber disabled={!hasVehicle} defaultValue={0} min={0} />
             </Form.Item>
           </FormRow>
 
@@ -192,8 +238,6 @@ const ServiceOrderForm = ({
                               required: true,
                               whitespace: true,
                               type: 'number',
-                              min: 1,
-                              max: 1,
                               message: 'Informe a quantidade de peças',
                             },
                           ]}
@@ -201,30 +245,23 @@ const ServiceOrderForm = ({
                           label="Quantidade"
                           tooltip="Quantidade de peças"
                         >
-                          <InputNumber defaultValue={1} min={1} />
+                          <InputNumber min={0} onChange={() => updateTotal()} />
                         </Form.Item>
 
                         <Form.Item
-                          name={['peca', 'precoUnitario']}
+                          name={['peca', 'preco']}
                           rules={[
                             {
                               required: true,
                               whitespace: true,
                               type: 'number',
-                              min: 1,
-                              max: 1,
                               message: 'Informe o preço da peça',
                             },
                           ]}
                           label="Preço Unitário"
                           tooltip="Preço unitário da peça"
                         >
-                          <InputNumber
-                            defaultValue={0}
-                            min={0}
-                            formatter={(value) => priceFormatterUtil(value)}
-                            parser={(value) => value.replace(/\$\s?|(,*)/g, '')}
-                          />
+                          <InputNumber min={0} onChange={() => updateTotal()} />
                         </Form.Item>
 
                         {fields.length >= 1 && (
@@ -267,7 +304,7 @@ const ServiceOrderForm = ({
                 row={3}
                 showCount
                 maxLength={500}
-                placeholder="Digite as obserções referente a ordem de serviço"
+                placeholder="Digite as observações referente a ordem de serviço"
               />
             </Form.Item>
             <Form.Item
@@ -276,7 +313,7 @@ const ServiceOrderForm = ({
               tooltip="O valor da mão de obra"
             >
               <InputNumber
-                onChange={(v) => setTotal(v)}
+                onChange={() => updateTotal()}
                 defaultValue={0}
                 min={0}
               />
@@ -287,14 +324,7 @@ const ServiceOrderForm = ({
               tooltip="Valor de desconto"
             >
               <InputNumber
-                onChange={(v) =>
-                  setTotal(
-                    Number(formRef.getFieldValue().precoSerico) -
-                      (Number(formRef.getFieldValue().precoSerico) *
-                        Number(v)) /
-                        100
-                  )
-                }
+                onChange={() => updateTotal()}
                 defaultValue={0}
                 min={0}
               />
@@ -305,14 +335,7 @@ const ServiceOrderForm = ({
               tooltip="Valor de acréscimo"
             >
               <InputNumber
-                onChange={(v) =>
-                  setTotal(
-                    Number(formRef.getFieldValue().precoSerico) -
-                      (Number(formRef.getFieldValue().precoSerico) *
-                        Number(v)) /
-                        100
-                  )
-                }
+                onChange={() => updateTotal()}
                 defaultValue={0}
                 min={0}
               />
@@ -327,7 +350,7 @@ const ServiceOrderForm = ({
           }}
         >
           <Statistic title="Valor Total" value={total} />
-          <Statistic title="Valor Bruto" value={total} />
+          <Statistic title="Valor Bruto" value={grossTotal} />
         </div>
       </FormWarapper>
     </Wrapper>

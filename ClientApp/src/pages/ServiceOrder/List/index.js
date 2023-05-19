@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { Tag, Typography, Form } from 'antd';
+import { Tag, Form } from 'antd';
 import { getFilters, onFilter } from '~/utils/componentUtils';
 
 import Table from '~/components/Table';
@@ -11,7 +11,6 @@ import {
   dateToBrazilDateUtil,
   priceFormatterUtil,
 } from '~/utils/formatterUtils';
-import { CopyOutlined } from '@ant-design/icons';
 
 const data = [
   {
@@ -19,6 +18,8 @@ const data = [
     descricao: 'Ordem a',
     status: 'em aberto',
     valorTotal: '12000',
+    valorBruto: '14000',
+    dataCadastro: new Date(),
     valorUnitario: '1000',
     dataEmissao: new Date(),
     numero: '1234',
@@ -42,6 +43,8 @@ const data = [
     numero: '1235',
     valorTotal: '12000',
     status: 'em aberto',
+    valorBruto: '14000',
+    dataCadastro: new Date(),
     valorUnitario: '1000',
     dataEmissao: new Date(),
     descricao: 'Ordem b',
@@ -65,6 +68,8 @@ const data = [
     descricao: 'Ordem c',
     valorTotal: '12000',
     status: 'em aberto',
+    valorBruto: '14000',
+    dataCadastro: new Date(),
     valorUnitario: '1000',
     numero: '1236',
     dataEmissao: new Date(),
@@ -88,6 +93,8 @@ const data = [
     numero: '1237',
     descricao: 'Ordem d',
     status: 'em aberto',
+    valorBruto: '14000',
+    dataCadastro: new Date(),
     valorTotal: '12000',
     valorUnitario: '1000',
     dataEmissao: new Date(),
@@ -111,6 +118,8 @@ const data = [
     numero: '1238',
     valorTotal: '12000',
     status: 'em aberto',
+    valorBruto: '14000',
+    dataCadastro: new Date(),
     valorUnitario: '1000',
     descricao: 'Ordem e',
     dataEmissao: new Date(),
@@ -134,6 +143,8 @@ const data = [
     numero: '1239',
     descricao: 'Ordem f',
     status: 'fechada',
+    valorBruto: '14000',
+    dataCadastro: new Date(),
     valorTotal: '12000',
     valorUnitario: '1000',
     dataEmissao: new Date(),
@@ -176,29 +187,28 @@ const constantscolumns = [
     filterSearch: true,
   },
   {
-    title: 'Veículo',
-    dataIndex: ['veiculo', 'placa'],
-    key: 'placaVeiculo',
+    title: 'Data Cadastro',
+    dataIndex: 'dataCadastro',
+    key: 'dataCadastro',
     sortDirections: ['descend', 'ascend'],
-    sorter: (a, b) => a.veiculo.placa.localeCompare(b.veiculo.placa),
-    filters: getFilters('veiculo.placa', data),
-    onFilter: (value, record) => onFilter(value, record, 'veiculo.placa'),
-    filterSearch: true,
-    render: (placa) => (
-      <Typography.Text
-        copyable={{ icon: <CopyOutlined style={{ color: '#2e2e2e' }} /> }}
-      >
-        {placa}
-      </Typography.Text>
-    ),
+    sorter: (a, b) => a.dataCadastro.toString().localeCompare(b.dataCadastro),
+    render: (dataCadastro) => <span>{dateToBrazilDateUtil(dataCadastro)}</span>,
   },
   {
-    title: 'Data Emissão',
+    title: 'Data Baixa',
     dataIndex: 'dataEmissao',
     key: 'dataEmissao',
     sortDirections: ['descend', 'ascend'],
     sorter: (a, b) => a.dataEmissao.toString().localeCompare(b.dataEmissao),
     render: (dataEmissao) => <span>{dateToBrazilDateUtil(dataEmissao)}</span>,
+  },
+  {
+    title: 'Valor Bruto',
+    dataIndex: 'valorBruto',
+    key: 'valorBruto',
+    sortDirections: ['descend', 'ascend'],
+    sorter: (a, b) => a.valorBruto.localeCompare(b.cliente.valorBruto),
+    render: (valorBruto) => <span>{priceFormatterUtil(valorBruto)}</span>,
   },
   {
     title: 'Valor Total',
@@ -207,14 +217,6 @@ const constantscolumns = [
     sortDirections: ['descend', 'ascend'],
     sorter: (a, b) => a.valorTotal.localeCompare(b.cliente.valorTotal),
     render: (valorTotal) => <span>{priceFormatterUtil(valorTotal)}</span>,
-  },
-  {
-    title: 'Valor Unitário',
-    dataIndex: 'valorUnitario',
-    key: 'valorUnitario',
-    sortDirections: ['descend', 'ascend'],
-    sorter: (a, b) => a.valorUnitario.localeCompare(b.valorUnitario),
-    render: (valorUnitario) => <span>{priceFormatterUtil(valorUnitario)}</span>,
   },
   {
     title: 'Status',
