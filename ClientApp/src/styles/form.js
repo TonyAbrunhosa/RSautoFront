@@ -16,5 +16,7 @@ export const FormWarapper = styled.div`
 
 export const FormRow = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: ${({ between = true }) =>
+    between ? 'space-between' : 'flex-start'};
+  align-items: center;
 `;

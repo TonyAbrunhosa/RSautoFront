@@ -1,3 +1,4 @@
+/* eslint-disable react/forbid-prop-types */
 /* eslint-disable react/require-default-props */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
@@ -10,15 +11,14 @@ const CollumnAction = ({
   onEdit = () => {},
   modalContent = null,
   modalTitle = '',
-  edit = true,
+  shouldDelete = true,
+  actions,
 }) => {
   const [openModal, setOpenModal] = useState(false);
 
   const getDropdownItems = () => {
-    const dropdownItems = [];
-
-    if (edit) {
-      dropdownItems.push({
+    const dropdownItems = [
+      {
         key: 1,
         label: (
           <>
@@ -65,26 +65,49 @@ const CollumnAction = ({
             </Modal>
           </>
         ),
+      },
+    ];
+
+    if (shouldDelete) {
+      dropdownItems.push({
+        key: 2,
+        label: (
+          <Popconfirm
+            onConfirm={onDelete}
+            title="Excluir registro"
+            description="Você tem certeza que deseja excluir este registro?"
+            okText="Sim"
+            cancelText="Não"
+          >
+            <span>
+              <DeleteOutlined
+                style={{ color: '#fd163d', marginRight: '5px' }}
+              />
+              Excluir
+            </span>
+          </Popconfirm>
+        ),
       });
     }
 
-    dropdownItems.push({
-      key: 2,
-      label: (
-        <Popconfirm
-          onConfirm={onDelete}
-          title="Excluir registro"
-          description="Você tem certeza que deseja excluir este registro?"
-          okText="Sim"
-          cancelText="Não"
-        >
-          <span>
-            <DeleteOutlined style={{ color: '#fd163d', marginRight: '5px' }} />
-            Excluir
-          </span>
-        </Popconfirm>
-      ),
-    });
+    if (actions && actions.length > 0) {
+      actions.forEach(({ label, icon, onClick }, i) => {
+        dropdownItems.push({
+          key: i + 3,
+          label: (
+            <span
+              onClick={onClick}
+              onKeyPress={() => {}}
+              role="button"
+              tabIndex="0"
+            >
+              {icon}
+              {label}
+            </span>
+          ),
+        });
+      });
+    }
 
     return dropdownItems;
   };
@@ -107,7 +130,8 @@ CollumnAction.propTypes = {
   onEdit: PropTypes.func,
   modalContent: PropTypes.node,
   modalTitle: PropTypes.string,
-  edit: PropTypes.bool,
+  shouldDelete: PropTypes.bool,
+  actions: PropTypes.array,
 };
 
 export default CollumnAction;

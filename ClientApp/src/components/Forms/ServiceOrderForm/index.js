@@ -6,7 +6,11 @@ import { toast } from 'react-toastify';
 
 import { InputNumber, Input, Select, Form, Button, Statistic } from 'antd';
 
-import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
+import {
+  MinusCircleOutlined,
+  PlusOutlined,
+  UploadOutlined,
+} from '@ant-design/icons';
 
 import { Wrapper, FormWarapper, FormRow } from '~/styles/form';
 
@@ -27,6 +31,7 @@ const ServiceOrderForm = ({
   boxShadow = true,
   initialValues = undefined,
   customers = [],
+  storePart = () => {},
 }) => {
   const [requiredMark, setRequiredMarkType] = useState('');
   const [hasCustomer, setHasCustomer] = useState(false);
@@ -210,7 +215,7 @@ const ServiceOrderForm = ({
                       <FormRow>
                         <Form.Item
                           name={['peca', 'descricao']}
-                          style={{ width: '60%' }}
+                          style={{ width: '85%' }}
                           validateTrigger={['onBlur', 'onChange']}
                           rules={[
                             {
@@ -231,6 +236,20 @@ const ServiceOrderForm = ({
                             options={[]}
                           />
                         </Form.Item>
+                        <Button
+                          type="link"
+                          onClick={storePart}
+                          icon={<UploadOutlined style={{ fontSize: '20px' }} />}
+                        />
+                        {fields.length >= 1 && (
+                          <MinusCircleOutlined
+                            style={{ fontSize: '16px', color: 'red' }}
+                            className="dynamic-delete-button"
+                            onClick={() => remove(field.name)}
+                          />
+                        )}
+                      </FormRow>
+                      <FormRow between={false}>
                         <Form.Item
                           validateTrigger={['onBlur', 'onChange']}
                           rules={[
@@ -244,6 +263,7 @@ const ServiceOrderForm = ({
                           name={['peca', 'quantidade']}
                           label="Quantidade"
                           tooltip="Quantidade de peças"
+                          style={{ marginRight: 10 }}
                         >
                           <InputNumber min={0} onChange={() => updateTotal()} />
                         </Form.Item>
@@ -263,14 +283,6 @@ const ServiceOrderForm = ({
                         >
                           <InputNumber min={0} onChange={() => updateTotal()} />
                         </Form.Item>
-
-                        {fields.length >= 1 && (
-                          <MinusCircleOutlined
-                            style={{ fontSize: '16px', color: 'red' }}
-                            className="dynamic-delete-button"
-                            onClick={() => remove(field.name)}
-                          />
-                        )}
                       </FormRow>
                     </>
                   </Form.Item>
@@ -364,6 +376,7 @@ ServiceOrderForm.propTypes = {
   boxShadow: PropTypes.bool.isRequired,
   size: PropTypes.number.isRequired,
   customers: PropTypes.array.isRequired,
+  storePart: PropTypes.func,
 };
 
 export default ServiceOrderForm;

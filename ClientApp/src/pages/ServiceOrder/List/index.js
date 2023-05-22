@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react';
 
-import { Tag, Form } from 'antd';
+import { Tag, Form, Button } from 'antd';
+import { DownloadOutlined, PrinterOutlined } from '@ant-design/icons';
 import { getFilters, onFilter } from '~/utils/componentUtils';
 
 import Table from '~/components/Table';
 import CollumnAction from '~/components/Table/CollumnAction';
 import ServiceOrderForm from '~/components/Forms/ServiceOrderForm';
+import PartForm from '~/components/Forms/PartForm';
+
+import FormModal from '~/components/Forms/FormModal';
 
 import {
   dateToBrazilDateUtil,
@@ -238,8 +242,38 @@ const SavedServiceOrders = () => {
   const [loading, setLoading] = useState(true);
   const [records, setRecords] = useState([]);
   const [searchLoading, setSearchLoading] = useState(false);
+  const [openPartFormModal, setOpenPartFormModal] = useState(false);
+  const [showSelectionButton, setShowSelectionButton] = useState(false);
+  const [selectRecord, setSelectRecord] = useState({});
+  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
 
   const [storeFormRef] = Form.useForm();
+  const [editFormRef] = Form.useForm();
+  const [storePartRef] = Form.useForm();
+
+  const onSelectChange = (newSelectedRowKeys) => {
+    console.log(newSelectedRowKeys);
+    setSelectedRowKeys(newSelectedRowKeys);
+    setShowSelectionButton(newSelectedRowKeys.length > 0);
+  };
+
+  const formContent = (initialValues, formRef) => (
+    <ServiceOrderForm
+      storePart={() => setOpenPartFormModal(true)}
+      customers={['João Victor - 67.117.218/0001-00']}
+      boxShadow={false}
+      size={100}
+      formRef={formRef}
+      initialValues={initialValues}
+      onSaveAsync={() =>
+        new Promise((resolve) => {
+          setTimeout(() => {
+            resolve(console.log('aushua'));
+          }, 1);
+        })
+      }
+    />
+  );
 
   const columns = [
     ...constantscolumns,
@@ -248,15 +282,33 @@ const SavedServiceOrders = () => {
       dataIndex: '',
       key: 'x',
       width: 90,
-      render: () => {
+      render: (text, record) => {
+        setSelectRecord(record);
+        const actions = [
+          {
+            label: 'Imprimir',
+            icon: (
+              <PrinterOutlined style={{ marginRight: '5px', color: 'green' }} />
+            ),
+            onClick: () => {},
+          },
+        ];
+
+        if (record.status.toLowerCase().trim() === 'em aberto') {
+          actions.push({
+            label: 'Emitir',
+            icon: <DownloadOutlined style={{ marginRight: '5px' }} />,
+            onClick: () => {},
+          });
+        }
+
         return (
           <CollumnAction
-            onDelete={() => {}}
-            edit={false}
-            modalTitle=""
-            modalContent={
-              <ServiceOrderForm formRef={storeFormRef} initialValues={{}} />
-            }
+            actions={actions}
+            shouldDelete={false}
+            onEdit={() => editFormRef.submit()}
+            modalTitle="Atualização dos dados da ordem de seriviço"
+            modalContent={formContent(selectRecord, editFormRef)}
           />
         );
       },
@@ -279,28 +331,60 @@ const SavedServiceOrders = () => {
   }, []);
 
   return (
-    <Table
-      filterPlaceholder="Digite o valor para a busca..."
-      title="Ordens de Serviço Salvas"
-      onChange={() => {}}
-      onCreateClick={() => storeFormRef.submit()}
-      searchLoading={searchLoading}
-      loading={loading}
-      data={records}
-      columns={columns}
-      width={300}
-      pageSize={10}
-      modalTitle="Cadastro de Ordens de Serviço"
-      modalContent={
-        <ServiceOrderForm
-          customers={['João Victor - 67.117.218/0001-00']}
-          boxShadow={false}
-          size={100}
-          formRef={storeFormRef}
-          initialValues={{}}
-        />
-      }
-    />
+    <>
+      <FormModal
+        title="Cadastro de Peças"
+        content={
+          <PartForm
+            suppliers={[]}
+            boxShadow={false}
+            size={100}
+            formRef={storePartRef}
+            initialValues={{}}
+            onSaveAsync={() =>
+              new Promise((resolve) => {
+                setTimeout(() => {
+                  resolve(console.log('aushua'));
+                }, 1);
+              })
+            }
+          />
+        }
+        open={openPartFormModal}
+        onCancel={() => setOpenPartFormModal(false)}
+        onSave={() => {}}
+        okText="Cadastrar"
+      />
+      <Table
+        rowSelection={{
+          selectedRowKeys,
+          onChange: onSelectChange,
+        }}
+        showSelectionButton={showSelectionButton}
+        selectionButton={
+          <Button
+            style={{ marginLeft: 5, background: '#8c8c8c' }}
+            type="primary"
+            size="large"
+            icon={<DownloadOutlined />}
+          >
+            Emitir
+          </Button>
+        }
+        filterPlaceholder="Digite o valor para a busca..."
+        title="Ordens de Serviço"
+        onChange={() => {}}
+        onCreateClick={() => storeFormRef.submit()}
+        searchLoading={searchLoading}
+        loading={loading}
+        data={records}
+        columns={columns}
+        width={300}
+        pageSize={10}
+        modalTitle="Cadastro de Ordem de Serviço"
+        modalContent={formContent({}, storeFormRef)}
+      />
+    </>
   );
 };
 

@@ -24,6 +24,9 @@ const Table = ({
   searchLoading,
   modalTitle = '',
   modalContent = undefined,
+  rowSelection = undefined,
+  showSelectionButton = false,
+  selectionButton = undefined,
 }) => {
   const [openModal, setOpenModal] = useState(false);
 
@@ -37,7 +40,7 @@ const Table = ({
             placeholder={filterPlaceholder}
             enterButton
             loading={searchLoading}
-            size='large'
+            size="large"
             onChange={() => onChange()}
           />
           <div>
@@ -45,7 +48,7 @@ const Table = ({
               type="dashed"
               style={{ marginRight: 5 }}
               icon={<LeftOutlined />}
-              size='large'
+              size="large"
               onClick={() => history.goBack()}
             >
               Voltar
@@ -53,13 +56,14 @@ const Table = ({
             <Button
               type="primary"
               icon={<PlusOutlined />}
-              size='large'
+              size="large"
               onClick={() =>
                 modalContent ? setOpenModal(true) : onCreateClick()
               }
             >
               Cadastrar
             </Button>
+            {rowSelection && showSelectionButton ? selectionButton : undefined}
           </div>
         </ActionsWrapper>
 
@@ -75,6 +79,7 @@ const Table = ({
             y: width,
           }}
           expandable={expandable}
+          rowSelection={rowSelection}
         />
       </Wrapper>
       <FormModal
@@ -99,11 +104,14 @@ Table.propTypes = {
   onChange: PropTypes.func.isRequired,
   onCreateClick: PropTypes.func.isRequired,
   onFilter: PropTypes.func.isRequired,
+  rowSelection: PropTypes.object,
   loading: PropTypes.bool,
   searchLoading: PropTypes.bool,
   expandable: PropTypes.object,
   modalTitle: PropTypes.string,
   modalContent: PropTypes.node,
+  selectionButton: PropTypes.node,
+  showSelectionButton: PropTypes.bool
 };
 
 export default Table;

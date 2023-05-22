@@ -413,7 +413,7 @@ const SavedParts = () => {
       columns={columns}
       width={300}
       pageSize={10}
-      modalTitle="Cadastro de Peças"
+      modalTitle="Cadastro de Peça"
       modalContent={formContent({}, storeFormRef)}
       expandable={{
         showExpandColumn: true,

@@ -259,7 +259,7 @@ const SavedVehicles = () => {
       columns={columns}
       width={350}
       pageSize={10}
-      modalTitle="Cadastro de Veículos"
+      modalTitle="Cadastro de Veículo"
       modalContent={formContent({}, storeFormRef)}
     />
   );

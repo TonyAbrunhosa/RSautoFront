@@ -202,7 +202,7 @@ const SavedCustomers = () => {
       columns={columns}
       width={350}
       pageSize={10}
-      modalTitle="Cadastro de Clientes"
+      modalTitle="Cadastro de Cliente"
       modalContent={formContent({}, storeFormRef)}
     />
   );
