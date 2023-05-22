@@ -87,7 +87,7 @@ const VehicleForm = ({
     <Wrapper size={size}>
       {!initialValues && (
         <FormHeader
-          title="Cadastro de Veículos"
+          title="Cadastro de Veículo"
           saveOnClick={() => formRef.submit()}
           goBackOnClick={() => history.goBack()}
         />

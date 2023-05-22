@@ -2,15 +2,15 @@ import React from 'react';
 
 import { Form } from 'antd';
 
-import CustomerForm from '~/components/Forms/UserForm';
+import SupplierForm from '~/components/Forms/UserForm';
 
-const CustomerStore = () => {
+const SupplierStore = () => {
   const [formRef] = Form.useForm();
 
   return (
-    <CustomerForm
+    <SupplierForm
       boxShadow
-      title="Cadastro de Cliente"
+      title="Cadastro de Fornecedor"
       size={90}
       formRef={formRef}
       initialValues={undefined}
@@ -26,4 +26,4 @@ const CustomerStore = () => {
 }
 
 
-export default CustomerStore;
+export default SupplierStore;

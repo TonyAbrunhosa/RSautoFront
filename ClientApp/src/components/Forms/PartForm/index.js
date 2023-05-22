@@ -84,7 +84,7 @@ const PartForm = ({
     <Wrapper size={size}>
       {!initialValues && (
         <FormHeader
-          title="Cadastro de Peças"
+          title="Cadastro de Peça"
           saveOnClick={() => formRef.submit()}
           goBackOnClick={() => history.goBack()}
         />

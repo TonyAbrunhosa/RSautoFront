@@ -10,7 +10,9 @@ import VehiclesStore from '~/pages/Vehicles/Store';
 import CustomerStore from '~/pages/Customer/Store';
 import SavedCustomers from '~/pages/Customer/List';
 import SavedServiceOrders from '~/pages/ServiceOrder/List';
-import Suppliers from '~/pages/Suppliers';
+import SavedSuppliers from '~/pages/Suppliers/List';
+import SuppliersStore from '~/pages/Suppliers/Store';
+
 import Metrics from '~/pages/Metrics';
 import Route from './Route';
 
@@ -22,7 +24,7 @@ const Routes = () => {
       <Route
         path="/veiculos"
         type="private"
-        page="Veículos > Salvos"
+        page="Veículos"
         component={SavedVehicles}
       />
       <Route
@@ -31,12 +33,7 @@ const Routes = () => {
         page="Veículos > Cadastrar"
         component={VehiclesStore}
       />
-      <Route
-        path="/pecas"
-        type="private"
-        page="Peças > Salvas"
-        component={SavedParts}
-      />
+      <Route path="/pecas" type="private" page="Peças" component={SavedParts} />
       <Route
         path="/cadastrar-peca"
         type="private"
@@ -46,7 +43,7 @@ const Routes = () => {
       <Route
         path="/clientes"
         type="private"
-        page="Clientes > Salvos"
+        page="Clientes"
         component={SavedCustomers}
       />
       <Route
@@ -58,7 +55,7 @@ const Routes = () => {
       <Route
         path="/ordens"
         type="private"
-        page="Ordens de Serviço > Cadastradas"
+        page="Ordens de Serviço"
         component={SavedServiceOrders}
       />
       <Route
@@ -71,7 +68,13 @@ const Routes = () => {
         path="/fornecedores"
         type="private"
         page="Fornecedores"
-        component={Suppliers}
+        component={SavedSuppliers}
+      />
+      <Route
+        path="/cadastrar-fornecedor"
+        type="private"
+        page="Fornecedores > Cadastrar"
+        component={SuppliersStore}
       />
       <Route path="/home" type="private" page="Home" component={Home} />
       <Route path="/login" type="auth" page="Login" component={SignIn} />

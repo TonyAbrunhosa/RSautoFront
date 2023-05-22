@@ -8,7 +8,7 @@ import { nameFormatterUtil } from '~/utils/formatterUtils';
 
 import Table from '~/components/Table';
 import CollumnAction from '~/components/Table/CollumnAction';
-import CustomerForm from '~/components/Forms/UserForm';
+import SupplierForm from '~/components/Forms/UserForm';
 
 const data = [
   {
@@ -120,7 +120,7 @@ const constantscolumns = [
   },
 ];
 
-const SavedCustomers = () => {
+const SavedSuppliers = () => {
   const [loading, setLoading] = useState(true);
   const [records, setRecords] = useState([]);
   const [searchLoading, setSearchLoading] = useState(false);
@@ -138,14 +138,14 @@ const SavedCustomers = () => {
       });
 
     loadData()
-      .then(() => setRecords(data.map(formatCustomer)))
+      .then(() => setRecords(data.map(formatSupplier)))
       .finally(() => setLoading(false));
 
     setSearchLoading(false);
   }, []);
 
   const formContent = (initialValues, formRef) => (
-    <CustomerForm
+    <SupplierForm
       boxShadow={false}
       size={100}
       formRef={formRef}
@@ -174,7 +174,7 @@ const SavedCustomers = () => {
           <CollumnAction
             onDelete={() => {}}
             onEdit={() => editFormRef.submit()}
-            modalTitle="Atualização dos dados do cliente"
+            modalTitle="Atualização dos dados do fornecedor"
             modalContent={formContent(selectRecord, editFormRef)}
           />
         );
@@ -182,7 +182,7 @@ const SavedCustomers = () => {
     },
   ];
 
-  const formatCustomer = (d) => {
+  const formatSupplier = (d) => {
     const nameParts = nameFormatterUtil(d.nome).split(' ');
     d.enderecoToShow = `${d.endereco.logradouro}, ${d.endereco.cidade} - ${d.endereco.estado} ${d.endereco.cep}`;
     d.nome = `${nameParts[0]} ${nameParts[nameParts.length - 1]}`;
@@ -193,7 +193,7 @@ const SavedCustomers = () => {
   return (
     <Table
       filterPlaceholder="Digite o valor para a busca..."
-      title="Clientes Cadastrados"
+      title="Fornecedores Cadastrados"
       onChange={() => {}}
       onCreateClick={() => storeFormRef.submit()}
       searchLoading={searchLoading}
@@ -202,10 +202,10 @@ const SavedCustomers = () => {
       columns={columns}
       width={350}
       pageSize={10}
-      modalTitle="Cadastro de Cliente"
+      modalTitle="Cadastro de Fornecedor"
       modalContent={formContent({}, storeFormRef)}
     />
   );
 };
 
-export default SavedCustomers;
+export default SavedSuppliers;

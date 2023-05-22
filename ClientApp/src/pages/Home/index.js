@@ -6,7 +6,8 @@ import { Card, Col, Row } from 'antd';
 import Statistics from '~/components/Statistics';
 
 import orderImg from '~/assets/images/order.png';
-import ordersImg from '~/assets/images/orders.png';
+import suppliersImg from '~/assets/images/suppliers.png';
+import supplierImg from '~/assets/images/supplier.png';
 import carImg from '~/assets/images/car.png';
 import carsImg from '~/assets/images/cars.png';
 import partImg from '~/assets/images/part.png';
@@ -19,9 +20,9 @@ const cardRows = [
     cards: [
       {
         image: orderImg,
-        title: 'Cadastrar ordem de serviço',
+        title: 'Gerenciar ordens de serviço',
         link: '/ordens',
-        description: 'Faça o cadastro de uma nova ordem de serviço.',
+        description: 'Cadastre, emita, visualize e imprima ordens de serviço.',
       },
       {
         image: carImg,
@@ -36,10 +37,10 @@ const cardRows = [
         description: 'Realize o cadastro de uma nova peça.',
       },
       {
-        image: ordersImg,
-        title: 'Visualizar ordens de serviço',
-        link: '/ordens-servico',
-        description: ' Visualize todas as ordens de serviço.',
+        image: supplierImg,
+        title: 'Cadastrar fornecedor',
+        link: '/cadastrar-fornecedor',
+        description: 'Cadastre um novo fornecedor.',
       },
     ],
   },
@@ -49,14 +50,19 @@ const cardRows = [
         image: partsImg,
         title: 'Visualizar peças cadastradas',
         link: '/pecas',
-        description:
-          'Visualize todas as peças cadastradas.',
+        description: 'Visualize todas as peças cadastradas.',
       },
       {
         image: carsImg,
         title: 'Visualizar veículos cadastrados',
         link: '/veiculos',
         description: 'Visualize todas as entradas de veículos.',
+      },
+      {
+        image: suppliersImg,
+        title: 'Visualizar fornecedores cadastrados',
+        link: '/fornecedores',
+        description: 'Visualize todos os fornecedores.',
       },
     ],
   },
@@ -80,7 +86,7 @@ const Home = () => {
                     <Card
                       style={{
                         boxShadow: '2px 3px 4px -1px #807878',
-                        height: 165
+                        height: 165,
                       }}
                       cover={
                         image ? (

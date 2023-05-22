@@ -99,7 +99,7 @@ const ServiceOrderForm = ({
     <Wrapper size={size}>
       {!initialValues && (
         <FormHeader
-          title="Cadastro de Ordem de Serviços"
+          title="Cadastro de Ordem de Serviço"
           saveOnClick={() => formRef.submit()}
           goBackOnClick={() => history.goBack()}
         />

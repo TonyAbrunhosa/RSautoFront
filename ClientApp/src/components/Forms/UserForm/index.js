@@ -21,12 +21,13 @@ const SUCCESS_MESSAGE = 'Cliente {1} com sucesso!';
 const ERROR_MESSAGE =
   'Falha ao {1} o Cliente! Caso o erro persista, contate o desenvolvedor.';
 
-const CustomerForm = ({
+const UserForm = ({
   formRef,
   onSaveAsync,
   size = 90,
   boxShadow = true,
   initialValues = undefined,
+  title = "",
 }) => {
   const [requiredMark, setRequiredMarkType] = useState('optional');
   const states = strToList(settings.data.states, ';', mapToSelectOption);
@@ -81,7 +82,7 @@ const CustomerForm = ({
     <Wrapper size={size}>
       {!initialValues && (
         <FormHeader
-          title="Cadastro de Clientes"
+          title={title}
           saveOnClick={() => formRef.submit()}
           goBackOnClick={() => history.goBack()}
         />
@@ -327,12 +328,13 @@ const CustomerForm = ({
   );
 };
 
-CustomerForm.propTypes = {
+UserForm.propTypes = {
   onSaveAsync: PropTypes.func.isRequired,
   initialValues: PropTypes.object.isRequired,
   formRef: PropTypes.any.isRequired,
   boxShadow: PropTypes.bool.isRequired,
   size: PropTypes.number.isRequired,
+  title: PropTypes.string,
 };
 
-export default CustomerForm;
+export default UserForm;
