@@ -11,12 +11,7 @@ const FormHeader = ({ title, goBackOnClick, saveOnClick }) => {
     <Wrapper>
       <h2>{title}</h2>
       <ButtonsSection>
-        <Button
-          type="dashed"
-          onClick={goBackOnClick}
-          icon={<LeftOutlined />}
-          size='large'
-        >
+        <Button type="dashed" onClick={goBackOnClick} icon={<LeftOutlined />}>
           Voltar
         </Button>
         <Button
@@ -24,7 +19,6 @@ const FormHeader = ({ title, goBackOnClick, saveOnClick }) => {
           onClick={saveOnClick}
           htmlType="submit"
           icon={<CheckOutlined />}
-          size='large'
         >
           Salvar
         </Button>

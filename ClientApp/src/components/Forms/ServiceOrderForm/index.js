@@ -237,7 +237,7 @@ const ServiceOrderForm = ({
                           />
                         </Form.Item>
                         <Button
-                          type="link"
+                          type="ghost"
                           onClick={storePart}
                           icon={<UploadOutlined style={{ fontSize: '20px' }} />}
                         />

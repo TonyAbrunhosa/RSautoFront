@@ -13,7 +13,7 @@ import carsImg from '~/assets/images/cars.png';
 import partImg from '~/assets/images/part.png';
 import partsImg from '~/assets/images/parts.png';
 
-import { Container } from './styles';
+import { Container, CardContainer } from './styles';
 
 const cardRows = [
   {
@@ -77,7 +77,7 @@ const Home = () => {
       </section>
       <section>
         <h2>Ações Rápidas</h2>
-        <div>
+        <CardContainer>
           {cardRows.map(({ cards }) => (
             <Row gutter={12} style={{ marginTop: 10 }}>
               {cards.map(({ title, link, description, image }) => (
@@ -121,7 +121,7 @@ const Home = () => {
               ))}
             </Row>
           ))}
-        </div>
+        </CardContainer>
       </section>
     </Container>
   );

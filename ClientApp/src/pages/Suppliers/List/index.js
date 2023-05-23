@@ -199,9 +199,10 @@ const SavedSuppliers = () => {
       searchLoading={searchLoading}
       loading={loading}
       data={records}
+      total={records.length}
       columns={columns}
       width={350}
-      pageSize={10}
+      pageSize={4}
       modalTitle="Cadastro de Fornecedor"
       modalContent={formContent({}, storeFormRef)}
     />

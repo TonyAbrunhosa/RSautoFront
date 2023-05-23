@@ -43,7 +43,7 @@ const menuStyles = {
 };
 
 const contentLayoutStyles = {
-  background: '#E9E8E8',
+  background: '#e6e6e6',
 };
 
 const headerStyles = {
@@ -78,10 +78,10 @@ const MenuItems = [
   getItem('Home', 'home', [], <HomeOutlined />),
   getItem('Métricas', 'metricas', [], <LineChartOutlined />),
   getItem('Ordens De Serviço', 'ordens', [], <FormOutlined />),
-  getItem('Clientes', 'clientes', [], <UserOutlined />),
   getItem('Peças', 'pecas', [], <SettingFilled />),
   getItem('Veículos', 'veiculos', [], <CarOutlined />),
   getItem('Fornecedores', 'fornecedores', [], <ImportOutlined />),
+  getItem('Clientes', 'clientes', [], <UserOutlined />),
 ];
 
 const getMenuItemComponent = (key, label, icon) => (

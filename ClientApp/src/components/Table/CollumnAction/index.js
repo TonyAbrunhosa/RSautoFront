@@ -12,13 +12,16 @@ const CollumnAction = ({
   modalContent = null,
   modalTitle = '',
   shouldDelete = true,
+  shouldEdit = true,
   actions,
 }) => {
   const [openModal, setOpenModal] = useState(false);
 
   const getDropdownItems = () => {
-    const dropdownItems = [
-      {
+    const dropdownItems = [];
+
+    if (shouldEdit) {
+      dropdownItems.push({
         key: 1,
         label: (
           <>
@@ -65,8 +68,8 @@ const CollumnAction = ({
             </Modal>
           </>
         ),
-      },
-    ];
+      });
+    }
 
     if (shouldDelete) {
       dropdownItems.push({
@@ -131,6 +134,7 @@ CollumnAction.propTypes = {
   modalContent: PropTypes.node,
   modalTitle: PropTypes.string,
   shouldDelete: PropTypes.bool,
+  shouldEdit: PropTypes.bool,
   actions: PropTypes.array,
 };
 

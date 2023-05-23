@@ -23,6 +23,7 @@ const Table = ({
   filterPlaceholder,
   searchLoading,
   modalTitle = '',
+  total = 0,
   modalContent = undefined,
   rowSelection = undefined,
   showSelectionButton = false,
@@ -33,7 +34,16 @@ const Table = ({
   return (
     <>
       <Wrapper>
-        <h2>{title}</h2>
+        <div>
+          <h2>{title}</h2>
+          {!!total && (
+            <span>
+              {total > 1
+                ? `${total} registros encontrados`
+                : '1 registro encontrado'}
+            </span>
+          )}
+        </div>
         <ActionsWrapper>
           <Input
             style={{ width: 400 }}
@@ -65,10 +75,6 @@ const Table = ({
         </ActionsWrapper>
 
         <AntdTable
-          style={{
-            boxShadow: '0px 2px 2px rgba(0, 0, 0, 0.25)',
-            fontSize: '5px',
-          }}
           locale="pt-br"
           loading={loading}
           columns={columns}
@@ -110,6 +116,7 @@ Table.propTypes = {
   modalContent: PropTypes.node,
   selectionButton: PropTypes.node,
   showSelectionButton: PropTypes.bool,
+  total: PropTypes.number,
 };
 
 export default Table;

@@ -5,8 +5,9 @@ export const Wrapper = styled.section`
   width: 100%;
   justify-content: space-between;  
   h2 {
+    font-weight: 700;
     color: #2e2e2e;
-    font-size: 26px;
+    font-size: 20px;
   }
 `;
 

@@ -305,6 +305,7 @@ const SavedServiceOrders = () => {
         return (
           <CollumnAction
             actions={actions}
+            shouldEdit={record.status.toLowerCase().trim() === 'em aberto'}
             shouldDelete={false}
             onEdit={() => editFormRef.submit()}
             modalTitle="Atualização dos dados da ordem de serviço"
@@ -377,9 +378,10 @@ const SavedServiceOrders = () => {
         searchLoading={searchLoading}
         loading={loading}
         data={records}
+        total={records.length}
         columns={columns}
         width={300}
-        pageSize={5}
+        pageSize={4}
         modalTitle="Cadastro de Ordem de Serviço"
         modalContent={formContent({}, storeFormRef)}
       />

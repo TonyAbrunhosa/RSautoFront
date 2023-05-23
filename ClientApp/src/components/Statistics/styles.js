@@ -14,7 +14,7 @@ export const StatisticSection = styled.div`
   margin-bottom: 20px;
   font-family: Roboto, sans serif;
   background: #ffff;
-  box-shadow: 2px 3px 4px -1px #807878;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
 
   h2 {
     margin-bottom: 10px;

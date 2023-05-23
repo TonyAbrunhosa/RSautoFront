@@ -410,9 +410,10 @@ const SavedParts = () => {
       searchLoading={searchLoading}
       loading={loading}
       data={records}
+      total={records.length}
       columns={columns}
       width={300}
-      pageSize={10}
+      pageSize={4}
       modalTitle="Cadastro de Peça"
       modalContent={formContent({}, storeFormRef)}
       expandable={{
