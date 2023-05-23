@@ -32,7 +32,7 @@ export const Content = styled.div`
       width: 411.33px;
       border: none;
       box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-      background: #d9d9d9;
+      background: #E9E8E8;
       padding: 10px;
       border-radius: 12px;
       height: 40px;

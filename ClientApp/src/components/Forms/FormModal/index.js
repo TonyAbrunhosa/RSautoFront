@@ -23,12 +23,8 @@ const FormModal = ({
       width="75%"
       okText={okText}
       cancelText="Cancelar"
-      okButtonProps={{
-        size: 'large',
-      }}
       cancelButtonProps={{
         type: 'ghost',
-        size: 'large',
         style: { backgroundColor: '#fd163d', color: '#ffff' },
       }}
     >

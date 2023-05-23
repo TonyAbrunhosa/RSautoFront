@@ -307,7 +307,7 @@ const SavedServiceOrders = () => {
             actions={actions}
             shouldDelete={false}
             onEdit={() => editFormRef.submit()}
-            modalTitle="Atualização dos dados da ordem de seriviço"
+            modalTitle="Atualização dos dados da ordem de serviço"
             modalContent={formContent(selectRecord, editFormRef)}
           />
         );
@@ -363,9 +363,8 @@ const SavedServiceOrders = () => {
         showSelectionButton={showSelectionButton}
         selectionButton={
           <Button
-            style={{ marginLeft: 5, background: '#8c8c8c' }}
-            type="primary"
-            size="large"
+            style={{ marginLeft: 5 }}
+            type="default"
             icon={<DownloadOutlined />}
           >
             Emitir
@@ -380,7 +379,7 @@ const SavedServiceOrders = () => {
         data={records}
         columns={columns}
         width={300}
-        pageSize={10}
+        pageSize={5}
         modalTitle="Cadastro de Ordem de Serviço"
         modalContent={formContent({}, storeFormRef)}
       />

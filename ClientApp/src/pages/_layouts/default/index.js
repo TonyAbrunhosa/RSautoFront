@@ -37,7 +37,8 @@ const menuHeaderStyles = {
 
 const menuStyles = {
   marginTop: '20px',
-  fontSize: '16px',
+  fontSize: '14px',
+  fontWeight: 'regular',
   fontFamily: 'Roboto, sans-serif',
 };
 
@@ -100,7 +101,7 @@ const DefaultLayout = ({ children, page }) => {
           collapsed={collapsed}
           onCollapse={(value) => setCollapsed(value)}
           style={siderStyles}
-          width="250"
+          width="220"
         >
           <div style={menuHeaderStyles}>
             <Link to="/home">
@@ -137,7 +138,7 @@ const DefaultLayout = ({ children, page }) => {
               <h2 style={pageNameStyles}>{page}</h2>
             </div>
           </Header>
-          <Content style={{ marginLeft: collapsed ? 100 : 270 }}>
+          <Content style={{ marginLeft: collapsed ? 100 : 220 }}>
             {children}
           </Content>
         </Layout>

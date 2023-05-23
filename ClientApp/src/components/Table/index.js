@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Table as AntdTable, Input, Button } from 'antd';
-import { LeftOutlined, PlusOutlined } from '@ant-design/icons';
+import { LeftOutlined, PlusOutlined, SearchOutlined } from '@ant-design/icons';
 
 import history from '~/services/history';
 import FormModal from '../Forms/FormModal';
@@ -35,12 +35,11 @@ const Table = ({
       <Wrapper>
         <h2>{title}</h2>
         <ActionsWrapper>
-          <Input.Search
+          <Input
             style={{ width: 400 }}
+            addonBefore={<SearchOutlined />}
             placeholder={filterPlaceholder}
-            enterButton
             loading={searchLoading}
-            size="large"
             onChange={() => onChange()}
           />
           <div>
@@ -48,7 +47,6 @@ const Table = ({
               type="dashed"
               style={{ marginRight: 5 }}
               icon={<LeftOutlined />}
-              size="large"
               onClick={() => history.goBack()}
             >
               Voltar
@@ -56,7 +54,6 @@ const Table = ({
             <Button
               type="primary"
               icon={<PlusOutlined />}
-              size="large"
               onClick={() =>
                 modalContent ? setOpenModal(true) : onCreateClick()
               }
@@ -68,15 +65,16 @@ const Table = ({
         </ActionsWrapper>
 
         <AntdTable
-          style={{ boxShadow: '0px 2px 2px rgba(0, 0, 0, 0.25)' }}
+          style={{
+            boxShadow: '0px 2px 2px rgba(0, 0, 0, 0.25)',
+            fontSize: '5px',
+          }}
+          locale="pt-br"
           loading={loading}
           columns={columns}
           dataSource={data}
           pagination={{
             pageSize,
-          }}
-          scroll={{
-            y: width,
           }}
           expandable={expandable}
           rowSelection={rowSelection}
@@ -111,7 +109,7 @@ Table.propTypes = {
   modalTitle: PropTypes.string,
   modalContent: PropTypes.node,
   selectionButton: PropTypes.node,
-  showSelectionButton: PropTypes.bool
+  showSelectionButton: PropTypes.bool,
 };
 
 export default Table;
