@@ -239,7 +239,11 @@ const ServiceOrderForm = ({
                         <Button
                           type="ghost"
                           onClick={storePart}
-                          icon={<UploadOutlined style={{ fontSize: '20px' }} />}
+                          icon={
+                            <UploadOutlined
+                              style={{ fontSize: '18px', color: '#666666' }}
+                            />
+                          }
                         />
                         {fields.length >= 1 && (
                           <MinusCircleOutlined
