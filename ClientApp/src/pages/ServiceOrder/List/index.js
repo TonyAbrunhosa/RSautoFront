@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 
-import { Tag, Form, Button } from 'antd';
+import { Tag, Form, Button, DatePicker } from 'antd';
 import { DownloadOutlined, PrinterOutlined } from '@ant-design/icons';
 import { getFilters, onFilter } from '~/utils/componentUtils';
 
@@ -15,6 +15,8 @@ import {
   dateToBrazilDateUtil,
   priceFormatterUtil,
 } from '~/utils/formatterUtils';
+
+import { FilterButtons } from './styles';
 
 const data = [
   {
@@ -191,22 +193,6 @@ const constantscolumns = [
     filterSearch: true,
   },
   {
-    title: 'Data Cadastro',
-    dataIndex: 'dataCadastro',
-    key: 'dataCadastro',
-    sortDirections: ['descend', 'ascend'],
-    sorter: (a, b) => a.dataCadastro.toString().localeCompare(b.dataCadastro),
-    render: (dataCadastro) => <span>{dateToBrazilDateUtil(dataCadastro)}</span>,
-  },
-  {
-    title: 'Data Baixa',
-    dataIndex: 'dataEmissao',
-    key: 'dataEmissao',
-    sortDirections: ['descend', 'ascend'],
-    sorter: (a, b) => a.dataEmissao.toString().localeCompare(b.dataEmissao),
-    render: (dataEmissao) => <span>{dateToBrazilDateUtil(dataEmissao)}</span>,
-  },
-  {
     title: 'Valor Bruto',
     dataIndex: 'valorBruto',
     key: 'valorBruto',
@@ -250,12 +236,62 @@ const SavedServiceOrders = () => {
   const [storeFormRef] = Form.useForm();
   const [editFormRef] = Form.useForm();
   const [storePartRef] = Form.useForm();
+  const ref = useRef(null);
 
   const onSelectChange = (newSelectedRowKeys) => {
     console.log(newSelectedRowKeys);
     setSelectedRowKeys(newSelectedRowKeys);
     setShowSelectionButton(newSelectedRowKeys.length > 0);
   };
+
+  const getColumnDatePickerProps = (dataIndex, ref) => ({
+    filterDropdown: ({
+      setSelectedKeys,
+      selectedKeys,
+      confirm,
+      clearFilters,
+      close,
+    }) => (
+      <div style={{ padding: 8 }} onKeyDown={(e) => e.stopPropagation()}>
+        <DatePicker.RangePicker
+          style={{ marginBottom: 8, display: 'block' }}
+          value={selectedKeys[0]}
+          onChange={(e) => {}}
+          onPressEnter={() => {
+            close();
+          }}
+        />
+        <FilterButtons>
+          <Button
+            onClick={() => {
+              clearFilters();
+              close();
+            }}
+            type="text"
+            size="small"
+          >
+            Resetar
+          </Button>
+          <Button
+            type="primary"
+            size="small"
+            onClick={() => {
+              close();
+            }}
+          >
+            OK
+          </Button>
+        </FilterButtons>
+      </div>
+    ),
+    onFilter: (value, record) =>
+      record[dataIndex].toString().toLowerCase().includes(value.toLowerCase()),
+    onFilterDropdownOpenChange: (visible) => {
+      if (visible) {
+        setTimeout(() => {});
+      }
+    },
+  });
 
   const formContent = (initialValues, formRef) => (
     <ServiceOrderForm
@@ -277,6 +313,26 @@ const SavedServiceOrders = () => {
 
   const columns = [
     ...constantscolumns,
+    {
+      title: 'Data Cadastro',
+      dataIndex: 'dataCadastro',
+      ...getColumnDatePickerProps('dataCadastro', ref),
+      key: 'dataCadastro',
+      sortDirections: ['descend', 'ascend'],
+      sorter: (a, b) => a.dataCadastro.toString().localeCompare(b.dataCadastro),
+      render: (dataCadastro) => (
+        <span>{dateToBrazilDateUtil(dataCadastro)}</span>
+      ),
+    },
+    {
+      title: 'Data Baixa',
+      dataIndex: 'dataEmissao',
+      key: 'dataEmissao',
+      ...getColumnDatePickerProps('dataEmissao', ref),
+      sortDirections: ['descend', 'ascend'],
+      sorter: (a, b) => a.dataEmissao.toString().localeCompare(b.dataEmissao),
+      render: (dataEmissao) => <span>{dateToBrazilDateUtil(dataEmissao)}</span>,
+    },
     {
       title: 'Ações',
       dataIndex: '',
